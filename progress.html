@@ -1,0 +1,209 @@
+---
+layout: page
+title: Learning Progress
+description: Track your learning journey across all series
+---
+
+<div id="learning-progress-dashboard">
+  <h1>Your Learning Progress</h1>
+  <p>Track your progress across all learning series. Progress is saved in your browser.</p>
+
+  <div id="progress-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+    <div style="padding: 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 1rem; color: white;">
+      <div style="font-size: 2rem; font-weight: 700;" id="total-completed">0</div>
+      <div style="font-size: 0.875rem; opacity: 0.9;">Posts Completed</div>
+    </div>
+    <div style="padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 1rem; color: white;">
+      <div style="font-size: 2rem; font-weight: 700;" id="series-completed">0</div>
+      <div style="font-size: 0.875rem; opacity: 0.9;">Series Completed</div>
+    </div>
+    <div style="padding: 1.5rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 1rem; color: white;">
+      <div style="font-size: 2rem; font-weight: 700;" id="total-time">0h</div>
+      <div style="font-size: 0.875rem; opacity: 0.9;">Estimated Time</div>
+    </div>
+  </div>
+
+  <div id="series-progress-list"></div>
+
+  <div style="margin-top: 3rem; padding: 1.5rem; background: #f3f4f6; border-radius: 1rem;">
+    <h2 style="margin-top: 0;">Reset Progress</h2>
+    <p>Clear all your progress data. This cannot be undone.</p>
+    <button onclick="resetAllProgress()" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+      Reset All Progress
+    </button>
+  </div>
+</div>
+
+<script>
+  // Learning progress tracker
+  const LearningProgress = {
+    STORAGE_KEY: 'learn-with-satya-progress',
+
+    // Get all progress data
+    getAll() {
+      const data = localStorage.getItem(this.STORAGE_KEY);
+      return data ? JSON.parse(data) : { posts: {}, series: {} };
+    },
+
+    // Mark post as complete
+    completePost(postSlug, categoryslug, readingTimeMinutes = 5) {
+      const progress = this.getAll();
+      progress.posts[postSlug] = {
+        completed: true,
+        completedAt: new Date().toISOString(),
+        readingTime: readingTimeMinutes,
+        category
+      };
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
+      return progress;
+    },
+
+    // Check if post is complete
+    isPostComplete(postSlug) {
+      const progress = this.getAll();
+      return progress.posts[postSlug]?.completed || false;
+    },
+
+    // Get series completion percentage
+    getSeriesProgress(seriesId, totalParts) {
+      const progress = this.getAll();
+      const seriesData = progress.series[seriesId] || { completed: [] };
+      const completedCount = seriesData.completed.length;
+      return Math.round((completedCount / totalParts) * 100);
+    },
+
+    // Mark series part as complete
+    completeSeriesPart(seriesId, partNumber) {
+      const progress = this.getAll();
+      if (!progress.series[seriesId]) {
+        progress.series[seriesId] = { completed: [], lastAccessed: new Date().toISOString() };
+      }
+      if (!progress.series[seriesId].completed.includes(partNumber)) {
+        progress.series[seriesId].completed.push(partNumber);
+        progress.series[seriesId].lastAccessed = new Date().toISOString();
+      }
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
+      return progress;
+    },
+
+    // Reset all progress
+    reset() {
+      localStorage.removeItem(this.STORAGE_KEY);
+    },
+
+    // Get stats
+    getStats() {
+      const progress = this.getAll();
+      const totalPosts = Object.keys(progress.posts).length;
+      const totalTime = Object.values(progress.posts).reduce((sum, post) => sum + (post.readingTime || 5), 0);
+      const seriesCompleted = Object.values(progress.series).filter(s => s.completed.length > 0).length;
+      
+      return {
+        totalPosts,
+        totalTime: Math.round(totalTime / 60), // Convert to hours
+        seriesCompleted
+      };
+    }
+  };
+
+  // Load and display progress on page load
+  function loadProgressDashboard() {
+    const progress = LearningProgress.getAll();
+    const stats = LearningProgress.getStats();
+
+    // Update stats
+    document.getElementById('total-completed').textContent = stats.totalPosts;
+    document.getElementById('series-completed').textContent = stats.seriesCompleted;
+    document.getElementById('total-time').textContent = stats.totalTime + 'h';
+
+    // Load series data from Jekyll
+    {% assign all_series = site.data.series %}
+    const seriesData = {{ all_series | jsonify }};
+
+    // Display series progress
+    const seriesList = document.getElementById('series-progress-list');
+    seriesList.innerHTML = '<h2>Series Progress</h2>';
+
+    seriesData.forEach(series => {
+      const seriesProgress = progress.series[series.id] || { completed: [] };
+      const completedCount = seriesProgress.completed.length;
+      const totalParts = series.total_parts || 0;
+      const percentage = totalParts > 0 ? Math.round((completedCount / totalParts) * 100) : 0;
+
+      const seriesCard = `
+        <div style="margin: 1.5rem 0; padding: 1.5rem; border: 1px solid #e5e7eb; border-radius: 1rem; background: white;">
+          <h3 style="margin-top: 0;">${series.title}</h3>
+          <p style="color: #6b7280; font-size: 0.875rem;">${series.description}</p>
+          <div style="margin: 1rem 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.875rem; font-weight: 600;">Progress</span>
+              <span style="font-size: 0.875rem;">${completedCount} / ${totalParts} parts (${percentage}%)</span>
+            </div>
+            <div style="height: 0.5rem; background: #e5e7eb; border-radius: 9999px; overflow: hidden;">
+              <div style="height: 100%; background: #3b82f6; border-radius: 9999px; width: ${percentage}%; transition: width 0.3s ease;"></div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+            <span style="padding: 0.25rem 0.75rem; background: #f3f4f6; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase;">
+              ${series.category}
+            </span>
+            <span style="padding: 0.25rem 0.75rem; background: #f3f4f6; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase;">
+              ${series.difficulty}
+            </span>
+          </div>
+          ${totalParts > 0 ? `<a href="/${series.category}/${series.posts[0]?.slug}/" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600;">
+            ${completedCount > 0 ? 'Continue Series' : 'Start Series'}
+          </a>` : '<span style="color: #6b7280; font-size: 0.875rem; font-style: italic;">No posts yet</span>'}
+        </div>
+      `;
+      seriesList.innerHTML += seriesCard;
+    });
+
+    if (seriesData.length === 0) {
+      seriesList.innerHTML += '<p style="color: #6b7280;">No series available yet. Check back soon!</p>';
+    }
+  }
+
+  // Reset all progress
+  function resetAllProgress() {
+    if (confirm('Are you sure you want to reset all your progress? This cannot be undone.')) {
+      LearningProgress.reset();
+      location.reload();
+    }
+  }
+
+  // Load dashboard on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadProgressDashboard);
+  } else {
+    loadProgressDashboard();
+  }
+
+  // Make LearningProgress available globally for post pages
+  window.LearningProgress = LearningProgress;
+</script>
+
+<style>
+  #learning-progress-dashboard {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  #learning-progress-dashboard h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  #learning-progress-dashboard h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem 0;
+  }
+
+  #learning-progress-dashboard h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+</style>

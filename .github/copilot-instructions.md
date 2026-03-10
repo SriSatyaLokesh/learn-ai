@@ -69,6 +69,42 @@
 
 ---
 
+## 🎓 LMS Features
+
+**Learning progress tracking** (localStorage-based):
+- Auto-marks posts complete at 80% scroll
+- Series completion percentage
+- Progress dashboard at `/progress/`
+- Completion badges and notifications
+
+**Series navigation**:
+- Previous/Next buttons with visual design
+- Progress bar showing completion (e.g., "33% - 2/6 parts")
+- Expandable parts list with ✅ indicators
+- Series badge on posts ("Part X of Series")
+
+**Difficulty-based optimization**:
+- Beginner: 1,500-2,000 words, Grade 8-10, simple examples
+- Intermediate: 2,000-3,000 words, Grade 10-12, production code
+- Advanced: 3,000-4,500 words, College+, complex optimizations
+
+**Components** (auto-integrated in post layout):
+- `difficulty-badge.html` - Color-coded difficulty (🌱 beginner, 📚 intermediate, 🚀 advanced)
+- `category-badge.html` - Category with emoji and color
+- `series-navigation.html` - Complete series UI with progress
+- `image-credit.html` - Attribution for Pixabay/Unsplash/Pexels
+- `quality-score-badge.html` - Optional quality score display
+
+**Progress tracking** (`assets/js/learning-progress-tracker.js`):
+- Tracks scroll completion (80% = complete, 100% = badge)
+- Stores in `localStorage` key: `learn-with-satya-progress`
+- Shows completion button at end of posts
+- Dashboard shows total stats and series breakdowns
+
+**📖 Full guide**: [`docs/BLOG-SYSTEM-GUIDE.md`](../docs/BLOG-SYSTEM-GUIDE.md)
+
+---
+
 ## Project Overview
 
 **Learn with Satya K** is a Jekyll-based AI-powered learning blog system hosted on GitHub Pages. It's a developer-owned static site that functions as a lightweight Learning Management System (LMS) with structured learning series across AI, System Design, Backend Engineering, and more.

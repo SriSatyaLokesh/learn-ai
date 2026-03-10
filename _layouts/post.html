@@ -190,5 +190,18 @@
             "keywords": [{{ page.tags | join: '","' | append: '"' | prepend: '"' }}]
         }
         </script>
+
+        {% comment %} Learning Progress Tracker {% endcomment %}
+        <script>
+            // Pass Jekyll page data to JavaScript
+            window.pageData = {
+                slug: '{{ page.slug }}',
+                category: '{{ page.category }}',
+                series: {% if page.series %}'{{ page.series }}'{% else %}null{% endif %},
+                part: {% if page.part %}{{ page.part }}{% else %}null{% endif %},
+                readingTime: {{ minutesText | replace: ' min read', '' | default: 5 }}
+            };
+        </script>
+        <script src="{{ '/assets/js/learning-progress-tracker.js' | prepend: site.baseurl }}"></script>
     </body>
 </html>
