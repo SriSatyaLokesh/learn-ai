@@ -21,15 +21,44 @@
                 <h1 class="post-title">{{ page.title }}</h1>
                 <p class="post-subtitle">{{ page.subtitle }}</p>
 
+                {% comment %} Blog metadata badges {% endcomment %}
+                <div class="post-metadata" style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1rem 0;">
+                    {% if page.difficulty %}
+                        {% include difficulty-badge.html difficulty=page.difficulty %}
+                    {% endif %}
+                    {% if page.category %}
+                        {% include category-badge.html category=page.category %}
+                    {% endif %}
+                    {% if page.series %}
+                        <span style="display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; background-color: #667eea1A; color: #667eea; border: 1px solid #667eea33;">
+                            <span aria-hidden="true">📚</span>
+                            <span>Part {{ page.part | default: 1 }} of Series</span>
+                        </span>
+                    {% endif %}
+                </div>
+
                 {% if page.image and paginator.activated == nil %}
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
+                    {% if page.header.credit and page.header.credit_url %}
+                        {% include image-credit.html credit=page.header.credit url=page.header.credit_url %}
+                    {% endif %}
                 {% endif %}
 
                 {% include pagination-post.html progressBar=true %}
 
                 {% include toc.html %}
 
+                {% comment %} Series navigation at top {% endcomment %}
+                {% if page.series %}
+                    {% include series-navigation.html %}
+                {% endif %}
+
                 {{ content }}
+
+                {% comment %} Series navigation at bottom {% endcomment %}
+                {% if page.series %}
+                    {% include series-navigation.html %}
+                {% endif %}
 
                 {% include pagination-post.html %}
             </article>

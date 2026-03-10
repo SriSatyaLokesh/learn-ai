@@ -1,0 +1,40 @@
+{% comment %}
+  Quality Score Badge Component
+  
+  Usage: {% include quality-score-badge.html score=87 %}
+  
+  Displays a quality score badge with color-coded band.
+  Typically used in post metadata or admin views.
+{% endcomment %}
+
+{% assign score = include.score | default: 0 %}
+
+{% if score >= 90 %}
+  {% assign band = "Exceptional" %}
+  {% assign color = "#10B981" %}
+  {% assign icon = "⭐" %}
+{% elsif score >= 80 %}
+  {% assign band = "Strong" %}
+  {% assign color = "#3B82F6" %}
+  {% assign icon = "✅" %}
+{% elsif score >= 70 %}
+  {% assign band = "Acceptable" %}
+  {% assign color = "#F59E0B" %}
+  {% assign icon = "✓" %}
+{% elsif score >= 60 %}
+  {% assign band = "Below Standard" %}
+  {% assign color = "#F97316" %}
+  {% assign icon = "⚠" %}
+{% else %}
+  {% assign band = "Rewrite" %}
+  {% assign color = "#EF4444" %}
+  {% assign icon = "❌" %}
+{% endif %}
+
+<span class="quality-score-badge quality-{{ band | downcase | replace: ' ', '-' }}" style="display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.375rem 0.875rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; background-color: {{ color }}1A; color: {{ color }}; border: 1px solid {{ color }}33;" title="{{ band }}: {{ score }}/100">
+  <span aria-hidden="true">{{ icon }}</span>
+  <span class="score-number" style="font-variant-numeric: tabular-nums;">{{ score }}</span>
+  <span class="score-separator" style="opacity: 0.5;">/</span>
+  <span class="score-total" style="opacity: 0.7;">100</span>
+  <span class="score-band" style="margin-left: 0.25rem; opacity: 0.8;">({{ band }})</span>
+</span>

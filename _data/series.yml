@@ -1,0 +1,86 @@
+# Series Data Structure
+#
+# This file defines all learning series in the blog.
+# Each series has metadata and a list of posts in order.
+#
+# Example:
+# - id: transformer-series
+#   title: "Transformer Architecture Deep Dive"
+#   category: ai
+#   description: "Complete guide to understanding transformer architecture from basics to advanced implementations"
+#   difficulty: beginner
+#   total_parts: 5
+#   posts:
+#     - slug: understanding-transformer-architecture
+#       part: 1
+#       title: "Understanding Transformer Architecture" # Optional - for display
+#     - slug: attention-mechanisms-explained
+#       part: 2
+#       title: "Attention Mechanisms Explained"
+
+# AI Category Series
+- id: transformer-series
+  title: "Transformer Architecture Deep Dive"
+  category: ai
+  description: "Complete guide to understanding transformer architecture from basics to advanced implementations"
+  difficulty: beginner
+  total_parts: 5
+  posts: []
+    # Posts will be added as they're created
+    # Example:
+    # - slug: understanding-transformer-architecture
+    #   part: 1
+
+# System Design Category Series
+# - id: distributed-systems-series
+#   title: "Distributed Systems Fundamentals"
+#   category: system-design
+#   description: "Learn distributed systems from CAP theorem to consensus algorithms"
+#   difficulty: intermediate
+#   total_parts: 8
+#   posts: []
+
+# Backend Category Series
+# - id: microservices-series
+#   title: "Microservices Architecture"
+#   category: backend
+#   description: "Design, build, and deploy microservices at scale"
+#   difficulty: intermediate
+#   total_parts: 6
+#   posts: []
+
+# DevOps Category Series
+# - id: kubernetes-series
+#   title: "Kubernetes from Scratch"
+#   category: devops
+#   description: "Master Kubernetes from basics to production deployment"
+#   difficulty: intermediate
+#   total_parts: 10
+#   posts: []
+
+# Frontend Category Series
+# - id: react-patterns-series
+#   title: "React Design Patterns"
+#   category: frontend
+#   description: "Modern React patterns for scalable applications"
+#   difficulty: intermediate
+#   total_parts: 7
+#   posts: []
+
+# Career Category Series
+# - id: interview-prep-series
+#   title: "Complete Interview Preparation"
+#   category: career
+#   description: "Ace technical interviews with systematic preparation"
+#   difficulty: beginner
+#   total_parts: 12
+#   posts: []
+
+# Tools Category Series
+# - id: git-mastery-series
+#   title: "Git Mastery"
+#   category: tools
+#   description: "Master Git from basics to advanced workflows"
+#   difficulty: beginner
+#   total_parts: 5
+#   posts: []

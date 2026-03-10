@@ -1,0 +1,21 @@
+{% comment %}
+  Image Credit Component
+  
+  Usage: {% include image-credit.html credit="Pixabay" url="https://pixabay.com/..." %}
+  
+  Displays image attribution below images.
+  Used for Pixabay, Unsplash, Pexels, and other sources.
+{% endcomment %}
+
+{% assign credit = include.credit %}
+{% assign url = include.url %}
+
+{% if credit and url %}
+<p class="image-credit" style="margin-top: 0.5rem; font-size: 0.75rem; color: #6B7280; font-style: italic;">
+  Image credit: <a href="{{ url }}" target="_blank" rel="noopener noreferrer" style="color: #3B82F6; text-decoration: underline;">{{ credit }}</a>
+</p>
+{% elsif credit %}
+<p class="image-credit" style="margin-top: 0.5rem; font-size: 0.75rem; color: #6B7280; font-style: italic;">
+  Image credit: {{ credit }}
+</p>
+{% endif %}
