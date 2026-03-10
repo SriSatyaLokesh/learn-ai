@@ -77,10 +77,29 @@
 #   posts: []
 
 # Tools Category Series
-# - id: git-mastery-series
-#   title: "Git Mastery"
-#   category: tools
-#   description: "Master Git from basics to advanced workflows"
-#   difficulty: beginner
-#   total_parts: 5
-#   posts: []
+- id: copilot-cli-learning
+  title: "Mastering GitHub Copilot CLI: From Zero to Pro"
+  category: tools
+  description: "A complete, hands-on series to master GitHub Copilot CLI for terminal automation, DevOps, and workflow productivity. Covers installation, getting started, advanced usage, troubleshooting, and a real-world project build."
+  difficulty: beginner-to-advanced
+  total_parts: 6
+  posts:
+    - slug: introduction-to-copilot-cli
+      part: 1
+      title: "Introduction to Copilot CLI: Your Essential Guide to AI in the Terminal"
+    - slug: copilot-cli-getting-started
+      part: 2
+      title: "Copilot CLI Tutorial: Your First Session & Commit Summaries in 2026"
+    - slug: copilot-cli-vs-copilot-chat
+      part: 3
+      title: "GitHub Copilot CLI vs VS Code Copilot Chat: Understanding the Evolution"
+    - slug: copilot-cli-advanced-usage
+      part: 4
+      title: "Copilot CLI Advanced Usage & Customization: Automate Multi-Step Workflows in 2026"
+    - slug: copilot-cli-troubleshooting
+      part: 5
+      title: "Troubleshooting & Best Practices for Copilot CLI: Debugging, Security, and Real-World Workflow Fixes in 2026"
+    - slug: copilot-cli-learning-series-6-project-build-with-copilot-cli
+      part: 6
+      title: "Copilot CLI Learning Series #6: Project – Build with Copilot CLI"
+

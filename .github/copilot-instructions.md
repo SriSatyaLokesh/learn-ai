@@ -99,6 +99,27 @@
 - Use code blocks for technical examples
 - Tables for comparisons, not bullet lists
 
+**Liquid Syntax Escaping:**
+- **CRITICAL**: Jekyll processes `{{ }}` and `{% %}` as Liquid template syntax
+- **Docker/Jinja2/Helm templates**: Wrap in `{% raw %}...{% endraw %}` tags
+- **Common patterns to escape**:
+  - Docker format strings: `{{.Names}}`, `{{.Ports}}`, `{{.ID}}`
+  - Jinja2 templates: `{{ variable }}`, `{% if condition %}`
+  - Helm/K8s templates: `{{ .Values.image }}`
+  - Go templates: `{{ range .Items }}`
+- **Example fix**:
+  ```markdown
+  Wrong:
+  docker ps --format "{{.Names}}"
+  
+  Right:
+  {% raw %}
+  docker ps --format "{{.Names}}"
+  {% endraw %}
+  ```
+- **When to escape**: Any code block containing double curly braces or `{%`
+- **Error indicators**: "Liquid syntax error", "[:dot, \".\"] is not a valid expression"
+
 ---
 
 ## 🎓 LMS Features

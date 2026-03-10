@@ -64,7 +64,7 @@
       
       <div class="series-navigation-buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
         {% if prev_post %}
-          <a href="/{{ page.category }}/{{ prev_post.slug }}/" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 0.5rem; text-decoration: none; color: #000000; transition: all 0.2s;" onmouseover="this.style.borderColor='#dc2f02'; this.style.background='#ffffff'" onmouseout="this.style.borderColor='#E5E7EB'; this.style.background='#F9FAFB'">
+          <a href="/{{ prev_post.slug }}/" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 0.5rem; text-decoration: none; color: #000000; transition: all 0.2s;" onmouseover="this.style.borderColor='#dc2f02'; this.style.background='#ffffff'" onmouseout="this.style.borderColor='#E5E7EB'; this.style.background='#F9FAFB'">
             <span style="font-size: 1.25rem; color: #dc2f02;">←</span>
             <div style="flex: 1; min-width: 0;">
               <div style="font-size: 0.75rem; color: #6B7280;">Previous</div>
@@ -78,7 +78,7 @@
         {% endif %}
         
         {% if next_post %}
-          <a href="/{{ page.category }}/{{ next_post.slug }}/" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 0.5rem; text-decoration: none; color: #000000; transition: all 0.2s;" onmouseover="this.style.borderColor='#dc2f02'; this.style.background='#ffffff'" onmouseout="this.style.borderColor='#E5E7EB'; this.style.background='#F9FAFB'">
+          <a href="/{{ next_post.slug }}/" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 0.5rem; text-decoration: none; color: #000000; transition: all 0.2s;" onmouseover="this.style.borderColor='#dc2f02'; this.style.background='#ffffff'" onmouseout="this.style.borderColor='#E5E7EB'; this.style.background='#F9FAFB'">
             <div style="flex: 1; min-width: 0; text-align: right;">
               <div style="font-size: 0.75rem; color: #6B7280;">Next</div>
               <div style="font-size: 0.875rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Part {{ next_post.part }}</div>
@@ -108,7 +108,7 @@
                     <span style="font-size: 0.75rem; padding: 0.125rem 0.5rem; background: #dc2f02; color: white; border-radius: 9999px;">Current</span>
                   </span>
                 {% else %}
-                  <a href="/{{ page.category }}/{{ post_item.slug }}/" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #000000; text-decoration: none; border-radius: 0.375rem; transition: background 0.2s;" onmouseover="this.style.background='#F9FAFB'" onmouseout="this.style.background='transparent'">
+                  <a href="/{{ post_item.slug }}/" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; color: #000000; text-decoration: none; border-radius: 0.375rem; transition: background 0.2s;" onmouseover="this.style.background='#F9FAFB'" onmouseout="this.style.background='transparent'">
                     <span style="color: #6B7280;">{{ post_item.part }}.</span>
                     <span style="flex: 1;">{{ post_item.title | default: post_item.slug | replace: '-', ' ' | capitalize }}</span>
                   </a>

@@ -1,5 +1,5 @@
 # Site Settings
-name: Learn with Satya K
+name: Learn@SatyaK
 title: Learn with Satya K | AI-powered learning blog
 version: v1.0.0
 description: Learn with Satya K is an AI-powered learning blog for developers, featuring structured series and hands-on tutorials.
@@ -57,6 +57,7 @@ sent_message_url: "/contact/message-sent/"
 markdown: kramdown
 highlighter: rouge
 permalink: /:title/
+future: true
 collections:
   authors:
     output: true
