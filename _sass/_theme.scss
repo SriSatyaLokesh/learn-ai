@@ -1,15 +1,35 @@
 $theme: (
+  // Primary Accent (Orange)
+  accentPrimary: #dc2f02,
+  accentHover: #c62302,
+  accentDark: #9c1f02,
+  accentLightBg: #fef3f2,
+  accentSubtle: rgba(220, 47, 2, 0.1),
+  
+  // Text Colors (Black & Grey Scale)
+  textPrimary: #000000,
+  textSecondary: #374151,
+  textTertiary: #6b7280,
+  textDisabled: #9ca3af,
+  
+  // Backgrounds & Surfaces
+  bgPrimary: #ffffff,
+  bgSubtle: #f9fafb,
+  border: #e5e7eb,
+  
+  // Semantic Colors (Feedback Only)
+  successGreen: #10b981,
+  errorRed: #ef4444,
+  warningYellow: #f59e0b,
+  infoBlue: #3b82f6,
+  
+  // Legacy aliases for compatibility
   themeColor: #dc2f02,
   primaryDark: #000000,
-  accentDark: #dc2f02,
   lightGray: #ffffff,
   texts: #374151,
-  textGreyMedium: #6B7280,
-  textGreyLight: #9CA3AF,
-  borderGrey: #E5E7EB,
-  surfaceGrey: #F9FAFB,
-  successGreen: #10B981,
-  errorRed: #EF4444,
-  warningYellow: #F59E0B,
-  infoBlue: #3B82F6
+  textGreyMedium: #6b7280,
+  textGreyLight: #9ca3af,
+  borderGrey: #e5e7eb,
+  surfaceGrey: #f9fafb
 );

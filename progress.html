@@ -9,17 +9,17 @@ description: Track your learning journey across all series
   <p>Track your progress across all learning series. Progress is saved in your browser.</p>
 
   <div id="progress-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
-    <div style="padding: 1.5rem; background: linear-gradient(135deg, #219ebc 0%, #023047 100%); border-radius: 1rem; color: white;">
+    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000;">
       <div style="font-size: 2rem; font-weight: 700;" id="total-completed">0</div>
-      <div style="font-size: 0.875rem; opacity: 0.9;">Posts Completed</div>
+      <div style="font-size: 0.875rem; color: #6b7280;">Posts Completed</div>
     </div>
-    <div style="padding: 1.5rem; background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%); border-radius: 1rem; color: white;">
+    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000;">
       <div style="font-size: 2rem; font-weight: 700;" id="series-completed">0</div>
-      <div style="font-size: 0.875rem; opacity: 0.9;">Series Completed</div>
+      <div style="font-size: 0.875rem; color: #6b7280;">Series Completed</div>
     </div>
-    <div style="padding: 1.5rem; background: linear-gradient(135deg, #8ecae6 0%, #219ebc 100%); border-radius: 1rem; color: white;">
+    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000;">
       <div style="font-size: 2rem; font-weight: 700;" id="total-time">0h</div>
-      <div style="font-size: 0.875rem; opacity: 0.9;">Estimated Time</div>
+      <div style="font-size: 0.875rem; color: #6b7280;">Estimated Time</div>
     </div>
   </div>
 
@@ -28,7 +28,7 @@ description: Track your learning journey across all series
   <div style="margin-top: 3rem; padding: 1.5rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 1rem;">
     <h2 style="margin-top: 0;">Reset Progress</h2>
     <p>Clear all your progress data. This cannot be undone.</p>
-    <button onclick="resetAllProgress()" style="padding: 0.5rem 1rem; background: #fb8500; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+    <button onclick="resetAllProgress()" style="padding: 0.5rem 1rem; background: #dc2f02; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
       Reset All Progress
     </button>
   </div>
@@ -140,7 +140,7 @@ description: Track your learning journey across all series
               <span style="font-size: 0.875rem;">${completedCount} / ${totalParts} parts (${percentage}%)</span>
             </div>
             <div style="height: 0.5rem; background: #e5e7eb; border-radius: 9999px; overflow: hidden;">
-              <div style="height: 100%; background: #219ebc; border-radius: 9999px; width: ${percentage}%; transition: width 0.3s ease;"></div>
+              <div style="height: 100%; background: #dc2f02; border-radius: 9999px; width: ${percentage}%; transition: width 0.3s ease;"></div>
             </div>
           </div>
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
@@ -151,16 +151,16 @@ description: Track your learning journey across all series
               ${series.difficulty}
             </span>
           </div>
-          ${totalParts > 0 ? `<a href="/${series.category}/${series.posts[0]?.slug}/" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background: #219ebc; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600;">
+          ${totalParts > 0 ? `<a href="/${series.category}/${series.posts[0]?.slug}/" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background: #dc2f02; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600;">
             ${completedCount > 0 ? 'Continue Series' : 'Start Series'}
-          </a>` : '<span style="color: #023047; font-size: 0.875rem; font-style: italic; opacity: 0.6;">No posts yet</span>'}
+          </a>` : '<span style="color: #374151; font-size: 0.875rem; font-style: italic; opacity: 0.6;">No posts yet</span>'}
         </div>
       `;
       seriesList.innerHTML += seriesCard;
     });
 
     if (seriesData.length === 0) {
-      seriesList.innerHTML += '<p style="color: #023047; opacity: 0.6;">No series available yet. Check back soon!</p>';
+      seriesList.innerHTML += '<p style="color: #374151; opacity: 0.6;">No series available yet. Check back soon!</p>';
     }
   }
 

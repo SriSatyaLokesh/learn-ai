@@ -28,7 +28,7 @@
   margin: 0 0 rem(40px);
   padding: 0 rem(23px);
   text-transform: lowercase;
-  color: #fff;
+  color: $bgPrimary;
 }
 
 .box-item {
@@ -71,12 +71,12 @@
     .box-body {
       time,
       p {
-        color: $accentDark;
+        color: $accentPrimary;
       }
 
       .cover {
         .new-post-tag {
-          background-color: #000;
+          background-color: $textPrimary;
         }
 
         .read-icon {
@@ -101,7 +101,7 @@
     padding: 0 rem(15px);
 
     a {
-      color: $accentDark;
+      color: $accentPrimary;
     }
   }
 
@@ -116,7 +116,7 @@
     time {
       font-weight: 300;
       font-size: rem(16px);
-      color: darken($lightGray, 50%);
+      color: $textTertiary;
       pointer-events: none;
     }
 
@@ -124,13 +124,13 @@
       margin: rem(10px) 0;
       font-size: rem(24px);
       @include mainFont(800);
-      color: $accentDark;
+      color: $textPrimary;
       line-height: rem(30px);
     }
 
     p {
       margin: 0 0 rem(30px);
-      color: darken($lightGray, 20%);
+      color: $textSecondary;
       font-size: rem(17px);
       line-height: rem(26px);
     }
@@ -138,18 +138,18 @@
     .tags a {
       height: rem(30px);
       line-height: rem(26px);
-      color: $accentDark;
+      color: $accentPrimary;
       padding: 0 rem(10px);
-      border: 1px solid $accentDark;
+      border: 1px solid $accentPrimary;
       border-radius: 15px;
       display: inline-block;
       margin: 0 rem(10px) rem(10px) 0;
       z-index: 50;
 
       &:hover {
-        color: $primaryDark;
-        background: $accentDark;
-        border-color: $accentDark;
+        color: $bgPrimary;
+        background: $accentPrimary;
+        border-color: $accentPrimary;
       }
     }
 
@@ -162,7 +162,7 @@
         top: 50%;
         left: 50%;
         transform: translate3d(-50%, -50%, 0);
-        color: $themeColor;
+        color: $accentPrimary;
         z-index: 1;
       }
 
@@ -174,8 +174,8 @@
       .new-post-tag {
         text-transform: uppercase;
         display: inline-block;
-        background: $themeColor;
-        color: #fff;
+        background: $accentPrimary;
+        color: $bgPrimary;
         font-size: rem(13px);
         font-weight: 700;
         line-height: rem(24px);
@@ -201,8 +201,8 @@
         left: 50%;
         margin-top: rem(-40px);
         margin-left: rem(-40px);
-        border: 2px solid #fff;
-        color: $themeColor;
+        border: 2px solid $bgPrimary;
+        color: $accentPrimary;
         z-index: 4;
 
         svg {

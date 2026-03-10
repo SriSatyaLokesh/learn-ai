@@ -82,10 +82,11 @@
       bottom: 2rem;
       right: 2rem;
       padding: 1rem 1.5rem;
-      background: linear-gradient(135deg, #219ebc 0%, #023047 100%);
-      color: white;
+      background: #ffffff;
+      color: #dc2f02;
+      border: 2px solid #dc2f02;
       border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(33, 158, 188, 0.3);
+      box-shadow: 0 10px 25px rgba(220, 47, 2, 0.15);
       font-weight: 600;
       z-index: 1000;
       animation: slideInUp 0.5s ease-out;
@@ -138,23 +139,24 @@
     buttonContainer.style.cssText = `
       margin: 3rem 0;
       padding: 2rem;
-      background: ${isComplete ? 'linear-gradient(135deg, #8ecae6 0%, #219ebc 100%)' : 'linear-gradient(135deg, #219ebc 0%, #023047 100%)'};
+      background: ${isComplete ? '#ffffff' : '#ffffff'};
+      border: 2px solid #dc2f02;
       border-radius: 1rem;
-      color: white;
+      color: #000000;
       text-align: center;
     `;
 
     if (isComplete) {
       buttonContainer.innerHTML = `
         <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">You've completed this post!</h3>
-        <p style="margin: 0; opacity: 0.9;">Check your <a href="/progress/" style="color: white; text-decoration: underline;">learning progress</a></p>
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">You've completed this post!</h3>
+        <p style="margin: 0; color: #374151;">Check your <a href="/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
       `;
     } else {
       buttonContainer.innerHTML = `
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">Did you find this helpful?</h3>
-        <p style="margin: 0 0 1rem 0; opacity: 0.9;">Mark as complete to track your progress</p>
-        <button onclick="window.markPostComplete()" style="padding: 0.75rem 2rem; background: white; color: #023047; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">Did you find this helpful?</h3>
+        <p style="margin: 0 0 1rem 0; color: #374151;">Mark as complete to track your progress</p>
+        <button onclick="window.markPostComplete()" style="padding: 0.75rem 2rem; background: #dc2f02; color: white; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s;">
           Mark as Complete
         </button>
       `;
@@ -176,8 +178,8 @@
         const container = button.closest('div');
         container.innerHTML = `
           <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-          <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">Marked as complete!</h3>
-          <p style="margin: 0; opacity: 0.9;">Check your <a href="/progress/" style="color: white; text-decoration: underline;">learning progress</a></p>
+          <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">Marked as complete!</h3>
+          <p style="margin: 0; color: #374151;">Check your <a href="/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
         `;
       }
     }, 100);

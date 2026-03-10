@@ -2,11 +2,38 @@
  * Set up here the general appearance of the theme.
  */
 
+// Primary Theme Variables (from theme map)
 $themeColor: map-get($theme, themeColor) !default;
 $primaryDark: map-get($theme, primaryDark) !default;
 $accentDark: map-get($theme, accentDark) !default;
 $lightGray: map-get($theme, lightGray) !default;
 $texts: map-get($theme, texts) !default;
+
+// Comprehensive Color Variables (from theme map)
+$accentPrimary: map-get($theme, accentPrimary) !default;
+$accentHover: map-get($theme, accentHover) !default;
+$accentLightBg: map-get($theme, accentLightBg) !default;
+$accentSubtle: map-get($theme, accentSubtle) !default;
+
+$textPrimary: map-get($theme, textPrimary) !default;
+$textSecondary: map-get($theme, textSecondary) !default;
+$textTertiary: map-get($theme, textTertiary) !default;
+$textDisabled: map-get($theme, textDisabled) !default;
+
+$bgPrimary: map-get($theme, bgPrimary) !default;
+$bgSubtle: map-get($theme, bgSubtle) !default;
+$border: map-get($theme, border) !default;
+
+$textGreyMedium: map-get($theme, textGreyMedium) !default;
+$textGreyLight: map-get($theme, textGreyLight) !default;
+$borderGrey: map-get($theme, borderGrey) !default;
+$surfaceGrey: map-get($theme, surfaceGrey) !default;
+
+// Semantic Colors
+$successGreen: map-get($theme, successGreen) !default;
+$errorRed: map-get($theme, errorRed) !default;
+$warningYellow: map-get($theme, warningYellow) !default;
+$infoBlue: map-get($theme, infoBlue) !default;
 
 // Breakpoints
 $breakpoints: (

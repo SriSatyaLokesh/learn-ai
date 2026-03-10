@@ -10,8 +10,8 @@
 
 footer {
   @include center(rem(800px));
-  border-top: 1px solid darken($accentDark, 10%);
-  background: $accentDark;
+  border-top: 1px solid $border;
+  background: $bgPrimary;
   padding: rem(20px) rem(25px);
   margin-top: rem(50px);
   margin-bottom: rem(120px);
@@ -23,7 +23,7 @@ footer {
 
   p {
     text-decoration: none;
-    color: $primaryDark;
+    color: $textSecondary;
     font-size: rem(16px);
     line-height: rem(25px);
   }
@@ -44,7 +44,7 @@ footer {
 
     &.love {
       @include size(20, 20);
-      fill: $themeColor;
+      fill: $accentPrimary;
       margin-top: rem(-2px);
       margin-left: rem(3px);
       margin-right: rem(3px);
@@ -53,13 +53,14 @@ footer {
 
   a {
     display: inline-block;
-    fill: #808080;
+    fill: $textTertiary;
     transition: all 0.3s ease;
     text-decoration: none;
-    color: #808080;
+    color: $textTertiary;
     
     &:hover {
-      fill: $themeColor;
+      fill: $accentPrimary;
+      color: $accentPrimary;
     }
     
     &.creator:hover {
@@ -88,11 +89,11 @@ footer {
 
 .main-page {
   footer {
-    background: $primaryDark;
-    border-top: 1px solid lighten($primaryDark, 10%);
+    background: $textPrimary;
+    border-top: 1px solid lighten($textPrimary, 10%);
     
     p {
-      color: $accentDark;
+      color: $bgPrimary;
     }
   }
 }
