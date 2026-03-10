@@ -10,17 +10,15 @@ part: 1
 excerpt: "Kick off your Copilot CLI learning journey! Learn what Copilot CLI is, how to install it on Windows, macOS, and Linux, set up authentication, and understand the difference between Copilot CLI and Copilot in IDEs."
 description: "Start your Copilot CLI journey with this beginner-friendly guide. Covers installation, setup, authentication, and practical differences between Copilot CLI and Copilot in IDEs, with step-by-step commands and screenshots."
 tags: [github-copilot, copilot-cli, terminal, ai-tools, setup-guide]
-image: https://docs.github.com/assets/cb-213582/mw-1440/images/help/copilot/copilot-cli-welcome.webp
+image: https://i0.wp.com/user-images.githubusercontent.com/602470/281470389-35d68eee-56c1-4af4-9129-81a82783a4f3.png?ssl=1
 header:
-  credit: GitHub Docs
-  credit_url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli
+  credit: GitHub Blog
+  credit_url: https://github.blog/changelog/2024-03-21-github-copilot-in-the-cli-now-in-public-beta/
 reading_time: 8
 author: satya-k
 ---
 
 # Introduction to Copilot CLI: Your Essential Guide to AI in the Terminal
-
-![Copilot CLI in action](/assets/img/posts/copilot-cli-intro.jpg)
 
 > **TL;DR:** GitHub Copilot CLI brings AI-powered command generation, error explanation, and shell automation directly to your terminal. Install it in under 5 minutes with npm, authenticate with your GitHub account, and start generating commands from plain English. Perfect for DevOps, scripting, and boosting terminal productivity. Works on Windows, macOS, and Linux. ([GitHub, 2024](https://github.com/features/copilot))
 

@@ -10,10 +10,10 @@ part: 3
 tags: [github-copilot, cli, vs-code, developer-productivity, ai-tools]
 excerpt: "Discover how GitHub Copilot CLI extends AI assistance beyond the editor, bringing intelligent command execution and workflow automation directly to your terminal."
 description: "Learn how Copilot CLI advances beyond Copilot Chat with terminal-native AI, natural language command generation, context-aware suggestions, and GitHub-integrated workflows."
-image: https://docs.github.com/assets/cb-213582/mw-1440/images/help/copilot/copilot-cli-welcome.webp
+image: https://i0.wp.com/user-images.githubusercontent.com/602470/281470389-35d68eee-56c1-4af4-9129-81a82783a4f3.png?ssl=1
 header:
-  credit: GitHub Docs
-  credit_url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli
+  credit: GitHub Blog
+  credit_url: https://github.blog/changelog/2024-03-21-github-copilot-in-the-cli-now-in-public-beta/
 reading_time: 12
 author: satya-k
 ---

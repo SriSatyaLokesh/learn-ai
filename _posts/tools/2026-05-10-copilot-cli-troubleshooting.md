@@ -10,10 +10,10 @@ difficulty: intermediate
 series: copilot-cli-learning
 series_title: "Mastering GitHub Copilot CLI: From Zero to Pro"
 part: 5
-image: https://docs.github.com/assets/cb-213582/mw-1440/images/help/copilot/copilot-cli-welcome.webp
+image: https://i0.wp.com/user-images.githubusercontent.com/602470/281470389-35d68eee-56c1-4af4-9129-81a82783a4f3.png?ssl=1
 header:
-  credit: GitHub Docs
-  credit_url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli
+  credit: GitHub Blog
+  credit_url: https://github.blog/changelog/2024-03-21-github-copilot-in-the-cli-now-in-public-beta/
 reading_time: 18
 author: satya-k
 ---
@@ -55,8 +55,6 @@ Copilot CLI troubleshooting is the process of diagnosing and resolving issues th
   - Workflow validation
 - **Common misconceptions:** Troubleshooting is not just for experts—any user can follow a structured approach to resolve most issues.
 - **Evolution:** As Copilot CLI matures, built-in diagnostics and community best practices have made troubleshooting more accessible.
-
-![Copilot CLI error output screenshot](https://pixabay.com/photos/terminal-code-coding-computer-4063372/)
 
 [STAT: 92% of Copilot CLI issues are resolved by reinstalling or re-authenticating (GitHub Community, 2026).]
 

@@ -10,10 +10,10 @@ part: 6
 tags: [github-copilot, cli, project, automation, best-practices]
 excerpt: "A hands-on guide to building, documenting, and deploying a CLI-driven app using GitHub Copilot CLI. Covers planning, coding, review, and deployment."
 description: "A hands-on guide to building, documenting, and deploying a CLI-driven app using GitHub Copilot CLI. Covers planning, coding, review, and deployment with best practices for SEO and accessibility."
-image: https://docs.github.com/assets/cb-213582/mw-1440/images/help/copilot/copilot-cli-welcome.webp
+image: https://i0.wp.com/user-images.githubusercontent.com/602470/281470389-35d68eee-56c1-4af4-9129-81a82783a4f3.png?ssl=1
 header:
-  credit: GitHub Docs
-  credit_url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli
+  credit: GitHub Blog
+  credit_url: https://github.blog/changelog/2024-03-21-github-copilot-in-the-cli-now-in-public-beta/
 reading_time: 20
 author: satya-k
 ---
@@ -476,15 +476,15 @@ Hierarchy: (1) Code defaults, (2) Global `~/.config/`, (3) Project `.config.json
 
 ## Summary and Next Steps
 
-🎉 **You've completed the Copilot CLI Learning Series!**
+**You've completed the Copilot CLI Learning Series!**
 
 **What you learned:**
-✅ Plan and scaffold CLI projects
-✅ Generate code, tests, docs with Copilot
-✅ Implement features with type safety
-✅ Quality review and testing
-✅ Deploy to npm
-✅ Accessibility and SEO best practices
+- Plan and scaffold CLI projects
+- Generate code, tests, docs with Copilot
+- Implement features with type safety
+- Quality review and testing
+- Deploy to npm
+- Accessibility and SEO best practices
 
 **Next steps:**
 1. Extend your CLI with cloud sync or team features
