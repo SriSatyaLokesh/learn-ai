@@ -8,6 +8,13 @@ $accentDark: map-get($theme, accentDark) !default;
 $lightGray: map-get($theme, lightGray) !default;
 $texts: map-get($theme, texts) !default;
 
+// Accent color for UI elements (was $accentPrimary)
+$accentPrimary: $themeColor !default;
+// Background color for UI elements (was $bgPrimary)
+$bgPrimary: #ffffff !default;
+// Tertiary text color (fallback to lightGray)
+$textTertiary: $lightGray !default;
+
 // Breakpoints
 $breakpoints: (
   sm: 37.5rem
