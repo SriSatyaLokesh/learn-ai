@@ -256,6 +256,106 @@
     }
   }
 
+  // Callout Boxes - Base Styles
+  .info-gain-callout,
+  .stat-callout {
+    @include center(rem(730px));
+    border-radius: rem(12px);
+    padding: rem(24px) rem(28px) rem(24px) rem(64px) !important;
+    margin: rem(40px) auto !important;
+    width: 90%;
+    position: relative;
+    font-size: rem(17px) !important;
+    line-height: 1.8 !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    @include media(">=sm") {
+      width: 100%;
+      margin: rem(50px) auto !important;
+      padding: rem(28px) rem(36px) rem(28px) rem(72px) !important;
+      font-size: rem(19px) !important;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .callout-icon {
+      position: absolute;
+      left: rem(16px);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: rem(32px);
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+      @include media(">=sm") {
+        left: rem(20px);
+        font-size: rem(36px);
+      }
+    }
+
+    .callout-label {
+      display: block;
+      font-weight: 700;
+      font-size: rem(15px);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: rem(6px);
+
+      @include media(">=sm") {
+        font-size: rem(16px);
+        margin-bottom: rem(8px);
+      }
+    }
+
+    .callout-text {
+      display: block;
+      line-height: 1.7;
+    }
+  }
+
+  // INFO-GAIN Callout - Blue Theme (Insights)
+  .info-gain-callout {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    border-left: rem(5px) solid #2196f3;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+    color: #1a237e !important;
+
+    &:hover {
+      box-shadow: 0 6px 16px rgba(33, 150, 243, 0.3);
+    }
+
+    .callout-label {
+      color: #1565c0;
+    }
+
+    .callout-text {
+      color: #263238;
+    }
+  }
+
+  // STAT Callout - Green Theme (Statistics/Data)
+  .stat-callout {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    border-left: rem(5px) solid #4caf50;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+    color: #1b5e20 !important;
+
+    &:hover {
+      box-shadow: 0 6px 16px rgba(76, 175, 80, 0.3);
+    }
+
+    .callout-label {
+      color: #2e7d32;
+    }
+
+    .callout-text {
+      color: #263238;
+    }
+  }
+
   hr {
     @include center(rem(760px));
     border: 1px solid $lightGray;

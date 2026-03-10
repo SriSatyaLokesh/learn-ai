@@ -99,6 +99,23 @@
 - Use code blocks for technical examples
 - Tables for comparisons, not bullet lists
 
+**Markdown Formatting Rules:**
+- **Line breaks**: Use blank line between paragraphs OR 2 spaces at end of line for line break
+- **Bullet points**: Always use proper markdown lists (-, *, or +) with blank lines before/after
+- **Never**: Single newline without 2 trailing spaces (renders as same line)
+- **Example**:
+  ```markdown
+  Wrong:
+  Item 1
+  Item 2
+  Item 3
+  
+  Right:
+  - Item 1
+  - Item 2
+  - Item 3
+  ```
+
 **Liquid Syntax Escaping:**
 - **CRITICAL**: Jekyll processes `{{ }}` and `{% %}` as Liquid template syntax
 - **Docker/Jinja2/Helm templates**: Wrap in `{% raw %}...{% endraw %}` tags
