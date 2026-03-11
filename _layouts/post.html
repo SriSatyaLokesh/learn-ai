@@ -37,6 +37,9 @@
                     {% endif %}
                 </div>
 
+                {% comment %} Series start prompt for series posts {% endcomment %}
+                {% include series-start-prompt.html %}
+
                 {% if page.image and paginator.activated == nil %}
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                     {% if page.header.credit and page.header.credit_url %}

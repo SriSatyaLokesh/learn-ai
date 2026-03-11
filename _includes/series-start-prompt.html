@@ -1,0 +1,158 @@
+{% comment %}
+Series Start Prompt Component
+Shows a prompt suggesting users start with Part 1 of the current series
+Only displays for series posts when user hasn't dismissed it
+{% endcomment %}
+
+{% if page.series and page.series_title and page.part != 1 %}
+<div class="series-start-prompt stat-callout info-gain-callout" 
+     id="seriesStartPrompt" 
+     data-series="{{ page.series }}"
+     style="display: none;">
+  
+  <div class="callout-icon">🚀</div>
+  
+  <button class="prompt-dismiss" onclick="dismissSeriesPrompt('{{ page.series }}')" 
+          aria-label="Dismiss this prompt">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8S12.4 0 8 0zm4.2 10.8L10.8 12.2 8 9.4 5.2 12.2 3.8 10.8 6.6 8 3.8 5.2 5.2 3.8 8 6.6l2.8-2.8 1.4 1.4L9.4 8l2.8 2.8z"/>
+    </svg>
+  </button>
+  
+  <div class="prompt-content">
+    <span class="callout-label">New to this series?</span>
+    <div class="callout-text">
+      <p>This is <strong>Part {{ page.part }}</strong> of <strong>{{ page.series_title }}</strong>. 
+      For the best learning experience, we recommend starting from the beginning.</p>
+      
+      {% comment %} Find Part 1 of this series {% endcomment %}
+      {% assign part_1_post = null %}
+      {% for post in site.posts %}
+        {% if post.series == page.series and post.part == 1 %}
+          {% assign part_1_post = post %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if part_1_post %}
+        <a href="{{ site.baseurl }}{{ part_1_post.url }}" 
+           class="series-start-btn">
+          Start with Part 1: {{ part_1_post.title }}
+        </a>
+      {% else %}
+        <a href="{{ site.baseurl }}/series/{{ page.series }}/" 
+           class="series-start-btn">
+          View Full Series
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+.series-start-prompt {
+  position: relative;
+  margin-bottom: 2rem !important;
+}
+
+.prompt-dismiss {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.prompt-dismiss:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.prompt-content {
+  padding-right: 2.5rem;
+}
+
+.series-start-btn {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  background-color: #2196f3;
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.series-start-btn:hover {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.4);
+  color: white !important;
+}
+
+@media (max-width: 768px) {
+  .prompt-dismiss {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  .series-start-btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+  }
+}
+</style>
+
+<script>
+// Series Start Prompt functionality
+(function() {
+  function checkSeriesPromptVisibility() {
+    const prompt = document.getElementById('seriesStartPrompt');
+    if (!prompt) return;
+    
+    const seriesSlug = prompt.dataset.series;
+    const dismissedKey = `series-prompt-dismissed-${seriesSlug}`;
+    
+    // Check if user has dismissed this series prompt
+    if (!localStorage.getItem(dismissedKey)) {
+      prompt.style.display = 'block';
+    }
+  }
+  
+  // Dismiss prompt function (global scope for onclick)
+  window.dismissSeriesPrompt = function(seriesSlug) {
+    const dismissedKey = `series-prompt-dismissed-${seriesSlug}`;
+    localStorage.setItem(dismissedKey, 'true');
+    
+    const prompt = document.getElementById('seriesStartPrompt');
+    if (prompt) {
+      prompt.style.opacity = '0';
+      prompt.style.transform = 'translateY(-10px)';
+      setTimeout(() => {
+        prompt.style.display = 'none';
+      }, 300);
+    }
+  };
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkSeriesPromptVisibility);
+  } else {
+    checkSeriesPromptVisibility();
+  }
+})();
+</script>
+{% endif %}
