@@ -67,8 +67,8 @@
   - Manages Node.js dev dependencies (Gulp, Babel, etc.)
   - Scripts in `package.json`:
     - `npm run build` → `gulp build`
-    - `npm run serve` → `bundle exec jekyll serve`
-    - `npm run dev` → `gulp build && bundle exec jekyll serve`
+    - `npm run serve` → `bundle exec jekyll serve --baseurl /learn-with-satya`
+    - `npm run dev` → `gulp build && bundle exec jekyll serve --baseurl /learn-with-satya`
 
 ### 3. **Ruby & Gems**
 
@@ -141,7 +141,7 @@ npm run dev
 gulp build
 
 # Jekyll only (for testing)
-bundle exec jekyll serve
+bundle exec jekyll serve --baseurl /learn-with-satya
 
 # Production build
 JEKYLL_ENV=production bundle exec jekyll build
