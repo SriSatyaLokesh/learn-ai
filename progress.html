@@ -80,10 +80,15 @@ description: Track your learning journey across all series
           <div style="margin: 1rem 0;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
               <span style="font-size: 0.875rem; font-weight: 600;">Progress</span>
-              <span style="font-size: 0.875rem;">${completedCount} / ${totalParts} parts (${percentage}%)</span>
+              <span style="font-size: 0.875rem;" class="progress-text">${completedCount} / ${totalParts} parts (${percentage}%)</span>
             </div>
             <div style="height: 0.5rem; background: #e5e7eb; border-radius: 9999px; overflow: hidden;">
-              <div style="height: 100%; background: #dc2f02; border-radius: 9999px; width: ${percentage}%; transition: width 0.3s ease;"></div>
+              <div 
+                data-progress-bar 
+                data-series-id="${series.id}" 
+                data-total-parts="${totalParts}"
+                style="height: 100%; background: #dc2f02; border-radius: 9999px; width: ${percentage}%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease;"
+              ></div>
             </div>
           </div>
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">

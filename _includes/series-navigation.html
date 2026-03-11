@@ -53,12 +53,17 @@
           <span style="font-size: 0.875rem; font-weight: 600;">
             Part {{ current_part }} of {{ total_parts }}
           </span>
-          <span style="font-size: 0.875rem;">
+          <span style="font-size: 0.875rem;" class="progress-text">
             {{ current_part | times: 100 | divided_by: total_parts }}% complete
           </span>
         </div>
         <div style="height: 0.5rem; background: #E5E7EB; border-radius: 9999px; overflow: hidden;">
-          <div style="height: 100%; background: #dc2f02; border-radius: 9999px; width: {{ current_part | times: 100 | divided_by: total_parts }}%; transition: width 0.3s ease;"></div>
+          <div 
+            data-progress-bar 
+            data-series-id="{{ page.series }}" 
+            data-total-parts="{{ total_parts }}"
+            style="height: 100%; background: #dc2f02; border-radius: 9999px; width: {{ current_part | times: 100 | divided_by: total_parts }}%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease;"
+          ></div>
         </div>
       </div>
       

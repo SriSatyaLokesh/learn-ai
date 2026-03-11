@@ -57,7 +57,7 @@
   const markPostAsComplete = () => {
     const metadata = getPostMetadata();
     
-    // Use LearningProgress from progress.html
+    // LearningProgress should be available since learning-progress.js loads first
     if (window.LearningProgress) {
       window.LearningProgress.completePost(metadata.slug, metadata.category, metadata.readingTime);
       
@@ -67,6 +67,8 @@
       }
       
       console.log('✅ Post marked as complete:', metadata.slug);
+    } else {
+      console.warn('LearningProgress not available - this should not happen');
     }
   };
 
@@ -169,13 +171,17 @@
   window.markPostComplete = () => {
     markPostAsComplete();
     hasReached100Percent = true;
+    
+    // The LearningProgress.completePost() already shows notification and updates UI
+    // But let's also show the completion badge for good UX
     showCompletionBadge();
     
-    // Replace button with completion message
+    // Replace button with completion message after a short delay to show the success feedback
     setTimeout(() => {
       const button = document.querySelector('button[onclick="window.markPostComplete()"]');
       if (button) {
         const container = button.closest('div');
+        container.style.transition = 'all 0.3s ease';
         container.innerHTML = `
           <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
           <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">Marked as complete!</h3>
