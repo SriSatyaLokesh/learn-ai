@@ -1,7 +1,7 @@
-<ul>
+<ul style="list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; flex-wrap: wrap; justify-content: center;">
   {% for item in site.menu %}
     {% if item.title and item.url %}
-      <li>
+      <li style="margin: 0;">
         <a href="{{ site.url }}{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
       </li>
     {% endif %}
