@@ -152,7 +152,7 @@
       buttonContainer.innerHTML = `
         <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
         <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">You've completed this post!</h3>
-        <p style="margin: 0; color: #374151;">Check your <a href="{{ site.baseurl }}/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
+        <p style="margin: 0; color: #374151;">Check your <a href="/learn-with-satya/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
       `;
     } else {
       buttonContainer.innerHTML = `
@@ -185,7 +185,7 @@
         container.innerHTML = `
           <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
           <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">Marked as complete!</h3>
-          <p style="margin: 0; color: #374151;">Check your <a href="{{ site.baseurl }}/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
+          <p style="margin: 0; color: #374151;">Check your <a href="/learn-with-satya/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
         `;
       }
     }, 100);
