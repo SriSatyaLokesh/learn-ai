@@ -2,7 +2,10 @@
 
 ## ⚠️ MANDATORY GIT WORKFLOW - NO EXCEPTIONS
 
-**EVERY task, change, or feature MUST follow this workflow. No direct commits to main.**
+**Every task, change, or feature MUST follow this workflow. No direct commits to main.**
+
+**📖 Full Guide**: [Git Workflow with GitHub CLI Skill](./.github/skills/git-workflow-github-cli/SKILL.md)  
+**Reference**: For detailed commands, troubleshooting, and GitHub CLI setup
 
 ### Git Workflow (Enforce for ALL Tasks)
 
@@ -10,109 +13,84 @@
 1. Create GitHub Issue → 2. Create Branch → 3. Make Changes → 4. Create PR → 5. Link PR to Issue → 6. Merge to Main
 ```
 
-#### Step-by-Step Commands
+#### Complete Workflow Steps
+
+**For full details on each step, see [Git Workflow Skill](./skills/git-workflow-github-cli/SKILL.md)**
 
 **1. Create GitHub Issue**
 ```bash
-# Create issue via GitHub CLI
-gh issue create --title "Fix: Series navigation links missing baseurl" --body "Navigation links in series component don't include /learn-with-satya/ prefix, causing 404s on GitHub Pages."
-
-# Or prompt user to create issue manually at:
-# https://github.com/SriSatyaLokesh/learn-with-satya/issues/new
+gh issue create --title "fix: Brief description" --body "Detailed description"
+# Returns: https://github.com/SriSatyaLokesh/learn-with-satya/issues/42
 ```
 
 **2. Create Feature Branch**
 ```bash
-# Format: <type>/<issue-number>-<short-description>
-# Types: feature/, fix/, docs/, style/, refactor/, test/, chore/
-
-# Example:
-git checkout -b fix/123-series-navigation-baseurl
+# Format: <type>/<issue-number>-<description>
+git checkout -b fix/42-image-paths-baseurl
 ```
 
-**3. Make Changes and Commit**
+**3. Implement & Test Locally**
 ```bash
-# Make your changes, then:
+# Make your changes, then verify:
+bundle exec jekyll build --future
+# Exit code 0 = success, 1 = errors
+```
+
+**4. Commit with Issue Reference**
+```bash
 git add .
-git commit -m "fix: add baseurl to series navigation links
+git commit -m "fix: Add baseurl to image paths
 
-- Updated _includes/series-navigation.html prevnext links
-- Fixed 'View all parts' dropdown links
-- Resolves #123"
-
-# Always include "Resolves #<issue-number>" in commit message
+- Updated placeholder paths
+- Fixed fallback images
+Resolves #42"  # Keywords: Fixes, Resolves, Closes all work
 ```
 
-**4. Push Branch**
+**5. Push Branch to Remote**
 ```bash
-git push origin fix/123-series-navigation-baseurl
+git push origin fix/42-image-paths-baseurl
 ```
 
-**5. Create Pull Request**
+**6. Create Pull Request (⚠️ MUST INCLUDE "Fixes #X")**
 ```bash
-# Via GitHub CLI
-gh pr create --title "Fix: Series navigation links missing baseurl" --body "Fixes #123
+# CRITICAL: PR body MUST start with "Fixes #42" to auto-close issue
+gh pr create \
+  --title "fix: Add baseurl to image paths" \
+  --body "Fixes #42
 
 ## Changes
-- Added {{ site.baseurl }} prefix to all series navigation links
-- Updated prev/next buttons and dropdown links
-- Tested locally with --baseurl flag
+- Updated all image paths to include baseurl filter
 
 ## Testing
 - [x] Local build passes
-- [x] Links work with /learn-with-satya/ prefix
-- [x] Navigation functions correctly" --base main
+- [x] No console errors" \
+  --base main
+# Returns: https://github.com/SriSatyaLokesh/learn-with-satya/pull/3
 ```
 
-**6. Assign Reviewer (Copilot assigns you automatically)**
+**7. Assign Reviewer**
 ```bash
-# Get the PR number from create output, or:
-gh pr view -q | head -1
-
-# Assign yourself as reviewer
-gh pr edit <PR-number> --add-reviewer SriSatyaLokesh
-
-# Or via one-liner after creation:
-PR_NUMBER=$(gh pr view --json number -q); gh pr edit $PR_NUMBER --add-reviewer SriSatyaLokesh
+gh pr edit 3 --add-reviewer SriSatyaLokesh
 ```
 
-**7. Approve PR (After reviewing)**
+**8. Approve PR**
 ```bash
-# Approve the PR
-gh pr review <PR-number> --approve
-
-# Or with a comment:
-gh pr review <PR-number> --approve --body "Looks good! Ready to merge."
+gh pr review 3 --approve
+# Note: You can't approve your own PR - this is normal
 ```
 
-**8. Merge PR**
+**9. Merge PR**
 ```bash
-# Merge with squash (recommended) and delete branch
-gh pr merge <PR-number> --squash --delete-branch
+# Squash merge (recommended for smaller fixes)
+gh pr merge 3 --squash --delete-branch
 
-# Or merge commit (for important features):
-gh pr merge <PR-number> --create-branch --delete-branch
-
-# Or rebase:
-gh pr merge <PR-number> --rebase --delete-branch
+# Output shows: ✓ Merged + Issue auto-closes
 ```
 
-**Complete Automated Workflow (One Command)**
+**10. Verify on Main**
 ```bash
-# Create PR, assign reviewer, approve, and merge (all at once):
-gh pr create --title "Your Title" --body "Your body" --base main && \
-PR_NUM=$(gh pr list --state open --json number,title | grep "Your Title" | head -1 | cut -d: -f2) && \
-gh pr edit $PR_NUM --add-reviewer SriSatyaLokesh && \
-gh pr review $PR_NUM --approve && \
-gh pr merge $PR_NUM --squash --delete-branch
-```
-
-#### Standard Review and Merge
-```bash
-# After review approval:
-gh pr merge <PR-number> --squash --delete-branch
-
-# Or merge via GitHub web interface
+git checkout main
+git log --oneline -3  # Verify merge commit is present
 ```
 
 #### Workflow Rules
@@ -120,7 +98,7 @@ gh pr merge <PR-number> --squash --delete-branch
 **✅ ALWAYS:**
 - Create issue FIRST for any task (bug fix, feature, content, refactor)
 - Create branch from main before making changes
-- Link PR to issue using "Fixes #123" or "Resolves #123"
+- **Include "Fixes #X" in PR body to auto-close issue** (most critical!)
 - Write descriptive commit messages with issue reference
 - Test changes locally before pushing
 - Delete branch after merge
@@ -128,9 +106,17 @@ gh pr merge <PR-number> --squash --delete-branch
 **❌ NEVER:**
 - Commit directly to main branch
 - Push changes without an issue
-- Create PR without linking to issue
+- Create PR without "Fixes #X" (issues stay open)
 - Merge without testing
 - Leave unmerged branches hanging
+
+**🔑 THE ONE THING THAT STOPPED ISSUES AUTO-CLOSING**:
+- PR #1 merged but Issue #2 stayed open
+- Root cause: PR body didn't include "Fixes #2" keyword
+- Fix: Always start PR body with exactly `Fixes #<issue-number>`
+- Result: Issue auto-closes when PR merges + GitHub links them
+
+See [Skill: Git Workflow with GitHub CLI](./skills/git-workflow-github-cli/SKILL.md) for complete details, all commands, troubleshooting, and GitHub CLI setup.
 
 #### Branch Naming Convention
 
@@ -165,35 +151,39 @@ What needs to be done and why?
 
 #### When User Requests a Task
 
-**Copilot MUST:**
-1. **Acknowledge the request**
-2. **Create GitHub issue** via `gh issue create`
-3. **Create feature branch** with proper naming
-4. **Execute the planned work**
-5. **Commit with proper message** (including issue reference)
-6. **Push branch to remote**
-7. **Create PR** via `gh pr create`
-8. **Assign reviewer** (you) via `gh pr edit --add-reviewer`
-9. **Approve PR** automatically via `gh pr review --approve`
-10. **Merge PR** automatically via `gh pr merge --squash --delete-branch`
+**Copilot MUST follow all 10 steps** (see complete workflow above):
 
-**Example Response:**
+1. ✅ Create GitHub issue
+2. ✅ Create feature branch with proper naming
+3. ✅ Implement changes and test locally
+4. ✅ Commit with issue reference ("Resolves #X")
+5. ✅ Push branch to remote
+6. ✅ Create PR **with "Fixes #X" in body** (auto-closes issue on merge)
+7. ✅ Assign reviewer (you)
+8. ✅ Approve PR (if not self-approval)
+9. ✅ Merge with squash and delete branch
+10. ✅ Verify on main branch
+
+**Example Response to User Request:**
 ```
-I'll fix the series navigation links. Let me follow the Git workflow:
+I'll fix the image paths issue. Following the 10-step Git workflow:
 
-1. ✅ Creating issue #124: "Fix: Series navigation baseurl"
-2. ✅ Creating branch: fix/124-series-navigation-baseurl
-3. ✅ Making changes to _includes/series-navigation.html
-4. ✅ Testing locally with bundle exec jekyll build
-5. ✅ Committing: "fix: add baseurl to series navigation (Resolves #124)"
-6. ✅ Pushing to origin
-7. ✅ Creating PR #125 linked to issue #124
-8. ✅ Assigning you as reviewer
-9. ✅ Approving PR #125
-10. ✅ Merging PR #125 with squash (branch deleted)
+1. ✅ Created issue #42: "fix: Image paths missing baseurl"
+2. ✅ Created branch: fix/42-image-paths-baseurl
+3. ✅ Updated all image src paths to include {{ site.baseurl }}
+4. ✅ Local build passes (1.25s, no errors)
+5. ✅ Committed: "fix: Add baseurl to image paths (Resolves #42)"
+6. ✅ Pushed to origin
+7. ✅ Created PR #3 with "Fixes #42" in body
+8. ✅ Assigned you as reviewer
+9. ✅ Approved PR #3
+10. ✅ Merged PR #3 with squash (branch deleted, issue auto-closed)
 
-All done! Changes live on main and deployed to GitHub Pages. 🚀
+All done! Changes live on main and deployed to GitHub Pages. Issue #42 closed. 🚀
 ```
+
+**For detailed commands and troubleshooting:**  
+👉 **[Read: Git Workflow with GitHub CLI Skill](./skills/git-workflow-github-cli/SKILL.md)**
 
 ---
 
