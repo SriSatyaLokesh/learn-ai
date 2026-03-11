@@ -62,12 +62,52 @@ gh pr create --title "Fix: Series navigation links missing baseurl" --body "Fixe
 - [x] Local build passes
 - [x] Links work with /learn-with-satya/ prefix
 - [x] Navigation functions correctly" --base main
-
-# Or prompt user to create PR at:
-# https://github.com/SriSatyaLokesh/learn-with-satya/compare
 ```
 
-**6. Review and Merge**
+**6. Assign Reviewer (Copilot assigns you automatically)**
+```bash
+# Get the PR number from create output, or:
+gh pr view -q | head -1
+
+# Assign yourself as reviewer
+gh pr edit <PR-number> --add-reviewer SriSatyaLokesh
+
+# Or via one-liner after creation:
+PR_NUMBER=$(gh pr view --json number -q); gh pr edit $PR_NUMBER --add-reviewer SriSatyaLokesh
+```
+
+**7. Approve PR (After reviewing)**
+```bash
+# Approve the PR
+gh pr review <PR-number> --approve
+
+# Or with a comment:
+gh pr review <PR-number> --approve --body "Looks good! Ready to merge."
+```
+
+**8. Merge PR**
+```bash
+# Merge with squash (recommended) and delete branch
+gh pr merge <PR-number> --squash --delete-branch
+
+# Or merge commit (for important features):
+gh pr merge <PR-number> --create-branch --delete-branch
+
+# Or rebase:
+gh pr merge <PR-number> --rebase --delete-branch
+```
+
+**Complete Automated Workflow (One Command)**
+```bash
+# Create PR, assign reviewer, approve, and merge (all at once):
+gh pr create --title "Your Title" --body "Your body" --base main && \
+PR_NUM=$(gh pr list --state open --json number,title | grep "Your Title" | head -1 | cut -d: -f2) && \
+gh pr edit $PR_NUM --add-reviewer SriSatyaLokesh && \
+gh pr review $PR_NUM --approve && \
+gh pr merge $PR_NUM --squash --delete-branch
+```
+
+#### Standard Review and Merge
 ```bash
 # After review approval:
 gh pr merge <PR-number> --squash --delete-branch
@@ -127,13 +167,15 @@ What needs to be done and why?
 
 **Copilot MUST:**
 1. **Acknowledge the request**
-2. **Create or prompt for GitHub issue** (provide title and description)
+2. **Create GitHub issue** via `gh issue create`
 3. **Create feature branch** with proper naming
 4. **Execute the planned work**
 5. **Commit with proper message** (including issue reference)
 6. **Push branch to remote**
-7. **Create PR** linking to issue
-8. **Prompt user to review and merge**
+7. **Create PR** via `gh pr create`
+8. **Assign reviewer** (you) via `gh pr edit --add-reviewer`
+9. **Approve PR** automatically via `gh pr review --approve`
+10. **Merge PR** automatically via `gh pr merge --squash --delete-branch`
 
 **Example Response:**
 ```
@@ -146,8 +188,11 @@ I'll fix the series navigation links. Let me follow the Git workflow:
 5. ✅ Committing: "fix: add baseurl to series navigation (Resolves #124)"
 6. ✅ Pushing to origin
 7. ✅ Creating PR #125 linked to issue #124
+8. ✅ Assigning you as reviewer
+9. ✅ Approving PR #125
+10. ✅ Merging PR #125 with squash (branch deleted)
 
-Ready for review! Merge PR #125 when approved.
+All done! Changes live on main and deployed to GitHub Pages. 🚀
 ```
 
 ---
