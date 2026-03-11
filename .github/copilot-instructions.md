@@ -443,11 +443,11 @@ learn-with-satya/
 # Install dependencies
 bundle install
 
-# Serve site locally with auto-rebuild
-bundle exec jekyll serve
+# Serve site locally with baseurl (matches production)
+bundle exec jekyll serve --baseurl /learn-with-satya
 
 # Serve with drafts and future posts
-bundle exec jekyll serve --drafts --future
+bundle exec jekyll serve --drafts --future --baseurl /learn-with-satya
 
 # Build for production
 JEKYLL_ENV=production bundle exec jekyll build

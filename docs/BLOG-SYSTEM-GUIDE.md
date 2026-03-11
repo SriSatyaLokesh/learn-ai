@@ -748,7 +748,7 @@ _posts/
 
 3. **Post Layout:** Includes series-navigation.html component (already integrated)
 
-4. **Jekyll Rebuild:** Run `bundle exec jekyll serve` to regenerate
+4. **Jekyll Rebuild:** Run `bundle exec jekyll serve --baseurl /learn-with-satya` to regenerate
 
 ---
 
@@ -806,7 +806,7 @@ _posts/
 **Debug:**
 ```bash
 bundle exec jekyll build --trace  # Shows full error stack
-bundle exec jekyll serve --verbose  # Shows build warnings
+bundle exec jekyll serve --verbose --baseurl /learn-with-satya  # Shows build warnings
 ```
 
 ---
@@ -855,7 +855,7 @@ python scripts/blog/analyze_blog.py _posts/ai/my-post.md --format markdown
 
 ### Phase 5: Testing & Polish
 
-- [ ] **Test Build** - `bundle exec jekyll serve`
+- [ ] **Test Build** - `bundle exec jekyll serve --baseurl /learn-with-satya`
 - [ ] **Create Example Posts** - 1 per category (7 total)
 - [ ] **Test Series Navigation** - Create 3-part sample series
 - [ ] **Test Progress Tracking** - Verify localStorage, dashboard

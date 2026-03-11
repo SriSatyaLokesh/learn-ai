@@ -25,8 +25,8 @@
   },
   "scripts": {
     "build": "gulp build",
-    "serve": "bundle exec jekyll serve",
-    "dev": "gulp build && bundle exec jekyll serve"
+    "serve": "bundle exec jekyll serve --baseurl /learn-with-satya",
+    "dev": "gulp build && bundle exec jekyll serve --baseurl /learn-with-satya"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",

@@ -393,7 +393,7 @@ _data/
 # Complete action items:
 #   - Source hero image from Unsplash
 #   - Update _data/series.yml
-#   - Test locally: bundle exec jekyll serve
+#   - Test locally: bundle exec jekyll serve --baseurl /learn-with-satya
 #   - Commit and push
 
 # Done! Post published to GitHub Pages
