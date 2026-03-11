@@ -191,7 +191,9 @@
         }
         </script>
 
-        {% comment %} Learning Progress Tracker {% endcomment %}
+        {% comment %} Learning Progress System {% endcomment %}
+        {% comment %} Load progress module first, then tracker {% endcomment %}
+        <script src="{{ '/assets/js/learning-progress.js' | prepend: site.baseurl }}"></script>
         <script>
             // Pass Jekyll page data to JavaScript
             window.pageData = {
