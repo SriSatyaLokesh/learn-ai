@@ -149,6 +149,9 @@ git log --oneline -3  # Verify merge commit is present
 
 See [Skill: Git Workflow with GitHub CLI](./skills/git-workflow-github-cli/SKILL.md) for complete details, all commands, troubleshooting, and GitHub CLI setup.
 
+<!-- PRIMARY BRANCH CONFIG -->
+Primary branch: main
+
 #### Branch Naming Convention
 
 | Type | Format | Example |
