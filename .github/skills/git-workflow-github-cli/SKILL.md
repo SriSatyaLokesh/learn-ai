@@ -144,8 +144,8 @@ bundle exec jekyll build --future
 # Exit code 1 = errors
 
 # Test with local server (optional)
-bundle exec jekyll serve --future --baseurl /learn-with-satya
-# Visit: http://127.0.0.1:4000/learn-with-satya/
+bundle exec jekyll serve --future --baseurl /learn-ai/
+# Visit: http://127.0.0.1:4000/learn-ai/
 ```
 
 ---

@@ -31,7 +31,7 @@
 1. Push to `main` branch
 2. GitHub Pages automatically detects Jekyll project
 3. Runs build via GitHub Actions
-4. Deploys static output to `https://username.github.io/learn-with-satya/`
+4. Deploys static output to `https://username.github.io/learn-ai/`
 
 **Configuration:**
 - Repo must be public (for free tier)

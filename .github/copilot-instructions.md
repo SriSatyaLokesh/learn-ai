@@ -35,7 +35,7 @@ gh issue create --title "fix: Brief description" --body "Detailed description"
 # If 'gh' command not found, use full path:
 & "C:\Program Files\GitHub CLI\gh.exe" issue create --title "fix: Brief description" --body "Detailed description"
 
-# Returns: https://github.com/SriSatyaLokesh/learn-with-satya/issues/42
+# Returns: https://github.com/SriSatyaLokesh/learn-ai/issues/42
 ```
 
 **2. Create Feature Branch**
@@ -87,7 +87,7 @@ gh pr create `
 - Local build passes, no errors" `
   --base main
 
-# Returns: https://github.com/SriSatyaLokesh/learn-with-satya/pull/3
+# Returns: https://github.com/SriSatyaLokesh/learn-ai/pull/3
 ```
 
 **7. Assign Reviewer**

@@ -33,7 +33,7 @@ Learn with Satya K is a **static Jekyll blog with planned autonomous AI content 
 │ Author's Machine (Local Development)                        │
 │ ├── Create/edit Markdown posts in _posts/                  │
 │ ├── Run: npm run dev (Gulp + Jekyll + BrowserSync)        │
-│ ├── Preview at localhost:4000/learn-with-satya/           │
+│ ├── Preview at localhost:4000/learn-ai/           │
 │ ├── Commit & push                                         │
 │ └── (Planned) Run agent pipeline                         │
 │     └── Generate posts via Claude API                    │
@@ -46,7 +46,7 @@ Learn with Satya K is a **static Jekyll blog with planned autonomous AI content 
 ## Request Flow — User Accessing a Blog Post
 
 ```
-1. User navigates to: https://username.github.io/learn-with-satya/ai/transformer-architecture/
+1. User navigates to: https://username.github.io/learn-ai/ai/transformer-architecture/
 
 2. GitHub Pages serves pre-built HTML from _site/ (< 100ms, cached by CDN)
 

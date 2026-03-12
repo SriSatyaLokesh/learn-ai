@@ -86,7 +86,7 @@ prerequisites:
 seo:
   primary_keyword: "{primary keyword from Phase 3}"
   secondary_keywords: [{secondary keywords from Phase 3}]
-  canonical_url: "https://yourusername.github.io/learn-with-satya/{category}/{slug}/"
+  canonical_url: "https://yourusername.github.io/learn-ai/{category}/{slug}/"
 ---
 ```
 
