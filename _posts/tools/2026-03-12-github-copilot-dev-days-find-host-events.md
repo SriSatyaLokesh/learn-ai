@@ -11,10 +11,8 @@ author: satya-k
 read_time: true
 toc: true
 toc_sticky: true
-
-# Hero image
+image: "https://github.blog/wp-content/uploads/2026/03/dev-days.png?w=1600"
 header:
-  image: "https://github.blog/wp-content/uploads/2026/03/dev-days.png?w=1600"
   image_credit: "GitHub"
   image_credit_url: "https://github.blog"
 
