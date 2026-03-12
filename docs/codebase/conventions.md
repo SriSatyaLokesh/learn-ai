@@ -39,12 +39,12 @@ permalink: /:categories/:title/
 
 **Generated URL:**
 ```
-https://yourusername.github.io/learn-with-satya/{category}/{slug}/
+https://yourusername.github.io/learn-ai/{category}/{slug}/
 ```
 
 **Examples:**
-- `https://yourusername.github.io/learn-with-satya/ai/transformer-architecture-explained/`
-- `https://yourusername.github.io/learn-with-satya/backend/rest-api-design-patterns/`
+- `https://yourusername.github.io/learn-ai/ai/transformer-architecture-explained/`
+- `https://yourusername.github.io/learn-ai/backend/rest-api-design-patterns/`
 
 ### Image Files
 
@@ -111,7 +111,7 @@ prerequisites:
 seo:
   primary_keyword: "transformer architecture explained"
   secondary_keywords: [self-attention mechanism, encoder-decoder architecture, BERT vs GPT, positional encoding]
-  canonical_url: "https://yourusername.github.io/learn-with-satya/ai/transformer-architecture-explained/"
+  canonical_url: "https://yourusername.github.io/learn-ai/ai/transformer-architecture-explained/"
 ---
 ```
 
@@ -140,7 +140,7 @@ seo:
 | `prerequisites` | Array | Optional | Array of `{title, url}` objects; links to required prior knowledge | See template above |
 | `seo.primary_keyword` | String | ✅ Yes | Main target keyword for SEO; used for Formatter validation | `transformer architecture explained` |
 | `seo.secondary_keywords` | Array | Optional | 4–6 related keywords for context; lower priority than primary | See template above |
-| `seo.canonical_url` | URL | ✅ Yes | Absolute canonical URL for this post; prevents duplicate content issues | `https://yourusername.github.io/learn-with-satya/ai/transformer-architecture-explained/` |
+| `seo.canonical_url` | URL | ✅ Yes | Absolute canonical URL for this post; prevents duplicate content issues | `https://yourusername.github.io/learn-ai/ai/transformer-architecture-explained/` |
 
 ---
 
