@@ -1,4 +1,4 @@
-# Copilot Instructions for Learn with Satya K
+# Copilot Instructions for LearnAI
 
 ## ⚠️ MANDATORY GIT WORKFLOW - NO EXCEPTIONS
 
@@ -395,7 +395,7 @@ All done! Changes live on main and deployed to GitHub Pages. Issue #42 closed. �
 
 ## Project Overview
 
-**Learn with Satya K** is a Jekyll-based AI-powered learning blog system hosted on GitHub Pages. It's a developer-owned static site that functions as a lightweight Learning Management System (LMS) with structured learning series across AI, System Design, Backend Engineering, and more.
+**LearnAI** is a Jekyll-based AI-powered learning blog system hosted on GitHub Pages. It's a developer-owned static site that functions as a lightweight Learning Management System (LMS) with structured learning series across AI, System Design, Backend Engineering, and more.
 
 **Key Characteristics:**
 - Content is generated through a multi-agent AI pipeline (Orchestrator → Research → SEO → Writer → Formatter)
@@ -418,7 +418,7 @@ All done! Changes live on main and deployed to GitHub Pages. Issue #42 closed. �
 ## Directory Structure
 
 ```
-learn-with-satya/
+learn-ai/
 ├── _posts/
 │   ├── ai/                    # AI category posts
 │   ├── system-design/         # System Design posts
@@ -475,10 +475,10 @@ learn-with-satya/
 bundle install
 
 # Serve site locally with baseurl (matches production)
-bundle exec jekyll serve --baseurl /learn-with-satya
+bundle exec jekyll serve --baseurl /learn-ai
 
 # Serve with drafts and future posts
-bundle exec jekyll serve --drafts --future --baseurl /learn-with-satya
+bundle exec jekyll serve --drafts --future --baseurl /learn-ai
 
 # Build for production
 JEKYLL_ENV=production bundle exec jekyll build
@@ -504,7 +504,7 @@ node agents/run.js "..." --dry-run
 git add .
 git commit -m "feat(ai): add transformer-architecture post"
 git push origin main
-# Site live at https://yourusername.github.io/learn-with-satya/ in 1-3 minutes
+# Site live at https://yourusername.github.io/learn-ai/ in 1-3 minutes
 ```
 
 ## Front-Matter Specification
@@ -554,7 +554,7 @@ prerequisites:
 seo:
   primary_keyword: "transformer architecture explained"  # REQUIRED
   secondary_keywords: [self-attention, encoder decoder, BERT, GPT]
-  canonical_url: "https://yourusername.github.io/learn-with-satya/ai/transformer-architecture/"  # REQUIRED
+  canonical_url: "https://yourusername.github.io/learn-ai/ai/transformer-architecture/"  # REQUIRED
 ---
 ```
 
@@ -599,7 +599,7 @@ _posts/{category}/{YYYY-MM-DD}-{slug}.md
 
 Jekyll generates URLs as: `/:categories/:title/`
 
-**Example:** `https://yourusername.github.io/learn-with-satya/ai/transformer-architecture-explained/`
+**Example:** `https://yourusername.github.io/learn-ai/ai/transformer-architecture-explained/`
 
 ## Categories and Series
 

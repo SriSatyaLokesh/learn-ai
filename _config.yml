@@ -1,8 +1,8 @@
 # Site Settings
-name: Learn@SatyaK
-title: Learn with Satya K | AI-powered learning blog
+name: LearnAI
+title: LearnAI | AI-powered learning blog
 version: v1.0.0
-description: Learn with Satya K is an AI-powered learning blog for developers, featuring structured series and hands-on tutorials.
+description: LearnAI is an AI-powered learning blog for developers, featuring structured series and hands-on tutorials.
 tags:
   - blog
   - learning
@@ -42,7 +42,7 @@ two_columns_layout: true
 
 
 # Advanced Settings
-baseurl: "/learn-with-satya" # the subpath of your site, e.g. /blog
+baseurl: "/learn-ai" # the subpath of your site, e.g. /blog
 url: "https://srisatyalokesh.is-a.dev" # the base hostname & protocol for your site
 google_analytics: "UA-XXXXXXXX-X"
 language: "en"
