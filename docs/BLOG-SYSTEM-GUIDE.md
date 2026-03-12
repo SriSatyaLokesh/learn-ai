@@ -2,7 +2,7 @@
 
 ## Overview
 
-Learn with Satya K now has a complete professional blog system integrated with AI-powered content creation, quality scoring, LMS features, and progress tracking. This guide covers everything you need to know.
+LearnAI K now has a complete professional blog system integrated with AI-powered content creation, quality scoring, LMS features, and progress tracking. This guide covers everything you need to know.
 
 ## Table of Contents
 
