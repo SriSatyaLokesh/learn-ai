@@ -1,20 +1,20 @@
 ---
 layout: post
-title: "Getting Started with Learn with Satya K"
+title: "Getting Started with LearnAI"
 date: 2024-03-15 10:00:00
 category: career
-tags: [learning, tutorials, getting-started, blog]
-excerpt: "Welcome to Learn with Satya K! Discover how to make the most of our structured learning series and track your progress."
-description: "Complete guide to using Learn with Satya K - explore learning series, track progress, and master AI, system design, and backend engineering through hands-on tutorials."
+tags: [learnai, learning, tutorials, getting-started]
+excerpt: "Welcome to LearnAI! Discover how to make the most of our structured learning series and track your progress."
+description: "Complete guide to LearnAI - explore organized learning series, track progress, and master AI, system design, and backend engineering through expert tutorials."
 difficulty: beginner
 image: /assets/img/blog-image.png
 author: satya-k
 reading_time: 5
 ---
 
-## Welcome to Learn with Satya K! 🎉
+## Welcome to LearnAI! 🎉
 
-**Learn with Satya K is your structured learning platform** for mastering AI, system design, backend engineering, and more. With 40-60 word answer-first paragraphs, comprehensive series navigation, and progress tracking, you'll have everything you need to level up your skills.
+**LearnAI is your structured learning platform** for mastering AI, system design, backend engineering, and more. With comprehensive series navigation, difficulty levels, and progress tracking, you'll have everything you need to level up your skills.
 
 According to [Stack Overflow's 2024 Developer Survey](https://stackoverflow.blog/2024/06/10/developer-survey-results-2024/), 65% of developers cite structured learning paths as crucial for skill development. That's exactly what we provide here.
 
@@ -116,7 +116,7 @@ After completing all 6 parts, you'll have a comprehensive understanding of Kuber
 ## Frequently Asked Questions
 
 **Q: Is this content free?**  
-A: Yes! All content on Learn with Satya K is completely free and always will be.
+A: Yes! All content on LearnAI is completely free and always will be.
 
 **Q: How often is new content published?**  
 A: We publish 2-3 new posts per week, with at least one new series starting each month.

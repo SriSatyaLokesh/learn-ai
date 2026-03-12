@@ -4,7 +4,7 @@ Full-lifecycle blog engine with 12 commands, 12 content templates, 5-category
 100-point scoring, and 4 specialized agents. Optimized for Google rankings
 (December 2025 Core Update, E-E-A-T) and AI citations (GEO/AEO).
 
-Adapted for **Learn with Satya K** Jekyll blog with:
+Adapted for **LearnAI** Jekyll blog with:
 - 7 categories (ai, system-design, backend, devops, frontend, career, tools)
 - Series support with navigation
 - Difficulty levels (beginner, intermediate, advanced)

@@ -292,7 +292,7 @@ Auto-selected based on topic and intent:
 
 ---
 
-## Integration Plan for Learn with Satya K
+## Integration Plan for LearnAI
 
 ### Phase 1: Core Adaptation (2-3 hours)
 
@@ -396,7 +396,7 @@ Auto-selected based on topic and intent:
 
 ### Phase 4: Enhanced Features (2-3 hours)
 
-**Goal:** Add features specific to Learn with Satya K
+**Goal:** Add features specific to LearnAI
 
 **New Features:**
 
@@ -654,7 +654,7 @@ python scripts\blog\analyze_blog.py
 
 ## Conclusion
 
-**The claude-blog skill is highly compatible with GitHub Copilot CLI and provides substantial value for the Learn with Satya K project.**
+**The claude-blog skill is highly compatible with GitHub Copilot CLI and provides substantial value for the LearnAI project.**
 
 **Key Benefits:**
 - 95% direct compatibility

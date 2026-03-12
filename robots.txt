@@ -1,3 +1,106 @@
 # robotstxt.org/
+# LearnAI - Allow all crawlers including AI training crawlers
 
+# General rules for all crawlers
 User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /learn-ai/
+Disallow: /_site/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /docs/
+Disallow: /scripts/
+Disallow: /.github/
+Disallow: /.env
+Crawl-delay: 0
+
+# Google (including GoogleBot, Googlebot-Image, Googlebot-News, etc.)
+User-agent: Googlebot
+Allow: /
+Disallow: /_site/
+Disallow: /node_modules/
+Disallow: /.git/
+
+# Microsoft Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /_site/
+Crawl-delay: 1
+
+# OpenAI GPT crawlers (ChatGPT, GPT-4, etc.)
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+
+# Google's AI training crawler
+User-agent: Google-Extended
+Allow: /
+
+# Other AI/ML crawlers
+User-agent: Omgilibot
+Allow: /
+
+User-agent: Omgili
+Allow: /
+
+User-agent: FacebookExternalHit
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Meta AI (formerly Facebook)
+User-agent: facebookexternalhit
+Allow: /
+
+# Apple Siri/News indexing
+User-agent: AppleNewsBot
+Allow: /
+
+# Microsoft Copilot
+User-agent: Copilot
+Allow: /
+
+User-agent: MicrosoftBot
+Allow: /
+
+# Archive.org crawler
+User-agent: Archive.org_bot
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+
+# Brave Search
+User-agent: Browserbot
+Allow: /
+
+# Sitemap for search engines
+Sitemap: https://srisatyalokesh.github.io/learn-ai/sitemap.xml
+Sitemap: https://srisatyalokesh.github.io/learn-ai/feed.xml

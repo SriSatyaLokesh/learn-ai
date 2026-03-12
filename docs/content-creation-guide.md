@@ -1,4 +1,4 @@
-# Learn with Satya K — Content Creation Guide
+# LearnAI — Content Creation Guide
 
 ## Overview
 
@@ -117,8 +117,8 @@ mkdir -p assets/images/posts/{slug}
 
 ### 3. Local Preview
 ```bash
-bundle exec jekyll serve --baseurl /learn-with-satya
-# Visit: http://127.0.0.1:4000/learn-with-satya/{category}/{slug}/
+bundle exec jekyll serve --baseurl /learn-ai
+# Visit: http://127.0.0.1:4000/learn-ai/{category}/{slug}/
 ```
 
 ### 4. Commit and Deploy
@@ -186,7 +186,7 @@ git push origin main
 
 # 6. Deploy
 # (After completing action items)
-bundle exec jekyll serve --baseurl /learn-with-satya  # test
+bundle exec jekyll serve --baseurl /learn-ai  # test
 git add . && git commit -m "feat(ai): add transformer-architecture-explained"
 git push origin main
 ```

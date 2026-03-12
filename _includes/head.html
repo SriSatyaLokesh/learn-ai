@@ -96,6 +96,26 @@
     <!-- Include extra styles -->
     {% include extra-css.html %}
 
+    <!-- Organization Schema (E-E-A-T Authority) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ site.organization.name }}",
+        "url": "{{ site.organization.url }}",
+        "logo": "{{ site.organization.logo }}",
+        "sameAs": [
+            "{{ site.organization.sameAs[0] }}",
+            "{{ site.organization.sameAs[1] }}"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Support",
+            "email": "{{ site.organization.contact_point.email }}"
+        }
+    }
+    </script>
+
     <!-- JavaScript enabled/disabled -->
     <script>
         document.querySelector('html').classList.remove('no-js');
