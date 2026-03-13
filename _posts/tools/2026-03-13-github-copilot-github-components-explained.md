@@ -13,6 +13,8 @@ header:
   image_credit: "GitHub Blog"
   image_credit_url: "https://github.blog/wp-content/uploads/2024/07/maxresdefault-1.jpg?w=1280"
 author: satya-k
+pinned: true
+featured: true
 difficulty: beginner
 read_time: true
 toc: true
