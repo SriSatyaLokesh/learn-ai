@@ -241,12 +241,36 @@ Learn how the `.github` folder organizes GitHub Copilot instructions, prompt fil
 - [x] Main `.github` customization layers covered
 - [x] Practical examples and references included
 - [x] FAQ section included
-- [ ] Local Jekyll build verification run
+- [x] Local Jekyll build verification run
 
-### Notes
+### Verification Report — 2026-03-13
 
-- Content is structurally ready to publish.
-- Local build verification remains optional before merge.
+**Pass/Fail**: Pass
+
+#### Requirements Alignment
+
+- ✅ Brief and final post align on topic and target audience.
+- ✅ All planned layers are covered: instructions, prompts, agents, skills, hooks, and MCP.
+- ✅ Decision framework, examples, repository references, and FAQ are present.
+
+#### Markdown and Build Check
+
+- ✅ No editor diagnostics were reported for the post or the brief.
+- ✅ Heading hierarchy, tables, images, and code fences are structurally coherent.
+- ✅ `bundle exec jekyll build --future` completed successfully.
+
+#### Fixes Confirmed
+
+- ✅ `seo.canonical_url` now matches `_config.yml` (`url` + `baseurl`).
+- ✅ Related Guides links now use `relative_url`, making them baseurl-aware and deploy-safe.
+
+#### Code Quality
+
+- ✅ No hardcoded credentials or sensitive values.
+- ✅ Front matter complete with author, SEO fields, and tags.
+- ✅ Standalone post format confirmed.
+
+### Verdict: ✅ READY FOR PR
 
 ---
 

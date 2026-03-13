@@ -19,7 +19,7 @@ toc_sticky: true
 seo:
   primary_keyword: "github copilot .github folder"
   secondary_keywords: [github copilot instructions, prompt files, custom agents, agent skills, hooks, mcp, copilot repository customization]
-  canonical_url: "https://srisatyalokesh.github.io/learn-ai/github-copilot-github-components-explained/"
+  canonical_url: "https://srisatyalokesh.is-a.dev/learn-ai/github-copilot-github-components-explained/"
 ---
 
 The `.github` folder is where repository-level GitHub Copilot guidance starts to become reusable, consistent, and team-friendly. If you want Copilot to follow shared standards instead of behaving differently in every chat, this is the folder you need to understand first.
@@ -480,12 +480,12 @@ No. Many repositories get strong results with instructions, prompt files, and cl
 
 If you want a practical follow-up path after this architecture guide, these Copilot CLI posts are good next reads:
 
-- [Introduction to Copilot CLI](/introduction-to-copilot-cli/)
-- [Copilot CLI Getting Started](/copilot-cli-getting-started/)
-- [Copilot CLI vs Copilot Chat](/copilot-cli-vs-copilot-chat/)
-- [Copilot CLI Troubleshooting](/copilot-cli-troubleshooting/)
-- [Copilot CLI Advanced Usage](/copilot-cli-advanced-usage/)
-- [Copilot CLI Project Build Series](/copilot-cli-learning-series-6-project-build-with-copilot-cli/)
+- [Introduction to Copilot CLI]({{ '/introduction-to-copilot-cli/' | relative_url }})
+- [Copilot CLI Getting Started]({{ '/copilot-cli-getting-started/' | relative_url }})
+- [Copilot CLI vs Copilot Chat]({{ '/copilot-cli-vs-copilot-chat/' | relative_url }})
+- [Copilot CLI Troubleshooting]({{ '/copilot-cli-troubleshooting/' | relative_url }})
+- [Copilot CLI Advanced Usage]({{ '/copilot-cli-advanced-usage/' | relative_url }})
+- [Copilot CLI Project Build Series]({{ '/copilot-cli-learning-series-6-project-build-with-copilot-cli/' | relative_url }})
 
 ## References
 
