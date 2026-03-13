@@ -1,4 +1,4 @@
-# Learn with Satya K — External Integrations
+# LearnAI — External Integrations
 
 **Document:** Third-Party Services & APIs  
 **Last Updated:** March 2026  

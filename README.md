@@ -1,4 +1,4 @@
-# Learn with Satya K — Codebase Architecture Documentation
+# LearnAI — Codebase Architecture Documentation
 
 **Status:** ✅ Complete (Foundation Phase)  
 **Last Updated:** March 10, 2026  
@@ -8,7 +8,7 @@
 
 ## 📚 Documentation Index
 
-Welcome to the codebase reference! This directory contains standardized documentation of the **Learn with Satya K** system architecture.
+Welcome to the codebase reference! This directory contains standardized documentation of the **LearnAI** system architecture.
 
 ### Quick Reference
 
@@ -46,7 +46,7 @@ npm run dev       # Start dev server (Gulp + Jekyll)
 ### 3. Explore the Structure (10 minutes)
 
 Navigate folders per [structure.md](structure.md):
-- `_posts/` — Blog content (currently empty)
+- `_posts/` — Blog content (9 published posts: Tools category + Career)
 - `_layouts/` — Page templates
 - `_includes/` — Reusable components
 - `assets/` — Compiled CSS/JS/images

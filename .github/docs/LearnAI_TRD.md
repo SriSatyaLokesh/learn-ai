@@ -1,4 +1,4 @@
-# Learn with Satya K — Technical Requirements Document (TRD)
+# LearnAI — Technical Requirements Document (TRD)
 **Version:** 1.0 | **Date:** March 2026 | **Status:** Draft
 
 ---
@@ -7,11 +7,11 @@
 
 | Field | Detail |
 |---|---|
-| Project Name | Learn with Satya K — Jekyll-Based AI-Powered Learning Blog System |
+| Project Name | LearnAI — Jekyll-Based AI-Powered Learning Blog System |
 | Document Type | Technical Requirements Document |
-| Author | Developer Portfolio Owner |
+| Author | Satya K |
 | Stack | Jekyll 4.x · GitHub Pages · Chirpy Theme · Claude API · Node.js |
-| Companion Doc | Learn with Satya K PRD v1.0 |
+| Companion Doc | LearnAI PRD v1.0 |
 
 ---
 
@@ -58,7 +58,7 @@
 ### 11.1 Directory Layout
 
 ```
-Learn with Satya K/
+learn-ai/
 ├── _posts/
 │   ├── ai/                        # AI category posts
 │   ├── system-design/             # System Design posts
@@ -117,11 +117,11 @@ Learn with Satya K/
 ```yaml
 # Site identity
 theme: jekyll-theme-chirpy
-title: Learn with Satya K
+title: LearnAI
 tagline: Structured learning paths for modern developers
 description: A developer learning blog covering AI, System Design, Backend, and more.
 url: "https://yourusername.github.io"
-baseurl: "/Learn with Satya K"
+baseurl: "/learn-ai"
 
 # Author
 author:
@@ -245,7 +245,7 @@ prerequisites:
 seo:
   primary_keyword: "transformer architecture explained"
   secondary_keywords: [self-attention, encoder decoder, BERT, GPT]
-  canonical_url: "https://yourusername.github.io/Learn with Satya K/ai/transformer-architecture/"
+  "canonical_url": "https://yourusername.github.io/learn-ai/ai/transformer-architecture/"
 ---
 ```
 
@@ -863,4 +863,4 @@ layout: null
 
 ---
 
-*Learn with Satya K TRD v1.0 — March 2026 — This is a living document. Update version and date on any revision.*
+*LearnAI TRD v1.0 — March 2026 — This is a living document. Update version and date on any revision.*

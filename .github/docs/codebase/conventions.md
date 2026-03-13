@@ -1,4 +1,4 @@
-# Learn with Satya K — Coding & Content Conventions
+# LearnAI — Coding & Content Conventions
 
 **Document:** Style Guide & Standards  
 **Last Updated:** March 2026  

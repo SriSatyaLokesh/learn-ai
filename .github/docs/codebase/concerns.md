@@ -1,4 +1,4 @@
-# Learn with Satya K — Known Issues & Technical Debt
+# LearnAI — Known Issues & Technical Debt
 
 **Document:** Concerns, Limitations, and Future Improvements  
 **Last Updated:** March 2026  
@@ -18,36 +18,47 @@ This project is in **Foundation Phase** with significant planned features not ye
 
 ## Tier 1: Critical Gaps (Block Phase 4–5)
 
-### 1.1 No Content Yet
+### 1.1 Partial Content — Published vs. Planned
 
-**Issue:** `_posts/` directories are empty  
-**Impact:** Site has no blog content; homepage shows no posts  
-**Status:** ⏳ Blocked pending Phase 3 (Agent Pipeline)  
-**Resolution:** Agents must be built and tested before content can be generated
+**Issue:** Only Tools category has published content; planned categories (AI, Backend, System Design, DevOps, Frontend) are empty  
+**Impact:** Site has initial content but lacks depth in core learning areas  
+**Status:** ✅ Partial; 🚀 requires Phase 3 (Agent Pipeline) for scale  
+**Current Content:**
 
-**Current State:**
+**Published (Live):**
 ```
 _posts/
-├── ai/                  # Empty
-├── backend/             # Empty
-├── career/              # Empty
-├── devops/              # Empty
-├── frontend/            # Empty
-├── system-design/       # Empty
-└── tools/               # Empty
+├── tools/               # ✅ 8 posts (Copilot CLI learning series)
+│   ├── Part 1: introduction-to-copilot-cli (2024-06-10)
+│   ├── Part 2: copilot-cli-getting-started (2026-03-20)
+│   ├── Part 3: copilot-cli-vs-copilot-chat (2026-03-10)
+│   ├── Part 4: copilot-cli-advanced-usage (2026-04-10)
+│   ├── Part 5: copilot-cli-troubleshooting (2026-05-10)
+│   ├── Part 6: project-build-with-copilot-cli (2026-03-10)
+│   └── 2 additional standalone posts
+│
+└── career/              # ✅ 1 post (getting-started.md)
+
+Planned (Empty):
+├── ai/                  # Blocked until Phase 3
+├── backend/             # Blocked until Phase 3
+├── devops/              # Blocked until Phase 3
+├── frontend/            # Blocked until Phase 3
+└── system-design/       # Blocked until Phase 3
 ```
 
-**What This Breaks:**
-- Homepage shows no posts
-- Category pages render empty
-- Search index is empty
-- Series index pages show "no posts yet"
-- Overall site is non-functional
+**Current Impact:**
+- ✅ Homepage displays published posts
+- ✅ Search index includes 9 posts
+- ✅ Tools category is functional
+- 🟡 Career category minimal (1 post)
+- 🔴 Planned categories (AI, Backend, System Design, DevOps, Frontend) empty
 
 **Timeline:**
-- Phase 3 (Agent Pipeline): Build agents
-- Phase 4: Generate first content (50+ posts)
-- Phase 5: Site becomes fully functional
+- ✅ Phase 1–2: Completed (current state)
+- 🚀 Phase 3: Build Agent Pipeline (2–3 weeks)
+- 📝 Phase 4: Generate planned content (50+ posts for AI, Backend, System Design)
+- ✨ Phase 5: Site fully functional with all categories populated
 
 ---
 

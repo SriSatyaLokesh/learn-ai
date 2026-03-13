@@ -1,4 +1,4 @@
-# Learn with Satya K — Technology Stack
+# LearnAI — Technology Stack
 
 **Document:** Codebase Architecture Reference  
 **Last Updated:** March 2026  

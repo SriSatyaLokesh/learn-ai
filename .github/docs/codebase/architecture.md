@@ -1,4 +1,4 @@
-# Learn with Satya K — System Architecture
+# LearnAI — System Architecture
 
 **Document:** Technical System Design & Data Flow  
 **Last Updated:** March 2026  
@@ -8,7 +8,7 @@
 
 ## Architecture Overview
 
-Learn with Satya K is a **static Jekyll blog with planned autonomous AI content generation**. The current system is a traditional static site generator; the multi-agent AI pipeline is in design phase.
+LearnAI is a **static Jekyll blog with planned autonomous AI content generation**. The current system is a traditional static site generator; the multi-agent AI pipeline is in design phase.
 
 ### Current Architecture (MVP)
 
