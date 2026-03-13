@@ -1,4 +1,4 @@
-# Learn with Satya K — Testing Strategy
+# LearnAI — Testing Strategy
 
 **Document:** Testing Approach & Quality Assurance  
 **Last Updated:** March 2026  

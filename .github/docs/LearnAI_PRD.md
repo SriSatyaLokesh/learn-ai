@@ -1,4 +1,4 @@
-# Learn with Satya K — Product Requirements Document (PRD)
+# LearnAI — Product Requirements Document (PRD)
 **Version:** 1.0 | **Date:** March 2026 | **Status:** Draft
 
 ---
@@ -7,7 +7,7 @@
 
 | Field | Detail |
 |---|---|
-| Project Name | Learn with Satya K — Jekyll-Based AI-Powered Learning Blog System |
+| Project Name | LearnAI — Jekyll-Based AI-Powered Learning Blog System |
 | Document Type | Product Requirements Document |
 | Author | Developer Portfolio Owner |
 | Target Platform | GitHub Pages (Jekyll Static Site) |
@@ -31,7 +31,7 @@
 
 ## 1. Executive Summary
 
-Learn with Satya K is a developer-owned, SEO-optimised static learning blog built on Jekyll and hosted on GitHub Pages. The system functions as a lightweight Learning Management System (LMS) where visitors can explore structured learning series across topics such as AI, System Design, Backend Engineering, and more.
+LearnAI is a developer-owned, SEO-optimised static learning blog built on Jekyll and hosted on GitHub Pages. The system functions as a lightweight Learning Management System (LMS) where visitors can explore structured learning series across topics such as AI, System Design, Backend Engineering, and more.
 
 All content is generated through a multi-agent AI pipeline that researches, writes, optimises for SEO, and formats posts automatically — reducing manual effort while maintaining high-quality output. The blog is attached to the owner's developer portfolio and serves as a public resource for the developer community.
 
@@ -41,7 +41,7 @@ All content is generated through a multi-agent AI pipeline that researches, writ
 
 ### 2.1 Vision Statement
 
-> To build a beautiful, fast, and perpetually growing learning platform where developers can follow structured learning paths across modern tech disciplines — powered by an intelligent multi-agent content engine.
+> To build LearnAI — a beautiful, fast, and perpetually growing learning platform where developers can follow structured learning paths across modern tech disciplines — powered by an intelligent multi-agent content engine.
 
 ### 2.2 Primary Goals
 
@@ -232,4 +232,4 @@ All images used in posts must comply with the following rules:
 
 ---
 
-*Learn with Satya K PRD v1.0 — March 2026 — This is a living document. Update version and date on any revision.*
+*LearnAI PRD v1.0 — March 2026 — This is a living document. Update version and date on any revision.*

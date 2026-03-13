@@ -1,4 +1,4 @@
-# Learn with Satya K — Directory Structure
+# LearnAI — Directory Structure
 
 **Document:** Project Organization Reference  
 **Last Updated:** March 2026  
@@ -31,18 +31,29 @@ learn-with-satya/
 
 ### `_posts/` — Blog Content
 **Purpose:** All blog posts organized by category  
-**Status:** Currently empty (awaiting Phase 4 content creation)
+**Status:** Partially populated (Tools + Career have content; AI, Backend, System Design, DevOps, Frontend await Phase 3)
 
 ```
 _posts/
-├── ai/                     # AI & Machine Learning category
-├── backend/                # Backend Engineering category
-├── career/                 # Career Development category
-├── devops/                 # DevOps & Cloud category
-├── frontend/               # Frontend & Web category
-├── system-design/          # System Design & Architecture category
-└── tools/                  # Dev Tools & Ecosystem category
+├── ai/                     # AI & Machine Learning category (empty—planned)
+├── backend/                # Backend Engineering category (empty—planned)
+├── career/                 # Career Development category (1 post: getting-started)
+├── devops/                 # DevOps & Cloud category (empty—planned)
+├── frontend/               # Frontend & Web category (empty—planned)
+├── system-design/          # System Design & Architecture category (empty—planned)
+└── tools/                  # Dev Tools & Ecosystem category (8 posts: Copilot CLI series + extras)
 ```
+
+**Current Content:**
+- **Published:** 9 posts (8 in `tools/`, 1 in `career/`)
+- **Featured Series:** "Mastering GitHub Copilot CLI: From Zero to Pro" (6-part series, parts 1–6)
+  - Part 1: Introduction (2024-06-10)
+  - Part 2: Getting Started (2026-03-20)
+  - Part 3: vs. Copilot Chat (2026-03-10)
+  - Part 4: Advanced Usage (2026-04-10)
+  - Part 5: Troubleshooting (2026-05-10)
+  - Part 6: Project Build (2026-03-10)
+- **Planned:** All content in AI, Backend, System Design, DevOps, Frontend categories (blocked until Agent Pipeline ready—Phase 3)
 
 **File Naming:**
 - Pattern: `YYYY-MM-DD-slug.md`
@@ -125,7 +136,7 @@ _includes/
 └── [others]                # Comments, search, analytics, etc.
 ```
 
-**[CUSTOM]**: Planned custom components for Learn with Satya K
+**[CUSTOM]**: Planned custom components for LearnAI
 
 ### `_sass/` — Stylesheets
 **Purpose:** SCSS files compiled to CSS
