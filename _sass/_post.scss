@@ -373,6 +373,10 @@
     letter-spacing: 0.025rem;
     margin: rem(50px) auto;
     border-collapse: collapse;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
 
     @include media(">=sm") {
       font-size: rem(20px);
