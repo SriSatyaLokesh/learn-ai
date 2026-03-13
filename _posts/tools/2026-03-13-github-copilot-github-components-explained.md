@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "The .github Folder for GitHub Copilot: Instructions, Prompts, Agents, Skills, Hooks, and MCP"
 subtitle: "How repository guidance layers work together for more consistent AI output"
 date: 2026-03-13 10:00:00 +0530
