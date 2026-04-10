@@ -2,22 +2,16 @@
 # Minimal design with single orange accent
 
 # Primary Colors
-themeColor: '#dc2f02'      # Orange - accent color (CTAs, links, active states)
-primaryDark: '#000000'     # Black - headings and primary text
-accentDark: '#dc2f02'      # Orange - same as theme for consistency
-
-# Background Colors
-lightGray: '#ffffff'       # White - all backgrounds
-texts: '#374151'           # Dark grey - body text
-
-# Additional Greys
-textGreyMedium: '#6B7280'  # Medium grey - tertiary text
-textGreyLight: '#9CA3AF'   # Light grey - disabled/placeholders
-borderGrey: '#E5E7EB'      # Light grey - borders and dividers
-surfaceGrey: '#F9FAFB'     # Very light grey - subtle backgrounds
-
-# Semantic Colors (feedback only)
-successGreen: '#10B981'    # Success messages
-errorRed: '#EF4444'        # Error messages
-warningYellow: '#F59E0B'   # Warning messages
-infoBlue: '#3B82F6'        # Information messages
+themeColor: '#ff9800'
+primaryDark: '#141414'
+accentDark: '#ffffff'
+lightGray: '#f2f2f2'
+texts: '#333333'
+textGreyMedium: '#6B7280'
+textGreyLight: '#9CA3AF'
+borderGrey: '#E5E7EB'
+surfaceGrey: '#F9FAFB'
+successGreen: '#10B981'
+errorRed: '#e84646'
+warningYellow: '#F59E0B'
+infoBlue: '#3B82F6'

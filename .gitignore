@@ -10,3 +10,5 @@ _drafts
 # Temporary analysis folders
 temp-*/*
 logs/
+
+*.pyc

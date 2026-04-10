@@ -1,13 +1,26 @@
-name: Jekflix
-title: Jekflix | A blog theme for Jekyll
-description: Jekflix is a template for Jekyll inspired by Netflix and made by
-  Thiago Rossener.
+name: LearnAI
+title: LearnAI | AI-powered learning blog
+version: v1.0.0
+description: LearnAI is an AI-powered learning blog for developers, featuring structured series and hands-on tutorials.
+
+# Organization Schema (for E-E-A-T and site-level authority)
+organization:
+  name: LearnAI
+  url: https://srisatyalokesh.is-a.dev
+  logo: https://srisatyalokesh.is-a.dev/assets/img/logo.png
+  sameAs:
+    - https://github.com/SriSatyaLokesh
+    - https://linkedin.com/in/SriSatyaLokesh
+  contact_point:
+    contact_type: Customer Support
+    email: srisatyalokesh2.12@gmail.com
+
 tags:
   - blog
-  - template
+  - learning
+  - ai
   - jekyll
-  - theme
-  - netlify
+  - devtools
 show_hero: true
 menu:
   - title: Home
@@ -18,7 +31,7 @@ menu:
     url: /contact
   - title: Feed
     url: /feed.xml
-email: youremail@test.com
+email: srisatyalokesh2.12@gmail.com
 # See: https://disqus.com/
 disqus_username: disqus_username
 # Contact Form Setting

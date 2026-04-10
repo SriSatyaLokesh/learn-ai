@@ -31,6 +31,29 @@
     # - slug: understanding-transformer-architecture
     #   part: 1
 
+- id: llm-wiki-series
+  title: "LLM Wiki: Build a Compounding AI Knowledge Base"
+  category: ai
+  description: "A complete series on Andrej Karpathy's LLM Wiki pattern — what it is, how to implement it, best community builds, how it compares to Context Hub, and when to use it over RAG."
+  difficulty: intermediate
+  total_parts: 5
+  posts:
+    - slug: llm-wiki-explained-karpathy-pattern
+      part: 1
+      title: "What Is LLM Wiki? Karpathy's Pattern for Compounding Knowledge"
+    - slug: how-to-implement-llm-wiki-complete-guide
+      part: 2
+      title: "How to Implement LLM Wiki: Complete Setup Guide with Commands"
+    - slug: best-llm-wiki-community-implementations
+      part: 3
+      title: "Best LLM Wiki Community Implementations: Top Repos by the Numbers"
+    - slug: llm-wiki-vs-andrew-ng-context-hub
+      part: 4
+      title: "LLM Wiki vs Andrew Ng's Context Hub: What Is the Difference?"
+    - slug: llm-wiki-vs-rag-when-to-use-each
+      part: 5
+      title: "LLM Wiki vs RAG: When Does Each Approach Win?"
+
 # System Design Category Series
 # - id: distributed-systems-series
 #   title: "Distributed Systems Fundamentals"

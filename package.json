@@ -25,8 +25,8 @@
   },
   "scripts": {
     "build": "gulp build",
-    "serve": "bundle exec jekyll serve --baseurl /learn-ai",
-    "dev": "gulp build && bundle exec jekyll serve --baseurl /learn-ai"
+    "serve": "bundle exec jekyll serve --baseurl /learn-ai --port 4080",
+    "dev": "gulp build && bundle exec jekyll serve --baseurl /learn-ai --port 4080"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
