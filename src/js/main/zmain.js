@@ -50,12 +50,19 @@
     dothis: $('.dosearch')
   };
 
+  var searchInitialized = false;
+
   bs.dothis.on('click', function() {
     $('.search-wrapper').toggleClass('active');
     bs.searchform.toggleClass('active');
     bs.searchform.find('input').focus();
     bs.canvas.toggleClass('search-overlay');
-    $('.search-field').simpleJekyllSearch();
+    if (!searchInitialized) {
+      $('.search-field').simpleJekyllSearch({
+        jsonFile: (window.SITE_BASEURL || '') + '/search.json'
+      });
+      searchInitialized = true;
+    }
   });
 
   function close_search() {
