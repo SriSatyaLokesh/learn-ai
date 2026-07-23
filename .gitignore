@@ -12,3 +12,4 @@ temp-*/*
 logs/
 
 *.pyc
+graphify-out/
