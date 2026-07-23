@@ -14,6 +14,8 @@ difficulty: intermediate
 read_time: true
 toc: true
 toc_sticky: true
+pinned: true
+featured: true
 
 image: https://www.kdnuggets.com/wp-content/uploads/kdn-the-roadmap-to-becoming-an-llm-engineer-in-2026-feature.png
 header:
