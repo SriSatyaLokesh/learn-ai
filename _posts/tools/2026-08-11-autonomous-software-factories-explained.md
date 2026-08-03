@@ -34,31 +34,6 @@ Let's walk through a **complete autonomous SDLC workflow** with a real example: 
 
 ---
 
-## FAQ: How Autonomous SDLC Works
-
-**Q: How do agents actually communicate with each other?**  
-A: Through **task queues and structured output**. Planning Agent outputs JSON tasks → Builder Agent consumes tasks, generates code → Reviewer Agent receives code+tests → Integrator Agent merges and deploys. Each agent speaks the same JSON language. Implementation usually uses AWS SQS, RabbitMQ, or Kafka queues.
-
-**Q: What about failure scenarios — what if a builder agent gets stuck?**  
-A: Multiple fallbacks: (1) Timeout — if builder takes >30 min, reassign task to different agent. (2) Validation failure — if output doesn't meet schema, re-prompt with feedback. (3) Human escalation — if agent fails 3 times, notify human. (4) Rollback — if deployed code fails in production, auto-rollback. Systems are designed to fail gracefully.
-
-**Q: How much human oversight is actually needed?**  
-A: At scale: 5-10% human involvement. Humans handle: requirements clarification (2%), feature approvals (3%), escalated failures (2%), production incidents (2%), strategic decisions (1%). Most daily work is autonomous. Humans become architects, not coders.
-
-**Q: Can this work for my programming language?**  
-A: Most likely yes. Claude and GPT-4 support: Python, JavaScript/TypeScript, Go, Java, C++, Rust, C#, PHP, Ruby, Kotlin, and 20+ others. If your language has good documentation and examples online, agents can use it. Harder for niche languages (Cobol, Lisp) but still possible.
-
-**Q: How do agents actually decide what to build from a feature request?**  
-A: Planning Agent uses: (1) Feature description, (2) Existing codebase structure, (3) Past similar features, (4) Acceptance criteria. It breaks features into tasks, then builders implement one task at a time. Example: "Add dark mode" → tasks = [Create context, Update UI, Add database field, Write tests].
-
-**Q: What's the learning curve for developers in an autonomous system?**  
-A: Low. Developers write better requirements (more specific, clearer acceptance criteria). They write more tests (agents need clear test cases to understand intent). They review agent-generated code (3-5 min per task, not hours). Many developers find it liberating — less grunt work, more review and architecture.
-
-**Q: How is this different from GitHub Copilot or ChatGPT?**  
-A: Copilot is interactive (you ask, it generates snippets). Autonomous factories are systematic (autonomous agents coordinate without human prompting). Copilot generates code in context. Factories plan, build, review, test, deploy, and monitor — end-to-end automation. Copilot assists humans; factories replace specific human roles.
-
----
-
 ## The Complete Flow: Feature to Production
 
 ### Step 1: Feature Intake → Planning Agent
@@ -146,6 +121,7 @@ Acceptance Criteria:
 
 **Builder Agent T1: Frontend Theme Context**
 
+{% raw %}
 ```typescript
 // contexts/ThemeContext.tsx (auto-generated)
 import React, { createContext, useState, useEffect } from 'react';
@@ -209,6 +185,7 @@ describe('ThemeProvider', () => {
   });
 });
 ```
+{% endraw %}
 
 **Builder Agent T2: Database Migration**
 
@@ -483,5 +460,30 @@ Friday: Architect improvements to factory infrastructure
 **Autonomous:** Deploy multiple times per day (continuous)
 
 **Result:** bugs fixed in hours instead of weeks
+
+## Frequently Asked Questions
+
+**Q: How do agents actually communicate with each other?**  
+A: Through **task queues and structured output**. Planning Agent outputs JSON tasks → Builder Agent consumes tasks, generates code → Reviewer Agent receives code+tests → Integrator Agent merges and deploys. Each agent speaks the same JSON language. Implementation usually uses AWS SQS, RabbitMQ, or Kafka queues.
+
+**Q: What about failure scenarios — what if a builder agent gets stuck?**  
+A: Multiple fallbacks: (1) Timeout — if builder takes >30 min, reassign task to different agent. (2) Validation failure — if output doesn't meet schema, re-prompt with feedback. (3) Human escalation — if agent fails 3 times, notify human. (4) Rollback — if deployed code fails in production, auto-rollback. Systems are designed to fail gracefully.
+
+**Q: How much human oversight is actually needed?**  
+A: At scale: 5-10% human involvement. Humans handle: requirements clarification (2%), feature approvals (3%), escalated failures (2%), production incidents (2%), strategic decisions (1%). Most daily work is autonomous. Humans become architects, not coders.
+
+**Q: Can this work for my programming language?**  
+A: Most likely yes. Claude and GPT-4 support: Python, JavaScript/TypeScript, Go, Java, C++, Rust, C#, PHP, Ruby, Kotlin, and 20+ others. If your language has good documentation and examples online, agents can use it. Harder for niche languages (Cobol, Lisp) but still possible.
+
+**Q: How do agents actually decide what to build from a feature request?**  
+A: Planning Agent uses: (1) Feature description, (2) Existing codebase structure, (3) Past similar features, (4) Acceptance criteria. It breaks features into tasks, then builders implement one task at a time. Example: "Add dark mode" → tasks = [Create context, Update UI, Add database field, Write tests].
+
+**Q: What's the learning curve for developers in an autonomous system?**  
+A: Low. Developers write better requirements (more specific, clearer acceptance criteria). They write more tests (agents need clear test cases to understand intent). They review agent-generated code (3-5 min per task, not hours). Many developers find it liberating — less grunt work, more review and architecture.
+
+**Q: How is this different from GitHub Copilot or ChatGPT?**  
+A: Copilot is interactive (you ask, it generates snippets). Autonomous factories are systematic (autonomous agents coordinate without human prompting). Copilot generates code in context. Factories plan, build, review, test, deploy, and monitor — end-to-end automation. Copilot assists humans; factories replace specific human roles.
+
+---
 
 **Next in the series:** Real autonomous factories — how Gitpod, Ona, and others built their systems.
