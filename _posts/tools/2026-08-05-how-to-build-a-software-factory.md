@@ -32,7 +32,7 @@ seo:
 
 A working factory has five layers. Build them sequentially—each depends on the previous one.
 
-![Five-layer architecture of a software factory](/assets/images/posts/how-to-build-a-software-factory/five-layers.jpg)
+
 *Each layer builds on the one below it. The Knowledge Base is the foundation; Quality Gates are the output checkpoint.*
 
 Industry data supports this layered approach: teams with automated quality gates catch **85% of defects before code review**, reducing review cycle time by an average of **67%** (DX Research, 2023). Adding templating on top reduces project setup time from a median of **4.5 hours** to under **30 minutes**.
@@ -122,7 +122,7 @@ Now every developer has a single reference.
 
 ## How Does Orchestration Route Developer Intent?
 
-![Orchestration decision tree routing developer requests to templates](/assets/images/posts/how-to-build-a-software-factory/orchestration-flow.jpg)
+
 *The orchestrator acts as a router: it converts a developer’s natural language intent into a specific template + automation combination.*
 
 Orchestration is the **decision engine** that routes developers based on their intent.
@@ -191,7 +191,7 @@ Each answer narrows down which template and automation to apply.
 
 ## How Are Factory Templates Structured?
 
-![Template directory structure for a REST API project](/assets/images/posts/how-to-build-a-software-factory/template-structure.jpg)
+
 *A well-structured template encodes the folder conventions, file naming, and configuration that teams would otherwise debate per-project.*
 
 Templates are **pre-configured project starters** that encode your conventions.
@@ -360,7 +360,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 
 ## Which Quality Gates Should You Enforce?
 
-![CI/CD pipeline showing quality gate sequence](/assets/images/posts/how-to-build-a-software-factory/quality-gates-pipeline.jpg)
+
 *Six gates run in parallel where possible: type check, lint, tests, security scan, build, performance baseline. Failure at any gate blocks the merge.*
 
 Quality gates have measurable impact: teams enforcing mandatory test coverage minimums ship **4x fewer regression bugs** in production. Security gates that run automated dependency audits catch **73% of known vulnerabilities** before deployment (Snyk State of Open Source Security, 2023).

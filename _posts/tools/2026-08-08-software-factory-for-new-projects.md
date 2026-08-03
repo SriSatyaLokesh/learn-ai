@@ -32,7 +32,7 @@ seo:
 
 Building a project with a factory from day one is profoundly different from retrofitting one.
 
-![Greenfield project with factory: 2 hours vs 3 days without](/assets/images/posts/software-factory-for-new-projects/greenfield-comparison.jpg)
+
 *Factory-based greenfield starts eliminate the setup phase entirely. You go from intent to working code in under 2 hours.*
 
 Without a factory on a greenfield project:
@@ -54,7 +54,7 @@ With a factory on a greenfield project:
 
 ## What Does the Factory Workflow Look Like Step by Step?
 
-![Factory workflow: orchestration, scaffolding, automation, quality gates](/assets/images/posts/software-factory-for-new-projects/workflow-steps.jpg)
+
 *Four steps from command to deployable project: orchestrate (questions), scaffold (structure), automate (setup), gate (verify).*
 
 ### Step 1: Orchestration (Minutes 0-2)
@@ -192,7 +192,7 @@ $ # Repeat until feature is complete
 
 ## How Much Faster Is a Factory-Based Greenfield Start?
 
-![Side-by-side timeline comparison: with factory vs without factory](/assets/images/posts/software-factory-for-new-projects/timeline-comparison.jpg)
+
 *Without factory: 5.6 hours before writing any business logic. With factory: 17 minutes. The factory eliminates the entire setup phase.*
 
 ### Without Factory (3 Days to First Feature)
@@ -292,7 +292,7 @@ I'll use a realistic example: Building a **Blog API** with CRUD operations.
 
 ## What Are the Real Metrics Across Multiple Projects?
 
-![Compound time savings across 10 projects per year](/assets/images/posts/software-factory-for-new-projects/compound-savings.jpg)
+
 *Setup time per project drops from days to minutes as the factory matures. By project 10, the factory is generating 155+ hours/year in saved setup time alone.*
 
 The speed advantage compounds over time.

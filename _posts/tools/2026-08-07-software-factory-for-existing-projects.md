@@ -32,7 +32,7 @@ seo:
 
 Adding a factory to an existing project is different from building one from scratch. Your project has:
 
-![Incremental factory retrofit vs big-bang refactor](/assets/images/posts/software-factory-for-existing-projects/incremental-vs-big-bang.jpg)
+
 *The incremental approach (right) delivers value each week. The big-bang approach (left) risks breaking production with no intermediate value.*
 - **Established patterns** (possibly inconsistent ones)
 - **Live traffic** (can't break anything)
@@ -45,7 +45,7 @@ Break something during retrofit, and you've wasted the factory investment. That'
 
 ## How Do You Measure Your Current State?
 
-![Developer running audit commands to measure baseline metrics](/assets/images/posts/software-factory-for-existing-projects/baseline-measurement.jpg)
+
 *Baseline metrics make the factory’s impact measurable. Without a before snapshot, improvements are invisible to stakeholders.*
 
 Before changing anything, understand where you are.
@@ -128,7 +128,7 @@ Commit this baseline to git. You'll compare against it later.
 
 ## How Do You Introduce Factory Patterns Without Breaking Production?
 
-![Incremental pattern introduction: new code first, old code migrated gradually](/assets/images/posts/software-factory-for-existing-projects/pattern-introduction.jpg)
+
 *Apply factory patterns to new code immediately. Migrate old code only when you touch it for another reason — never in isolation.*
 
 Start small. Pick **one problem** and solve it with a factory pattern.
@@ -268,7 +268,7 @@ app.use((err, req, res, next) => {
 
 ## How Do You Validate the Factory Is Working?
 
-![Before and after metrics dashboard showing improvements](/assets/images/posts/software-factory-for-existing-projects/before-after-metrics.jpg)
+
 *After 10 weeks, measurable improvements across all dimensions: coverage +10%, lint errors -71%, PR review time -75%, feature setup time -75%.*
 
 After 2-3 weeks of introducing patterns, measure again.

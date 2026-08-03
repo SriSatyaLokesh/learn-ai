@@ -28,7 +28,7 @@ seo:
 
 ## The Friction of Manual Development
 
-![Developer facing decision fatigue without a factory](/assets/images/posts/why-build-a-software-factory/decision-fatigue.jpg)
+
 *Without a factory, developers spend 30-40% of project time on structural decisions rather than solving the actual problem.*
 
 > **TL;DR** — Software factories pay for themselves within 2-3 months and compound from there. A 5-person team building 4-5 projects/year saves 475-892 hours in Year 1 alone — worth $71,250-$133,800 at typical developer rates. The five benefits stack: faster velocity, fewer bugs, 3x faster onboarding, consistent quality, and team scaling without chaos.
@@ -70,7 +70,7 @@ Every developer on a typical team faces these friction points:
 
 ## Does the Math Actually Work? The Factory ROI
 
-![ROI calculation showing factory investment vs returns](/assets/images/posts/why-build-a-software-factory/roi-calculation.jpg)
+
 *The 80-hour factory investment breaks even within the first project cycle and compounds from there.*
 
 Let's calculate the ROI for a 5-person team over one year.
@@ -131,7 +131,7 @@ At $150/hour fully-loaded cost, Year 1 alone saves $71,250-$133,800.
 
 ## What Concrete Benefits Does a Factory Deliver?
 
-![Five benefits of a software factory: velocity, quality, onboarding, consistency, scaling](/assets/images/posts/why-build-a-software-factory/five-benefits.jpg)
+
 *Each benefit compounds independently — together they create multiplicative, not additive, productivity gains.*
 
 ### 1. Velocity (Speed to Ship)
@@ -204,7 +204,7 @@ With a factory:
 
 ## What Do Top Companies Show About Factory Investment?
 
-![Google, Netflix, Stripe engineering productivity at scale](/assets/images/posts/why-build-a-software-factory/company-examples.jpg)
+
 *Google's monorepo + Bazel, Netflix's OSS resilience tools, and Stripe's SDK generation are all factory investments that scaled to tens of thousands of engineers.*
 
 ### Google's Factory Mindset

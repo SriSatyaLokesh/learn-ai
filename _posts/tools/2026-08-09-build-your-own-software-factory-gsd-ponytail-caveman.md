@@ -32,7 +32,7 @@ seo:
 
 Individual developers can ship faster than teams if they have a personal factory. Not because they're smarter—because they eliminate friction in their own workflow.
 
-![Three tools forming a personal software factory: GSD, Ponytail, Caveman](/assets/images/posts/build-your-own-software-factory-gsd-ponytail-caveman/three-tools.jpg)
+
 *GSD provides structure, Ponytail enforces minimalism, Caveman automates quality checks. Together they form a complete personal development pipeline.*
 
 A personal software factory combines:
@@ -44,7 +44,7 @@ Together, these create a pipeline where you write less code, make fewer decision
 
 ## Part 1: What Does GSD Contribute to Your Factory?
 
-![GSD five-phase workflow: Discuss, Research, Plan, Execute, Verify](/assets/images/posts/build-your-own-software-factory-gsd-ponytail-caveman/gsd-phases.jpg)
+
 *GSD's five phases act as guardrails: each phase has a clear input, output, and handoff. No phase can be skipped without triggering a quality failure downstream.*
 
 GSD (Goal-Driven Software Development) is a methodology for breaking work into phases. Each phase has a clear input and output.
@@ -170,7 +170,7 @@ Over a year of projects, GSD saves 4-6 weeks of rework and debugging.
 
 ## Part 2: How Does Ponytail's Minimalism Reduce Bugs?
 
-![Ponytail code comparison: over-engineered vs minimal implementation](/assets/images/posts/build-your-own-software-factory-gsd-ponytail-caveman/ponytail-comparison.jpg)
+
 *The same functionality: 47 lines of over-engineered code vs 8 lines of Ponytail-style code. Fewer lines = fewer bugs = faster review.*
 
 Ponytail is the principle: **Write the laziest solution that actually works.**
@@ -265,7 +265,7 @@ Typical saving: 30-40% less code means 30-40% fewer bugs.
 
 ## Part 3: How Does Caveman Catch Bugs Before They Ship?
 
-![Caveman pre-commit hook blocking a bad commit with failing tests](/assets/images/posts/build-your-own-software-factory-gsd-ponytail-caveman/caveman-hook.jpg)
+
 *Caveman intercepts the commit, runs all quality checks, and blocks it if any fail. The developer fixes the issue before the code ever touches the repo history.*
 
 Caveman is automated pre-commit verification. Before code reaches git, check:

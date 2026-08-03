@@ -32,7 +32,7 @@ seo:
 
 Before examining real examples, let's establish the principles that underpin successful factories.
 
-![Three theories diagram: constraint, knowledge crystallization, automation scaling](/assets/images/posts/software-factory-examples-and-theories/three-theories.jpg)
+
 *Three theories, three companies, three different domains — but the same factory principle at work.*
 
 ### Theory 1: Constraint as Enabler
@@ -94,7 +94,7 @@ Now let's see these theories in action.
 
 ## Why Did Netflix Build Hystrix?
 
-![Netflix microservices architecture with circuit breaker pattern](/assets/images/posts/software-factory-examples-and-theories/netflix-hystrix.jpg)
+
 *Netflix's Hystrix encodes the circuit breaker pattern so every service team doesn’t have to re-solve cascading failure independently.*
 
 ### The Problem
@@ -160,7 +160,7 @@ Engineers just say "I need resilience for this call" and Hystrix handles it. Dec
 
 ## How Does Google Bazel Scale Builds Across 50,000 Engineers?
 
-![Google Bazel build system caching and distribution diagram](/assets/images/posts/software-factory-examples-and-theories/google-bazel.jpg)
+
 *Bazel's content-addressed caching means a build artifact is only ever compiled once across the entire organization.*
 
 ### The Problem
@@ -214,7 +214,7 @@ Engineers don't think about build systems; they specify what to build, and Bazel
 
 ## How Does Stripe Maintain 20+ Language SDKs Without Bugs?
 
-![Stripe OpenAPI spec generating multiple language SDKs](/assets/images/posts/software-factory-examples-and-theories/stripe-sdk-generation.jpg)
+
 *One canonical API spec generates all language SDKs. A change to the spec propagates to all 20+ SDKs simultaneously.*
 
 ### The Problem

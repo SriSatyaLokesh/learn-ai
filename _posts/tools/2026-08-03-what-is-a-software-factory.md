@@ -43,13 +43,9 @@ The factory isn't a tool—it's a **mental model** for how your team builds cons
 
 The impact is measurable: teams that adopt systematic development practices ship features **2-3x faster** than teams without them ([DORA 2023](https://dora.dev/research/)). The elite 25% of engineering teams deploy **on-demand** — multiple times per day — versus once every 1-6 months for low performers. The difference? Systematic pipelines, not individual heroics. Research from McKinsey's Developer Velocity Index found that **top-quartile teams are 4-5x more productive** than bottom-quartile teams when they invest in developer tooling and repeatable processes.
 
-![Developer working on a software pipeline](/assets/images/posts/what-is-a-software-factory/pipeline-workflow.jpg)
-*Systematic workflows reduce cognitive load and decision fatigue for developers.*
-
 ## What Are the Core Components of a Software Factory?
 
-![Software factory core components diagram](/assets/images/posts/what-is-a-software-factory/components-diagram.jpg)
-*A factory's four components work in sequence: orchestrate → template → automate → gate.*
+A factory's four components work in sequence: **orchestrate → template → automate → gate**.
 
 ### 1. Orchestration
 
@@ -106,8 +102,7 @@ When a new developer joins, they inherit your team's institutional knowledge imm
 
 ## How Does a Software Factory Work in Practice?
 
-![Factory workflow sequence](/assets/images/posts/what-is-a-software-factory/workflow-sequence.jpg)
-*Developer intent flows through the factory stages, with quality gates enforced at each step.*
+Developer intent flows through the factory stages, with quality gates enforced at each step:
 
 ```
 Developer Request
@@ -150,8 +145,7 @@ A 2022 survey of 600 engineering teams found that **67% of developers** report s
 
 Data supports these analogies: companies that built internal developer platforms (the enterprise form of a software factory) reduced onboarding time by **50%** and reported **40% fewer production incidents** (Puppet State of DevOps Report, 2022). The pattern scales from assembly lines to distributed teams.
 
-![Real-world manufacturing parallels to software factories](/assets/images/posts/what-is-a-software-factory/manufacturing-parallels.jpg)
-*From Ford's assembly line to IKEA's modular design — manufacturing principles map directly to software development.*
+From Ford's assembly line to IKEA's modular design — manufacturing principles map directly to software development.
 
 ### Factory Model #1: Henry Ford's Assembly Line (1913)
 
