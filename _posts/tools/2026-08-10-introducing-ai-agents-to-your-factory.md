@@ -50,6 +50,33 @@ Feature Request
 Working Feature (No Human Code Written)
 ```
 
+---
+
+## FAQ: Adding AI Agents to Your Factory
+
+**Q: Can I add agents incrementally, or do I need all five at once?**  
+A: Incrementally, absolutely. Most teams start with a **Planning Agent** (breaks down features) + **Builder Agent** (writes code) — this gives you 30-50% autonomy immediately. Add Reviewer next (validate code), then Integrator (deploy). Start simple, expand as you build confidence.
+
+**Q: Which agent should I build first?**  
+A: **Planning Agent** is the foundation. It parses feature requests and creates structured tasks that other agents consume. Without good planning, builders generate low-quality code. Start with planning, add building, then add reviewing. This progression mirrors how humans build features.
+
+**Q: How much does it cost to run agents continuously?**  
+A: **Claude 3.5 Sonnet (recommended):** $1,200-1,500/month for a single team. **Planning Agent:** ~$200/month (mostly planning, low volume). **Builder Agent:** ~$600/month (generates code constantly). **Reviewer Agent:** ~$300/month (reviews generated code). **Integrator + Monitoring:** ~$100/month. Scale this linearly with team count.
+
+**Q: Which LLM should I use for agents?**  
+A: **Claude 3.5 Sonnet** is most proven for code generation (highest context window 200k tokens, best for multi-file generation). **GPT-4** also works but costs 2-3x more. **Smaller models** (Llama 3.1) are cheaper but generate lower-quality code. Most production autonomous factories use Claude or GPT-4.
+
+**Q: How do I ensure agent-generated code is high quality?**  
+A: (1) **Reviewer Agent** validates code for bugs, performance, security before merge. (2) **Automated tests** catch runtime issues. (3) **Production monitoring** catches escaped bugs. (4) **Human override** — humans can request rewrites. Quality improves over time as agents learn from past issues.
+
+**Q: What if agents make mistakes or generate broken code?**  
+A: Treat it like a junior developer: (1) Code review catches issues before production. (2) Tests catch logic errors. (3) Staging deploys catch integration issues. (4) Monitoring catches runtime issues and auto-rollsback. (5) Humans write better requirements for next time. The system is designed to catch agent mistakes.
+
+**Q: Can I start with planning-only agents and add builders later?**  
+A: Yes. Planning-only agents help break down features and organize work, but humans still write code. This gives 20-30% velocity improvement and lets you build confidence in agent reliability before automating code generation. Many teams start here.
+
+---
+
 ## Agent Roles in an Autonomous Factory
 
 ### 1. Planning Agent: Feature to Tasks

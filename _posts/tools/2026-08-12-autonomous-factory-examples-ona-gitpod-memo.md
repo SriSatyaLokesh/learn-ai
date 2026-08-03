@@ -75,7 +75,32 @@ Figma Design (Input)
 | Average review time | 3 min | AI reviewers instant, no queue |
 | Deployment frequency | 2-3x daily | Continuous deployment |
 | Bug escape rate | 0.2% | Bugs reaching production |
+---
 
+## FAQ: Real-World Autonomous Factories
+
+**Q: Are these systems actually production-ready, or still experimental?**  
+A: Production-ready. Gitpod deployed 688 PRs through this system, with 100% CI green rate. Ona runs it for 50+ engineers across 200+ microservices. These aren't demos — they're running production code at scale. Expect 95%+ reliability, not 99.9% (still human-managed for now).
+
+**Q: What's the real success rate of autonomous deploys — do they actually work?**  
+A: 88% full autonomy (zero human intervention) at Gitpod, 60%+ at Ona. Remaining 12-40% need: clarification on requirements (3-5%), human approval for risky changes (2-3%), failure investigation (1-2%). These are not bugs — they're intentional gates for safety. Systems work; gates exist by design.
+
+**Q: How do failures actually get handled in production?**  
+A: Multiple layers: (1) Tests catch most issues before production. (2) Staging deploy validates end-to-end. (3) Canary deploy to 5% traffic first. (4) Monitoring catches metrics anomalies. (5) Auto-rollback on error rate spike or latency threshold. (6) Human on-call investigates. Gitpod has 0.2% bug escape rate — issues caught quickly.
+
+**Q: What's the team structure needed for this level of autonomy?**  
+A: Gitpod: ~15-20 engineers supporting 688 autonomous PRs. That's 1 engineer per 34-45 PRs (vs. 1 engineer per 2-3 PRs traditionally). Ona: 50 engineers with 200+ services. Key roles: (1) Agent system maintainers (2-3 people), (2) QA for monitoring (2-3), (3) Feature owners (most engineers), (4) On-call for incidents (1 rotating).
+
+**Q: How long before autonomy kicks in — can a new company adopt this immediately?**  
+A: No. Foundation required: (1) Automated testing culture (2-4 weeks to establish). (2) CI/CD infrastructure (2-4 weeks). (3) Staging/canary deployment (2-4 weeks). (4) Monitoring and alerting (2-4 weeks). Then agent integration (4-8 weeks). Total: 12-24 weeks from zero to partial autonomy, 6 more months to high autonomy.
+
+**Q: What's the cost per autonomous feature at scale?**  
+A: $20-40 per feature in LLM costs (planning + building + reviewing). Infrastructure: $2,000-5,000/month for agent servers. Total: ~$50-100 per feature including infra. Compare to: 1 developer = $150-200k/year ÷ 1000 features/year = $150-200/feature. Autonomous is 2-4x cheaper.
+
+**Q: Can I actually see the code agents generated?**  
+A: Yes, it's all in git. Pull requests show agent-generated commits, code diffs, and reviewer feedback. Gitpod's 688 PRs are publicly visible in their repo. You can audit quality, patterns, and decision-making. Transparency is crucial for trust.
+
+---
 ### Agent Breakdown
 
 **Design Parser Agent**

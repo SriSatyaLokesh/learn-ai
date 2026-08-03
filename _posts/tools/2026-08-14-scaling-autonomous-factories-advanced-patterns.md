@@ -77,6 +77,33 @@ teams:
     model: claude-3-opus-20250219  # Different model for AI work
 ```
 
+---
+
+## FAQ: Scaling to Enterprise
+
+**Q: How do I actually prevent different teams from interfering with each other?**  
+A: **Isolated agent pools** (shown above) + **separate repositories/namespaces** + **independent CI/CD pipelines**. Frontend team agents never touch backend code. Backend agents never deploy frontend. Each team has dedicated infrastructure, queues, and budgets. Permission model: agents inherit team access controls.
+
+**Q: What's the cost scaling curve — is it linear?**  
+A: Yes, roughly linear. 1 team (50 engineers): $10k/month. 5 teams (250 engineers): $45-50k/month. 10 teams: $90-100k/month. Factors: (1) LLM costs scale linearly. (2) Infrastructure scales sublinearly (shared monitoring, central queue). (3) Optimization improves over time (prompt caching saves 30-40% LLM costs at scale).
+
+**Q: Can agents handle complex dependencies between services?**  
+A: With limitations. Simple dependencies work fine. Complex cross-team features need coordination: (1) Planning Agent identifies dependencies. (2) Tasks routed to correct team agents. (3) Agents work sequentially or parallel (if safe). (4) Integration Agent handles final merge. Teams with 5+ service dependencies need explicit coordination protocol.
+
+**Q: Can agents actually learn from past failures?**  
+A: Yes, through multiple mechanisms: (1) **Retrieval-augmented generation (RAG)** — agents reference past issues in vector database. (2) **Fine-tuning** — retrain model on good/bad examples. (3) **Prompt learning** — store successful patterns, include in future prompts. (4) **Fallback patterns** — if approach A fails, try approach B next time. Learning happens at system level, not individual agent level.
+
+**Q: How do I monitor 1000+ autonomous services?**  
+A: **Observability stack:** (1) Metrics (Prometheus) — error rate, latency, request volume. (2) Logs (ELK/DataDog) — aggregate logs from all services. (3) Traces (Jaeger) — trace requests across services. (4) Alerts — auto-alert on anomalies. (5) Dashboards — per-team view + company-wide view. (6) Runbooks — auto-trigger response when issues detected (similar to Monitoring Agent).
+
+**Q: What happens when there are complex cross-service dependencies?**  
+A: Plan carefully. Example: Feature X needs API change (backend team) + UI change (frontend team) + database migration (platform team). Solution: (1) Planning Agent identifies all dependencies upfront. (2) Creates sequenced task list: database migration first, then API, then UI. (3) Stages deployments (database Tuesday, API Wednesday, UI Thursday). (4) Each team autonomous within their stage. (5) Automated integration tests validate contract between teams.
+
+**Q: When should I actually scale to multiple teams?**  
+A: When: (1) Single team/factory is > 80% utilized (agents always busy). (2) Team velocity not increasing despite more developers. (3) Different teams need different standards (e.g., crypto team needs crypto review agents). Typically: start with 1 team (months 1-6), scale to 3-5 teams (months 6-12), scale to enterprise (year 2+). Don't over-architect early.
+
+---
+
 ### Implementation
 
 ```typescript

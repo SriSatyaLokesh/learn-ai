@@ -347,6 +347,33 @@ def validate_service(service_definition):
 | **Automation** | Deployment pipeline | Build pipeline | Code generation | Schema validation |
 | **Outcome** | Fast deploys, instant rollback | Consistent builds, fast compiles | Identical SDKs, zero maintenance | All services identical, easy management |
 
+---
+
+## FAQ: Building Your Own Factory
+
+**Q: Can I use Netflix's Spinnaker directly for my company?**  
+A: Yes! Spinnaker is open source and used by many companies. However, you'll need significant infrastructure (multiple cloud accounts, deployment expertise, monitoring setup). Smaller teams often start with simpler tools like GitHub Actions before evolving to Spinnaker.
+
+**Q: What's the real difference between these factories and CI/CD pipelines?**  
+A: Traditional CI/CD is triggered by a developer and runs tests/deployment. Software factories are proactive systems with built-in standardization, templates, and automatic enforcement. Netflix's factory auto-rollbacks on metrics. Google's factory standardizes build configs. Stripe's factory auto-generates SDKs. These go beyond "run tests and deploy."
+
+**Q: Do I need to implement all four components (Netflix + Google + Stripe + Uber)?**  
+A: No. Start with one component based on your biggest pain point. If deployments are slow → implement orchestration (Netflix pattern). If builds are inconsistent → standardize with templates (Google pattern). If you have API clients → automate SDKs (Stripe pattern). Add components as you scale.
+
+**Q: How long does it take to build a factory like Netflix's?**  
+A: Netflix spent 5-7 years building Spinnaker (2009-2015) with a dedicated team. But you can start simpler: basic deployment orchestration in 2-3 months, templates in 1-2 months, automation in 2-3 months. Expect 6-12 months for a meaningful factory at your company's scale.
+
+**Q: Can small teams (5-10 developers) build software factories?**  
+A: Yes, but differently. Start with YAML-based automation (GitHub Actions, GitLab CI) instead of custom systems. Use off-the-shelf templates rather than building from scratch. Focus on 1-2 components, not all four. Many small teams successfully run factories built on existing tools.
+
+**Q: Which of these factory patterns delivers the most ROI?**  
+A: **Orchestration (Netflix)** is usually first: it enables faster deployment and instant rollback, reducing incident impact immediately. **Templates (Google)** second: consistency prevents bugs and speeds up new projects. **Automation (Stripe)** third: save months of SDK maintenance. **Schema enforcement (Uber)** last: valuable at scale when you have 1000+ services.
+
+**Q: What's the first practical step to adopt these patterns?**  
+A: (1) Audit your current deployment process — write down every manual step. (2) Identify bottlenecks — what's slowest? (3) Implement one pattern for that bottleneck (e.g., if manual testing is slow, automate tests). (4) Measure impact — deployment speed, failure rate, time to rollback. (5) Iterate. See [Part 5](building-your-own-software-factory) for the complete step-by-step guide.
+
+---
+
 ## From Generic Factories to Autonomous
 
 These four companies built factories that:
