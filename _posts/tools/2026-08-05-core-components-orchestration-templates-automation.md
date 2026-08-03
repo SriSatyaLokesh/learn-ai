@@ -9,10 +9,10 @@ tags: [software-factory, orchestration, templates, automation, quality-gates, de
 excerpt: "Every software factory is built on four core components working in sequence. Learn how orchestration, templates, automation, and quality gates combine to turn developer intent into working code."
 description: "Software factory core components: orchestration, templates, automation, and quality gates. Master the four pillars that drive developer velocity and code consistency."
 author: satya-k
-image: "https://particle41.com/images/insights/d6f3bc67-874b-4c5f-9d25-ddac5dbba736.webp"
+image: "https://factory.ai/static/software-factory-dashboard-62a45f.png"
 header:
-  credit: "Particle41"
-  credit_url: "https://particle41.com"
+  credit: "Factory.ai"
+  credit_url: "https://factory.ai"
 difficulty: intermediate
 read_time: true
 toc: true

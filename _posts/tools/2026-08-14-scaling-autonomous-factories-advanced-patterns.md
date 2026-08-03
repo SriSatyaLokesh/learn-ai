@@ -9,10 +9,10 @@ tags: [autonomous-factory, scaling, optimization, production, multi-team, advanc
 excerpt: "Scale autonomous factories from small teams to enterprise scale. Learn advanced patterns for multi-team coordination, cost optimization, and reliability at massive scale."
 description: "Scale autonomous factories: multi-team coordination, cost optimization, reliability patterns, monitoring at scale, handling edge cases."
 author: satya-k
-image: "https://coderslab.dev/wp-content/uploads/2024/12/software-company.webp"
+image: "https://factory.ai/static/software-factory-dashboard-62a45f.png"
 header:
-  credit: "Coders Lab"
-  credit_url: "https://coderslab.dev"
+  credit: "Factory.ai"
+  credit_url: "https://factory.ai"
 difficulty: advanced
 read_time: true
 toc: true

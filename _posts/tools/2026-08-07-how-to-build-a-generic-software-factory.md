@@ -9,10 +9,10 @@ tags: [software-factory, how-to, implementation, orchestration, automation, infr
 excerpt: "Build your own software factory in phases. Start with standardization, add automation gradually, and enforce quality gates. This guide covers the exact steps."
 description: "How to build a software factory: standardize patterns, create templates, automate workflows, enforce gates, measure results."
 author: satya-k
-image: "https://particle41.com/images/insights/d6f3bc67-874b-4c5f-9d25-ddac5dbba736.webp"
+image: "https://factory.ai/static/cover-3092ba.png"
 header:
-  credit: "Particle41"
-  credit_url: "https://particle41.com"
+  credit: "Factory.ai"
+  credit_url: "https://factory.ai"
 difficulty: intermediate
 read_time: true
 toc: true

@@ -9,10 +9,10 @@ tags: [autonomous-factory, implementation, llm-agents, setup-guide, ai-developme
 excerpt: "Step-by-step guide to adding AI agents to your existing software factory. Start with your generic factory and layer on AI-powered code generation, review, and deployment."
 description: "Build your first autonomous software factory: architect agent roles, set up LLM pipelines, implement task queues, deploy agents to production."
 author: satya-k
-image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbbAiWO8Ju1CsgLuEvcay6VTBSo-hg7yzvvWKUS9ddrM_AlrE7hOJxZ9I&s=10"
+image: "https://www.vincirufus.com/assets/images/agent-factory.webp"
 header:
-  credit: "Google Images"
-  credit_url: "https://images.google.com"
+  credit: "Vinc Irufus"
+  credit_url: "https://www.vincirufus.com"
 difficulty: advanced
 read_time: true
 toc: true

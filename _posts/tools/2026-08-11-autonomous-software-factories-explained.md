@@ -9,10 +9,10 @@ tags: [autonomous-sdlc, ai-agents, self-driving-codebase, software-factory, llm-
 excerpt: "A deep dive into how autonomous software factories execute the entire SDLC without human intervention. Learn the agent architecture, decision points, feedback loops, and how planning, building, reviewing, and monitoring agents coordinate."
 description: "Autonomous SDLC: How planning agents, builder agents, and reviewer agents coordinate to ship features without human code writing. Complete workflow walkthrough."
 author: satya-k
-image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwXZvTrbARYsMN1mXQSH7y8QLD2bcQU7PbWG6Rgy-l38euSIZL9VxZ0hI&s=10"
+image: "https://www.infoworld.com/wp-content/uploads/2026/03/4142019-0-69186100-1773047012-shutterstock_2650209211.jpg?resize=1536%2C828&quality=50&strip=all"
 header:
-  credit: "Google Images"
-  credit_url: "https://images.google.com"
+  credit: "InfoWorld"
+  credit_url: "https://www.infoworld.com"
 difficulty: advanced
 read_time: true
 toc: true

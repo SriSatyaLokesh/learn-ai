@@ -9,10 +9,10 @@ tags: [ai-agents, software-factory, autonomous-development, llm, code-generation
 excerpt: "Learn how to integrate AI agents into your software factory to eliminate manual code generation, reviews, and deployment tasks. Move from orchestration+templates to fully autonomous workflows."
 description: "Add AI agents to your software factory: architect agent roles, build agent communication, implement autonomous code generation, and deploy with zero human intervention."
 author: satya-k
-image: "https://cdn.prod.website-files.com/655cded184fee2e958fab05d/6a3a918a5456f086aaa6c5ea_LI_Content_cover-new.jpg"
+image: "https://www.vincirufus.com/assets/images/agent-factory.webp"
 header:
-  credit: "Website Files CDN"
-  credit_url: "https://cdn.prod.website-files.com"
+  credit: "Vinc Irufus"
+  credit_url: "https://www.vincirufus.com"
 difficulty: advanced
 read_time: true
 toc: true
