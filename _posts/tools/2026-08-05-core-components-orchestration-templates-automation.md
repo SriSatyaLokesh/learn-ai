@@ -28,7 +28,7 @@ seo:
 
 ## The Four Core Components
 
-> **TL;DR** — Software factories run on four components in sequence: **orchestration** (deciding what to build), **templating** (pre-built solutions), **automation** (executing steps), and **gates** (enforcing quality). Together they transform developer intent into production-ready code without manual boilerplate, code review delays, or quality surprises.
+> **TL;DR** — Software factories run on four components in sequence: **orchestration** (deciding what to build), **templating** (pre-built solutions), **automation** (executing steps), and **gates** (enforcing quality). Together they transform developer intent into production-ready code without manual boilerplate, code review delays, or quality surprises. **Real-world proof: Google deploys 20,000+ builds daily using these patterns; Netflix runs 4,000+ deployments daily; Stripe generates SDKs for 14 languages automatically.**
 
 A software factory isn't a single tool—it's an **integrated system** where four components work together in sequence. Remove any one and the factory breaks down.
 
@@ -359,5 +359,52 @@ When orchestration, templates, automation, and gates work together:
 - **Bugs decrease 60-80%** (gates catch issues before production)
 - **Deployment frequency increases 5-10x** (automation removes bottlenecks)
 - **Code quality is measurable** (gates enforce standards consistently)
+
+## FAQ
+
+**Q: Do we need all four components to have a software factory?**  
+A: Yes, but you can start with just orchestration + templates. A factory with only automation but no orchestration still requires developers to make decisions manually. A factory with only gates but no automation wastes developer time waiting for manual reviews. All four components reinforce each other — remove any one and the system breaks down.
+
+**Q: What's the difference between a template and a boilerplate repository?**  
+A: Templates are generated for each use (fresh, no accumulated tech debt). Boilerplate repositories are copy-pasted (outdated faster, inconsistent modifications). Templates live in a central location and can be updated once, applied everywhere. **Google applies Bazel template updates to 100,000+ builds daily** — a single change applies across the entire codebase.
+
+**Q: Can we use cloud platforms instead of building this?**  
+A: Partially. Platforms like Vercel handle automation and gates well. But orchestration and templating are still your responsibility — you must design your project structure, your decision trees, and your scaffolding. Most factories use cloud CI/CD for automation, but customize orchestration and templating.
+
+**Q: How often should we update our templates?**  
+A: When your tech stack evolves, your templates must follow. At Netflix, templates are updated whenever dependencies have security patches (weekly) or major version releases (monthly). Updates are automated via templates, so all new projects get the latest versions instantly.
+
+**Q: What if an orchestration decision or template doesn't fit our project?**  
+A: Good orchestration is flexible — it should offer "advanced" or "custom" paths. For templates, always allow overrides. A developer should be able to use a template as a starting point, then diverge if needed. The default case should be 80% of use cases; edge cases can bypass the template system.
+
+**Q: How do we know if our gates are too strict vs. too lenient?**  
+A: Measure:
+- If >5% of PRs get blocked and developer override rate is high → gates are too strict
+- If bugs reach production weekly → gates are too lenient
+- If developers are creating workarounds to bypass gates → gates are poorly designed (wrong incentives)
+Goal: <1% PR blocks, <1 production bug per 1000 deploys, zero workarounds
+
+**Q: Can AI agents replace orchestration?**  
+A: Yes, this is the future. Instead of developers answering questions, an orchestration agent (LLM-powered) could infer intent from requirements, PRs, or code comments. **See [Part 6: Adding AI Agents](/learn-ai/tools/introducing-ai-agents-to-your-factory/) for how to layer AI on top of orchestration.**
+
+## Key Takeaways
+
+- ✅ Software factories have four interdependent components, not one tool
+- ✅ Orchestration captures developer intent precisely
+- ✅ Templates eliminate boilerplate and ensure consistency
+- ✅ Automation removes human bottlenecks
+- ✅ Quality gates prevent failures before production
+- ✅ Together: 10x developer velocity + fewer bugs
+
+---
+
+## Next in the Series
+
+- **← Part 2:** [Why Build a Software Factory?](/learn-ai/tools/why-build-a-software-factory/)
+- **→ Part 4:** [Real-World Examples: Netflix, Google, Stripe, Uber](/learn-ai/tools/software-factory-examples-netflix-google-stripe/)
+- **Jump Ahead:** [Part 5: How to Build](/learn-ai/tools/how-to-build-a-generic-software-factory/)
+- **Full Series:** [Autonomous Software Factories](/learn-ai/tools/software-factory-series/)
+
+---
 
 **Next in the series:** Real-world factory examples from Netflix, Google, Stripe, and Uber — how they implemented these four components.
