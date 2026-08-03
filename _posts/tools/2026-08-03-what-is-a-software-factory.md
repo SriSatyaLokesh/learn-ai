@@ -189,23 +189,6 @@ A software factory solves real problems with measurable impact:
 5. **Knowledge preservation** — Team learning isn't lost when someone leaves
 6. **Scalable teams** — Grow without chaos
 
-## Frequently Asked Questions
-
-**Q: Do software factories require special tools or platforms?**
-No. A factory can start as a shell script, a markdown conventions file, and a CI/CD pipeline you already have. The concept is tool-agnostic.
-
-**Q: Is a software factory only useful for large teams?**
-No — solo developers benefit too. A personal factory with templates and automated checks removes friction on every project, regardless of team size.
-
-**Q: How is a software factory different from a framework like Next.js or Rails?**
-Frameworks handle *what* technology to use. Factories handle *how your team works with* any technology — conventions, code generation, quality gates, and knowledge encoding are layered on top of frameworks.
-
-**Q: How long does it take to build a basic factory?**
-A minimal factory (conventions doc + 2 templates + CI quality gates) can be built in 1-2 weeks. The [full architecture guide](/learn-ai/tools/how-to-build-a-software-factory/) details the five-layer approach.
-
-**Q: When should I start investing in a factory?**
-When you have 3+ developers, 2+ active projects, or find yourself repeating setup decisions. See [Part 2](/learn-ai/tools/why-build-a-software-factory/) for the break-even math.
-
 ## Key Takeaway
 
 A software factory is a **system for turning developer intent into working code predictably**. It combines orchestration (smart routing), templates (starting points), automation (repetitive task elimination), and knowledge (team conventions).
@@ -213,6 +196,23 @@ A software factory is a **system for turning developer intent into working code 
 You probably already use factories — you might just not call them that. GitHub Actions CI/CD? That's factory automation. Your team's folder structure convention? That's templating. Your code review checklist? That's a quality gate. What you don't have yet is a deliberate system that ties all of these together into a repeatable, documented process.
 
 This series will help you build, strengthen, and scale your personal software factory to ship faster without sacrificing quality.
+
+## Frequently Asked Questions
+
+**Q: Do software factories require special tools or platforms?**  
+A: No. A factory can start as a shell script, a markdown conventions file, and a CI/CD pipeline you already have. The concept is tool-agnostic.
+
+**Q: Is a software factory only useful for large teams?**  
+A: No — solo developers benefit too. A personal factory with templates and automated checks removes friction on every project, regardless of team size.
+
+**Q: How is a software factory different from a framework like Next.js or Rails?**  
+A: Frameworks handle *what* technology to use. Factories handle *how your team works with* any technology — conventions, code generation, quality gates, and knowledge encoding are layered on top of frameworks.
+
+**Q: How long does it take to build a basic factory?**  
+A: A minimal factory (conventions doc + 2 templates + CI quality gates) can be built in 1-2 weeks. The [full architecture guide](/learn-ai/tools/how-to-build-a-software-factory/) details the five-layer approach.
+
+**Q: When should I start investing in a factory?**  
+A: When you have 3+ developers, 2+ active projects, or find yourself repeating setup decisions. See [Part 2](/learn-ai/tools/why-build-a-software-factory/) for the break-even math.
 
 ## Sources and Further Reading
 

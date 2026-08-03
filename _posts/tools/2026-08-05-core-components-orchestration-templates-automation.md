@@ -360,7 +360,7 @@ When orchestration, templates, automation, and gates work together:
 - **Deployment frequency increases 5-10x** (automation removes bottlenecks)
 - **Code quality is measurable** (gates enforce standards consistently)
 
-## FAQ
+## Frequently Asked Questions
 
 **Q: Do we need all four components to have a software factory?**  
 A: Yes, but you can start with just orchestration + templates. A factory with only automation but no orchestration still requires developers to make decisions manually. A factory with only gates but no automation wastes developer time waiting for manual reviews. All four components reinforce each other — remove any one and the system breaks down.
@@ -378,11 +378,7 @@ A: When your tech stack evolves, your templates must follow. At Netflix, templat
 A: Good orchestration is flexible — it should offer "advanced" or "custom" paths. For templates, always allow overrides. A developer should be able to use a template as a starting point, then diverge if needed. The default case should be 80% of use cases; edge cases can bypass the template system.
 
 **Q: How do we know if our gates are too strict vs. too lenient?**  
-A: Measure:
-- If >5% of PRs get blocked and developer override rate is high → gates are too strict
-- If bugs reach production weekly → gates are too lenient
-- If developers are creating workarounds to bypass gates → gates are poorly designed (wrong incentives)
-Goal: <1% PR blocks, <1 production bug per 1000 deploys, zero workarounds
+A: Measure: (1) If >5% of PRs get blocked and developer override rate is high → gates are too strict. (2) If bugs reach production weekly → gates are too lenient. (3) If developers create workarounds to bypass gates → gates are poorly designed (wrong incentives). Goal: <1% PR blocks, <1 production bug per 1000 deploys, zero workarounds.
 
 **Q: Can AI agents replace orchestration?**  
 A: Yes, this is the future. Instead of developers answering questions, an orchestration agent (LLM-powered) could infer intent from requirements, PRs, or code comments. **See [Part 6: Adding AI Agents](/learn-ai/tools/introducing-ai-agents-to-your-factory/) for how to layer AI on top of orchestration.**

@@ -349,7 +349,7 @@ def validate_service(service_definition):
 
 ---
 
-## FAQ: Building Your Own Factory
+## Frequently Asked Questions
 
 **Q: Can I use Netflix's Spinnaker directly for my company?**  
 A: Yes! Spinnaker is open source and used by many companies. However, you'll need significant infrastructure (multiple cloud accounts, deployment expertise, monitoring setup). Smaller teams often start with simpler tools like GitHub Actions before evolving to Spinnaker.
@@ -370,7 +370,7 @@ A: Yes, but differently. Start with YAML-based automation (GitHub Actions, GitLa
 A: **Orchestration (Netflix)** is usually first: it enables faster deployment and instant rollback, reducing incident impact immediately. **Templates (Google)** second: consistency prevents bugs and speeds up new projects. **Automation (Stripe)** third: save months of SDK maintenance. **Schema enforcement (Uber)** last: valuable at scale when you have 1000+ services.
 
 **Q: What's the first practical step to adopt these patterns?**  
-A: (1) Audit your current deployment process — write down every manual step. (2) Identify bottlenecks — what's slowest? (3) Implement one pattern for that bottleneck (e.g., if manual testing is slow, automate tests). (4) Measure impact — deployment speed, failure rate, time to rollback. (5) Iterate. See [Part 5](building-your-own-software-factory) for the complete step-by-step guide.
+A: (1) Audit your current deployment process — write down every manual step. (2) Identify bottlenecks — what's slowest? (3) Implement one pattern for that bottleneck (e.g., if manual testing is slow, automate tests). (4) Measure impact — deployment speed, failure rate, time to rollback. (5) Iterate. See [Part 5](/learn-ai/tools/how-to-build-a-generic-software-factory/) for the complete step-by-step guide.
 
 ---
 

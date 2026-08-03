@@ -255,23 +255,6 @@ If you're a solo developer building one-off projects? Factories are overkill.
 
 If you're a team of 5+ building related projects? Factories are essential.
 
-## Frequently Asked Questions
-
-**Q: What is the upfront cost to build a software factory?**
-A basic factory takes one senior developer about 1-2 weeks (40-80 hours). This includes conventions documentation, 2-3 project templates, automation scripts, and a CI/CD quality gate pipeline.
-
-**Q: How quickly does a factory break even?**
-For a 5-person team running 4-5 projects/year, the 80-hour investment pays back within the first project cycle (typically 4-8 weeks). Compounding savings grow 2x each year as patterns mature.
-
-**Q: Do solo developers benefit from building a factory?**
-Yes. A solo developer running 2+ similar projects/year saves 40-60 hours per year from reduced setup overhead and fewer repeated decisions. The investment is smaller (1 week), so break-even is even faster.
-
-**Q: What's the biggest risk of investing in a factory?**
-Over-engineering it. Start minimal — a conventions doc + one template + basic CI pipeline. Add complexity only when you feel the friction of not having it. See [Part 3](/learn-ai/tools/how-to-build-a-software-factory/) for the minimal viable factory architecture.
-
-**Q: What if my team doesn't adopt the factory?**
-Adoption depends on showing the metrics. Track setup time before and after, show reduced code review friction, and share the velocity numbers. Teams adopt factories when they *feel* the benefit, not when they're told.
-
 ## Key Takeaway
 
 Software factories aren't about automation for its own sake. They're about **compounding productivity gains**:
@@ -282,6 +265,23 @@ Software factories aren't about automation for its own sake. They're about **com
 Scale across a team and over time, factories create 30-50% velocity improvements with better quality and faster onboarding.
 
 The investment of 1-2 weeks pays back within a month and keeps compounding.
+
+## Frequently Asked Questions
+
+**Q: What is the upfront cost to build a software factory?**  
+A: A basic factory takes one senior developer about 1-2 weeks (40-80 hours). This includes conventions documentation, 2-3 project templates, automation scripts, and a CI/CD quality gate pipeline.
+
+**Q: How quickly does a factory break even?**  
+A: For a 5-person team running 4-5 projects/year, the 80-hour investment pays back within the first project cycle (typically 4-8 weeks). Compounding savings grow 2x each year as patterns mature.
+
+**Q: Do solo developers benefit from building a factory?**  
+A: Yes. A solo developer running 2+ similar projects/year saves 40-60 hours per year from reduced setup overhead and fewer repeated decisions. The investment is smaller (1 week), so break-even is even faster.
+
+**Q: What's the biggest risk of investing in a factory?**  
+A: Over-engineering it. Start minimal — a conventions doc + one template + basic CI pipeline. Add complexity only when you feel the friction of not having it. See [Part 3](/learn-ai/tools/how-to-build-a-software-factory/) for the minimal viable factory architecture.
+
+**Q: What if my team doesn't adopt the factory?**  
+A: Adoption depends on showing the metrics. Track setup time before and after, show reduced code review friction, and share the velocity numbers. Teams adopt factories when they *feel* the benefit, not when they're told.
 
 ## Sources and Further Reading
 

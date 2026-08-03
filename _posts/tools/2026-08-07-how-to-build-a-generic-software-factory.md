@@ -32,31 +32,6 @@ seo:
 
 ---
 
-## FAQ: Building Your Factory
-
-**Q: Do I need to replace all existing projects at once?**  
-A: No. Migrate projects gradually. Pick 2-3 projects as pilots, establish the factory patterns with them, document learnings, then expand to 5-10 projects, then to all. This takes 3-6 months and builds confidence as you iterate. Forcing all projects at once causes chaos.
-
-**Q: Is 12 weeks realistic for a factory?**  
-A: Yes, if you have a dedicated team (2-3 people). Week 1-2 standardization, Week 3-4 templates, Week 5-8 automation, Week 9-12 quality gates. But this assumes you're not also shipping features. Many teams do this part-time (10-20% of sprint capacity) over 4-6 months.
-
-**Q: How do I measure if my factory is working?**  
-A: Track these metrics: (1) Time from code commit to deploy, (2) Percentage of PRs that pass tests on first run, (3) Number of deployment failures per week, (4) Time to rollback a bad deploy, (5) New project setup time. These directly reflect factory quality.
-
-**Q: What templates should I start with?**  
-A: Start with templates for your most common project type. If 60% of projects are React + Node, create a React + Node template first. Then add templates for other frequent combinations. This 80/20 approach lets small teams start immediately without templates for every stack.
-
-**Q: How do I get team buy-in for 12 weeks of setup?**  
-A: Frame it as "velocity multiplier." Show metrics from similar companies: Netflix gets 99.98% deploy success, Google builds in 1 minute. Share the ROI — less time firefighting deploys = more time building features. Start with a 2-week pilot, show results, ask for extended investment.
-
-**Q: Can I build this with existing tools (GitHub Actions, GitLab CI)?**  
-A: Absolutely. You don't need Netflix-scale infrastructure. Start with GitHub Actions for orchestration, create GitHub templates for standardization, use existing Actions for automation, and write GitHub workflows for gates. Many successful factories run on these free/cheap tools.
-
-**Q: What happens to the team during the 12-week transition?**  
-A: Productivity initially drops 10-20% (people learning new processes). By week 8, velocity increases by 30-50% (less manual deployment, fewer bugs in production). By month 4-5, the ROI becomes obvious. Set expectations upfront: short-term pain, long-term gain.
-
----
-
 ## Phase 1: Standardize (Weeks 1-2)
 
 ### Step 1.1: Document Existing Patterns
@@ -399,6 +374,31 @@ BEFORE vs. AFTER
 ├── MTTR: 1 hour → 10 minutes (6x faster)
 └── Developer satisfaction: "We build, not configure"
 ```
+
+---
+
+## Frequently Asked Questions
+
+**Q: Do I need to replace all existing projects at once?**  
+A: No. Migrate projects gradually. Pick 2-3 projects as pilots, establish the factory patterns with them, document learnings, then expand to 5-10 projects, then to all. This takes 3-6 months and builds confidence as you iterate. Forcing all projects at once causes chaos.
+
+**Q: Is 12 weeks realistic for a factory?**  
+A: Yes, if you have a dedicated team (2-3 people). Week 1-2 standardization, Week 3-4 templates, Week 5-8 automation, Week 9-12 quality gates. But this assumes you're not also shipping features. Many teams do this part-time (10-20% of sprint capacity) over 4-6 months.
+
+**Q: How do I measure if my factory is working?**  
+A: Track these metrics: (1) Time from code commit to deploy, (2) Percentage of PRs that pass tests on first run, (3) Number of deployment failures per week, (4) Time to rollback a bad deploy, (5) New project setup time. These directly reflect factory quality.
+
+**Q: What templates should I start with?**  
+A: Start with templates for your most common project type. If 60% of projects are React + Node, create a React + Node template first. Then add templates for other frequent combinations. This 80/20 approach lets small teams start immediately without templates for every stack.
+
+**Q: How do I get team buy-in for 12 weeks of setup?**  
+A: Frame it as "velocity multiplier." Show metrics from similar companies: Netflix gets 99.98% deploy success, Google builds in 1 minute. Share the ROI — less time firefighting deploys = more time building features. Start with a 2-week pilot, show results, ask for extended investment.
+
+**Q: Can I build this with existing tools (GitHub Actions, GitLab CI)?**  
+A: Absolutely. You don't need Netflix-scale infrastructure. Start with GitHub Actions for orchestration, create GitHub templates for standardization, use existing Actions for automation, and write GitHub workflows for gates. Many successful factories run on these free/cheap tools.
+
+**Q: What happens to the team during the 12-week transition?**  
+A: Productivity initially drops 10-20% (people learning new processes). By week 8, velocity increases by 30-50% (less manual deployment, fewer bugs in production). By month 4-5, the ROI becomes obvious. Set expectations upfront: short-term pain, long-term gain.
 
 ---
 
