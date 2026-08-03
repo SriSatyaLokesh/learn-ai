@@ -56,33 +56,42 @@
 
 # Tools Category Series
 - id: software-factory-series
-  title: "Software Factory: Build Your Own AI-Powered Dev Pipeline"
+  title: "Autonomous Software Factories: From Manual Pipelines to Self-Driving Codebases"
   category: tools
-  description: "A complete 7-part series on software factories — what they are, why teams build them, how to construct one, real-world examples, retrofitting existing projects, starting new ones, and building your personal factory with GSD, Ponytail, and Caveman."
+  description: "A 10-part series progressing from software factory fundamentals to fully autonomous AI-driven development pipelines. Learn how to build generic factories, add AI agents, and achieve continuous shipping with zero human code review."
   difficulty: intermediate
-  total_parts: 7
+  total_parts: 10
   posts:
     - slug: what-is-a-software-factory
       part: 1
-      title: "What Is a Software Factory? The Mental Model Every Developer Needs"
+      title: "What Is a Software Factory? Foundations and Mental Models"
     - slug: why-build-a-software-factory
       part: 2
-      title: "Why Build a Software Factory? The Case for Systematic Development"
-    - slug: how-to-build-a-software-factory
+      title: "Why Build a Software Factory? ROI and Competitive Advantage"
+    - slug: core-components-orchestration-templates-automation
       part: 3
-      title: "How to Build a Software Factory: A Step-by-Step Architecture Guide"
-    - slug: software-factory-examples-and-theories
+      title: "Core Components: Orchestration, Templates, Automation, and Gates"
+    - slug: software-factory-examples-netflix-google-stripe
       part: 4
-      title: "Software Factory Examples and Theories: Lessons from Ford to Netflix"
-    - slug: software-factory-for-existing-projects
+      title: "Real-World Factory Examples: Netflix, Google, Stripe, and Uber"
+    - slug: how-to-build-a-generic-software-factory
       part: 5
-      title: "How to Apply a Software Factory to an Existing Project"
-    - slug: software-factory-for-new-projects
+      title: "How to Build a Generic Software Factory: Step-by-Step Guide"
+    - slug: introducing-ai-agents-to-your-factory
       part: 6
-      title: "Starting a New Project with a Software Factory from Day One"
-    - slug: build-your-own-software-factory-gsd-ponytail-caveman
+      title: "Adding AI Agents to Your Factory: The Path to Autonomy"
+    - slug: autonomous-software-factories-explained
       part: 7
-      title: "Build Your Own Software Factory with GSD, Ponytail, and Caveman"
+      title: "Autonomous Software Factories: Planning Agents, Builders, and Reviewers"
+    - slug: autonomous-factory-examples-ona-gitpod-memo
+      part: 8
+      title: "Real Autonomous Factories: software-factory.dev, Ona Sessions, and Memo"
+    - slug: building-your-first-autonomous-factory
+      part: 9
+      title: "Building Your First Autonomous Factory: Architecture and Setup"
+    - slug: scaling-autonomous-factories-advanced-patterns
+      part: 10
+      title: "Scaling Autonomous Factories: Advanced Patterns and Optimization"
 
 # System Design Category Series
 # - id: distributed-systems-series
