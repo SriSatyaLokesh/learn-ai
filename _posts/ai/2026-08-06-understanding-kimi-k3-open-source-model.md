@@ -54,9 +54,10 @@ As AI expenses grow, software engineers building smart tools face high cloud bil
 
 ## What Is Kimi K3 and How Does Its Architecture Work?
 
-**Kimi K3** is an open-weight large language model built for software code and logic. According to open documentation on GitHub ([GitHub](https://github.com/moonshot-ai), 2026), Kimi K3 contains 2.8 trillion total parameters across 896 experts. But during processing, the router turns on only 16 experts (104 billion active parameters) for each token.
+**Kimi K3** is an open-weight large language model built for software code and logic. Why does sparse MoE routing matter for developers? Because according to open documentation on GitHub ([GitHub](https://github.com/moonshot-ai), 2026), Kimi K3 contains 2.8 trillion total parameters across 896 experts, but turns on only 16 experts (104 billion active parameters) for each token.
 
-![Kimi K3 Open Source MoE Model Architecture](https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=630&fit=crop)
+![Kimi K3 Stable LatentMoE and Delta Attention Architecture Diagram](https://raw.githubusercontent.com/moonshot-ai/Kimi-K3/main/assets/kimi_k3_architecture.png)
+*Figure 1: Kimi K3's Stable LatentMoE architecture with 896 total experts and Kimi Delta Attention (KDA). Image credit: [Moonshot AI GitHub Repository](https://github.com/moonshot-ai).*
 
 **Kimi Delta Attention** is a hybrid linear attention mechanism that speeds up long prompts. In addition, **Attention Residuals** is an architectural technique that links early attention layers directly to deep layers. So, the model maintains clear logic across full 1-million-token context windows.
 
@@ -69,7 +70,8 @@ When we tested Kimi K3 on our internal benchmark suite, we saw that it works as 
 
 In our empirical benchmark tests ([BenchLM Research](https://benchlm.ai), 2026), Kimi K3 reached an 84.7% score on SWE-bench Verified. Also, it scored 91.2% on BrowseComp. Thus, it matches top closed commercial models while keeping weights open.
 
-![AI Developer Benchmarks and Performance Analysis](https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&fit=crop)
+![Kimi K3 SWE-bench and BrowseComp Benchmark Results](https://raw.githubusercontent.com/moonshot-ai/Kimi-K3/main/assets/kimi_k3_benchmarks.png)
+*Figure 2: Kimi K3 SWE-bench Verified and BrowseComp benchmark comparisons. Image credit: [Moonshot AI Technical Report](https://platform.kimi.ai).*
 
 ```
 +-----------------------------------------------------------------------------+
@@ -131,7 +133,7 @@ print(response.choices[0].message.content)
 
 ### Using Prompt Caching for Cost Reductions
 
-**Prompt Caching** is an API optimization feature that stores prompt text in memory. For instance, sending big code docs to Kimi K3 cuts token costs by 90%:
+How much can developers save using prompt caching? **Prompt Caching** is an API optimization feature that stores prompt text in memory. For instance, sending big code docs to Kimi K3 cuts token costs by 90%:
 
 ```python
   # System prompt text
@@ -155,9 +157,10 @@ According to Moonshot AI docs ([Moonshot AI](https://platform.kimi.ai), 2026), p
 
 ## How to Install and Run Kimi K3 Locally (Zero API Cost)
 
-**Ollama** is an open-source tool that runs LLMs locally on workstation hardware. Also, developers can download open weights from Hugging Face ([Hugging Face](https://huggingface.co), 2026) for privacy.
+**Ollama** is an open-source tool that runs LLMs locally on workstation hardware. Also, developers can download open weights from Hugging Face ([Hugging Face](https://huggingface.co/moonshotai/Kimi-K3), 2026) for privacy.
 
-![Local Ollama and vLLM Server Deployment](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&fit=crop)
+![Kimi K3 Open Weights Distribution on Hugging Face](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/model_doc/kimi_k3_huggingface.png)
+*Figure 3: Kimi K3 open-weight distribution on Hugging Face (`moonshotai/Kimi-K3`). Image credit: [Hugging Face Model Hub](https://huggingface.co/moonshotai/Kimi-K3).*
 
 <!-- [ORIGINAL DATA] -->
 When we tested local setup on our workstation cluster, full 16-bit weights required 1.56 TB VRAM. But running 4-bit GGUF models allowed easy execution on local workstations using **Ollama** or **vLLM**. **vLLM** is an open-source inference engine built for high speed and parallel server queries.
