@@ -15,6 +15,11 @@
       .replace(/^\d{4}-\d{2}-\d{2}-/, '');
   }
 
+  const getProgressUrl = () => {
+    const base = (window.pageData && window.pageData.baseUrl) ? window.pageData.baseUrl : '/learn-ai';
+    return base.replace(/\/$/, '') + '/progress/';
+  };
+
   // Check if we are on a blog post page
   const isPostPage = () => {
     return (window.pageData && window.pageData.slug) ||
@@ -61,7 +66,7 @@
     // Auto mark complete when reader reaches 80% scroll
     if (scrollPercentage >= 80 && !hasReached80Percent) {
       hasReached80Percent = true;
-      markPostAsComplete(false); // don't show noisy popups on scroll, just record
+      markPostAsComplete(false); // record completion without noisy popups
     }
   };
 
@@ -104,6 +109,8 @@
     const container = document.getElementById('post-completion-callout');
     if (!container) return;
 
+    const progressUrl = getProgressUrl();
+
     if (isComplete) {
       container.style.borderColor = '#059669';
       container.style.background = '#f0fdf4';
@@ -112,7 +119,7 @@
         <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem; color: #065f46; font-weight: 700;">You've completed this post!</h3>
         <p style="margin: 0 0 1rem 0; color: #047857; font-size: 0.875rem;">Your reading progress has been saved locally.</p>
         <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-          <a href="{{ site.baseurl }}/progress/" style="padding: 0.5rem 1.25rem; background: #059669; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem;">
+          <a href="${progressUrl}" style="padding: 0.5rem 1.25rem; background: #059669; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem;">
             View Learning Dashboard
           </a>
           <button onclick="window.togglePostComplete()" style="padding: 0.5rem 1rem; background: transparent; color: #047857; border: 1px solid #059669; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem; cursor: pointer;">

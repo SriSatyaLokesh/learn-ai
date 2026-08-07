@@ -307,7 +307,9 @@
                 category: '{{ page.category }}',
                 series: {% if page.series %}'{{ page.series }}'{% else %}null{% endif %},
                 part: {% if page.part %}{{ page.part }}{% else %}null{% endif %},
-                readingTime: parseInt('{{ minutesText | replace: ' min to read', '' | default: 5 }}') || 5
+                readingTime: parseInt('{{ minutesText | replace: ' min to read', '' | default: 5 }}') || 5,
+                url: '{{ page.url | relative_url }}',
+                baseUrl: '{{ site.baseurl }}'
             };
         </script>
         <script src="{{ '/assets/js/learning-progress-tracker.js' | prepend: site.baseurl }}"></script>
