@@ -73,20 +73,14 @@ In our empirical benchmark tests ([BenchLM Research](https://benchlm.ai), 2026),
 ![Kimi K3 SWE-bench and BrowseComp Benchmark Results](https://raw.githubusercontent.com/moonshot-ai/Kimi-K3/main/assets/kimi_k3_benchmarks.png)
 *Figure 2: Kimi K3 SWE-bench Verified and BrowseComp benchmark comparisons. Image credit: [Moonshot AI Technical Report](https://platform.kimi.ai).*
 
-```
-+-----------------------------------------------------------------------------+
-|                        KIMI K3 BENCHMARK SUMMARY                            |
-+------------------------------------+-----------------------+----------------+
-| Benchmark Metric                   | Kimi K3 (Open-Weight) | Closed SOTA    |
-+------------------------------------+-----------------------+----------------+
-| SWE-bench Verified (Coding)        | 84.7%                 | 86.2%          |
-| BrowseComp (Agentic Navigation)    | 91.2%                 | 89.8%          |
-| HumanEval (Python Pass@1)          | 92.4%                 | 93.1%          |
-| MATH-500 (Complex Reasoning)       | 88.9%                 | 89.5%          |
-| GPQA Diamond (Graduate Science)    | 76.3%                 | 78.1%          |
-| 1M Token Context Recall (Needle)   | 99.8%                 | 99.5%          |
-+------------------------------------+-----------------------+----------------+
-```
+| Benchmark Metric | Kimi K3 (Open-Weight) | Closed SOTA |
+| :--- | :--- | :--- |
+| **SWE-bench Verified (Coding)** | 84.7% | 86.2% |
+| **BrowseComp (Agentic Navigation)** | 91.2% | 89.8% |
+| **HumanEval (Python Pass@1)** | 92.4% | 93.1% |
+| **MATH-500 (Complex Reasoning)** | 88.9% | 89.5% |
+| **GPQA Diamond (Graduate Science)** | 76.3% | 78.1% |
+| **1M Token Context Recall (Needle)** | 99.8% | 99.5% |
 
 ### Benchmark Summary
 
@@ -203,18 +197,12 @@ Once running, point client apps to `http://localhost:8000/v1` for offline infere
 
 The Kimi API uses a **top-up rate limit tier system** ([Moonshot Console](https://platform.kimi.ai/console), 2026). Therefore, adding balance increases account speed automatically.
 
-```
-+-----------------------------------------------------------------------------+
-|                      KIMI API BILLING & RATE LIMIT TIERS                    |
-+---------+------------------+---------------+-------------------+------------+
-| Tier    | Total Top-Up ($) | Max RPM       | Max TPM           | Concurrency|
-+---------+------------------+---------------+-------------------+------------+
-| Tier 1  | $1 - $49         | 60 RPM        | 100,000 TPM       | 5 requests |
-| Tier 2  | $50 - $199       | 300 RPM       | 500,000 TPM       | 20 requests|
-| Tier 3  | $200 - $999      | 1,200 RPM     | 2,000,000 TPM     | 50 requests|
-| Tier 4  | $1,000+          | Custom High   | 10,000,000+ TPM   | Custom     |
-+---------+------------------+---------------+-------------------+------------+
-```
+| Tier | Total Top-Up ($) | Max RPM | Max TPM | Concurrency |
+| :--- | :--- | :--- | :--- | :--- |
+| **Tier 1** | $1 - $49 | 60 RPM | 100,000 TPM | 5 requests |
+| **Tier 2** | $50 - $199 | 300 RPM | 500,000 TPM | 20 requests |
+| **Tier 3** | $200 - $999 | 1,200 RPM | 2,000,000 TPM | 50 requests |
+| **Tier 4** | $1,000+ | Custom High | 10,000,000+ TPM | Custom |
 
 ### Rate Limit Guidelines
 
@@ -227,24 +215,18 @@ The Kimi API uses a **top-up rate limit tier system** ([Moonshot Console](https:
 
 The matrix below compares Kimi K3 against other top frontier models ([AI Economics Survey](https://aieconomics.dev), 2026):
 
-```
-+-----------------------------------------------------------------------------------------------------+
-|                              FEATURE & COST COMPARISON MATRIX                                       |
-+----------------------+--------------------+--------------------+--------------------+---------------+
-| Feature / Metric     | Kimi K3            | Claude 3.7 Sonnet  | OpenAI Codex/GPT-5 | DeepSeek R1   |
-+----------------------+--------------------+--------------------+--------------------+---------------+
-| Model Type           | Open-Weight (MoE)  | Proprietary Closed | Proprietary Closed | Open-Weight   |
-| Total Parameters     | 2.8 Trillion       | Undisclosed        | Undisclosed        | 671 Billion   |
-| Active Parameters    | 104 Billion        | Undisclosed        | Undisclosed        | 37 Billion    |
-| Context Window       | 1,000,000 tokens   | 200,000 tokens     | 128,000 tokens     | 128,000 tokens|
-| Input Price / 1M     | $3.00              | $3.00              | $5.00              | $0.55         |
-| Cached Input / 1M    | $0.30 (-90%)       | $0.30 (-90%)       | $2.50 (-50%)       | $0.14 (-75%)  |
-| Output Price / 1M    | $15.00             | $15.00             | $15.00             | $2.19         |
-| SWE-bench Score      | 84.7%              | 86.2%              | 85.0%              | 79.8%         |
-| Local Self-Hosting   | YES (Open Weights) | NO (Cloud Only)    | NO (Cloud Only)    | YES           |
-| License              | Modified MIT       | Commercial API     | Commercial API     | MIT           |
-+----------------------+--------------------+--------------------+--------------------+---------------+
-```
+| Feature / Metric | Kimi K3 | Claude 3.7 Sonnet | OpenAI Codex/GPT-5 | DeepSeek R1 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Model Type** | Open-Weight (MoE) | Proprietary Closed | Proprietary Closed | Open-Weight |
+| **Total Parameters** | 2.8 Trillion | Undisclosed | Undisclosed | 671 Billion |
+| **Active Parameters** | 104 Billion | Undisclosed | Undisclosed | 37 Billion |
+| **Context Window** | 1,000,000 tokens | 200,000 tokens | 128,000 tokens | 128,000 tokens |
+| **Input Price / 1M** | $3.00 | $3.00 | $5.00 | $0.55 |
+| **Cached Input / 1M** | $0.30 (-90%) | $0.30 (-90%) | $2.50 (-50%) | $0.14 (-75%) |
+| **Output Price / 1M** | $15.00 | $15.00 | $15.00 | $2.19 |
+| **SWE-bench Score** | 84.7% | 86.2% | 85.0% | 79.8% |
+| **Local Self-Hosting** | YES (Open Weights) | NO (Cloud Only) | NO (Cloud Only) | YES |
+| **License** | Modified MIT | Commercial API | Commercial API | MIT |
 
 ### Key Insights for Engineering Teams
 
