@@ -43,6 +43,16 @@ description: Track your learning journey across all series and articles
 <script src="{{ '/assets/js/learning-progress.js' | prepend: site.baseurl }}"></script>
 
 <script>
+  function normalizeSlug(str) {
+    if (!str) return '';
+    return String(str)
+      .toLowerCase()
+      .trim()
+      .replace(/^(https?:\/\/[^\/]+)?\/?(learn-ai\/)?/, '')
+      .replace(/\/$/, '')
+      .replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  }
+
   // Jekyll Site Data
   {% assign all_series = site.data.series %}
   const seriesData = {{ all_series | jsonify }};
@@ -69,118 +79,132 @@ description: Track your learning journey across all series and articles
     const stats = window.LearningProgress.getStats();
 
     // Update Top Stat Numbers
-    document.getElementById('total-completed').textContent = stats.totalPosts;
-    document.getElementById('series-completed').textContent = stats.seriesCompleted;
-    document.getElementById('total-time').textContent = stats.totalTimeFormatted || (stats.totalTime + 'h');
+    const totalEl = document.getElementById('total-completed');
+    const seriesEl = document.getElementById('series-completed');
+    const timeEl = document.getElementById('total-time');
+
+    if (totalEl) totalEl.textContent = stats.totalPosts;
+    if (seriesEl) seriesEl.textContent = stats.seriesCompleted;
+    if (timeEl) timeEl.textContent = stats.totalTimeFormatted || (stats.totalTime + 'h');
 
     // Display Series Progress
     const seriesList = document.getElementById('series-progress-list');
-    seriesList.innerHTML = '<h2 style="font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem 0;">Series Progress</h2>';
+    if (seriesList) {
+      seriesList.innerHTML = '<h2 style="font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem 0;">Series Progress</h2>';
 
-    if (seriesData && seriesData.length > 0) {
-      seriesData.forEach(series => {
-        const seriesProgress = progress.series[series.id] || { completed: [] };
-        const completedCount = seriesProgress.completed ? seriesProgress.completed.length : 0;
-        const totalParts = series.total_parts || (series.posts ? series.posts.length : 0);
-        const percentage = totalParts > 0 ? Math.round((completedCount / totalParts) * 100) : 0;
+      if (seriesData && seriesData.length > 0) {
+        seriesData.forEach(series => {
+          const seriesProgress = progress.series[series.id] || { completed: [] };
+          const completedCount = seriesProgress.completed ? seriesProgress.completed.length : 0;
+          const totalParts = series.total_parts || (series.posts ? series.posts.length : 0);
+          const percentage = totalParts > 0 ? Math.round((completedCount / totalParts) * 100) : 0;
 
-        const firstPostUrl = series.posts && series.posts.length > 0
-          ? `{{ site.baseurl }}/${series.posts[0].slug}/`
-          : '#';
+          const firstPostUrl = series.posts && series.posts.length > 0
+            ? `{{ site.baseurl }}/${series.posts[0].slug}/`
+            : '#';
 
-        const seriesCard = `
-          <div style="margin: 1.25rem 0; padding: 1.5rem; border: 1px solid #e5e7eb; border-radius: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-            <h3 style="margin-top: 0; font-size: 1.25rem; font-weight: 600;">${series.title}</h3>
-            <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 1rem;">${series.description || ''}</p>
-            
-            <div style="margin: 1rem 0;">
-              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <span style="font-size: 0.875rem; font-weight: 600; color: #374151;">Completion</span>
-                <span style="font-size: 0.875rem; font-weight: 600; color: #dc2f02;" class="progress-text">${completedCount} / ${totalParts} parts (${percentage}%)</span>
+          const seriesCard = `
+            <div style="margin: 1.25rem 0; padding: 1.5rem; border: 1px solid #e5e7eb; border-radius: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+              <h3 style="margin-top: 0; font-size: 1.25rem; font-weight: 600;">${series.title}</h3>
+              <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 1rem;">${series.description || ''}</p>
+              
+              <div style="margin: 1rem 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.875rem; font-weight: 600; color: #374151;">Completion</span>
+                  <span style="font-size: 0.875rem; font-weight: 600; color: #dc2f02;" class="progress-text">${completedCount} / ${totalParts} parts (${percentage}%)</span>
+                </div>
+                <div style="height: 0.6rem; background: #f3f4f6; border-radius: 9999px; overflow: hidden;">
+                  <div 
+                    data-progress-bar 
+                    data-series-id="${series.id}" 
+                    data-total-parts="${totalParts}"
+                    style="height: 100%; background: #dc2f02; border-radius: 9999px; width: ${percentage}%; transition: width 0.5s ease;"
+                  ></div>
+                </div>
               </div>
-              <div style="height: 0.6rem; background: #f3f4f6; border-radius: 9999px; overflow: hidden;">
-                <div 
-                  data-progress-bar 
-                  data-series-id="${series.id}" 
-                  data-total-parts="${totalParts}"
-                  style="height: 100%; background: #dc2f02; border-radius: 9999px; width: ${percentage}%; transition: width 0.5s ease;"
-                ></div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;">
+                <div style="display: flex; gap: 0.5rem;">
+                  <span style="padding: 0.25rem 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #374151;">
+                    ${series.category || 'General'}
+                  </span>
+                  <span style="padding: 0.25rem 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #374151;">
+                    ${series.difficulty || 'All Levels'}
+                  </span>
+                </div>
+                ${totalParts > 0 ? `
+                  <a href="${firstPostUrl}" style="padding: 0.5rem 1rem; background: #dc2f02; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem;">
+                    ${completedCount > 0 ? (percentage === 100 ? 'Review Series' : 'Continue Series') : 'Start Series'}
+                  </a>
+                ` : '<span style="color: #9ca3af; font-size: 0.875rem; font-style: italic;">Coming soon</span>'}
               </div>
             </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;">
-              <div style="display: flex; gap: 0.5rem;">
-                <span style="padding: 0.25rem 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #374151;">
-                  ${series.category || 'General'}
-                </span>
-                <span style="padding: 0.25rem 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #374151;">
-                  ${series.difficulty || 'All Levels'}
-                </span>
-              </div>
-              ${totalParts > 0 ? `
-                <a href="${firstPostUrl}" style="padding: 0.5rem 1rem; background: #dc2f02; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem;">
-                  ${completedCount > 0 ? (percentage === 100 ? 'Review Series' : 'Continue Series') : 'Start Series'}
-                </a>
-              ` : '<span style="color: #9ca3af; font-size: 0.875rem; font-style: italic;">Coming soon</span>'}
-            </div>
-          </div>
-        `;
-        seriesList.innerHTML += seriesCard;
-      });
-    } else {
-      seriesList.innerHTML += '<p style="color: #6b7280;">No series available yet.</p>';
+          `;
+          seriesList.innerHTML += seriesCard;
+        });
+      } else {
+        seriesList.innerHTML += '<p style="color: #6b7280;">No series available yet.</p>';
+      }
     }
 
     // Display Completed Articles List
     const completedList = document.getElementById('completed-posts-list');
-    const completedSlugs = Object.keys(progress.posts || {}).filter(slug => progress.posts[slug].completed);
+    if (completedList) {
+      const completedEntries = Object.keys(progress.posts || {}).filter(key => progress.posts[key] && progress.posts[key].completed);
 
-    if (completedSlugs.length > 0) {
-      let postsHTML = '<ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">';
-      
-      completedSlugs.forEach(slug => {
-        const postMeta = allPostsData.find(p => p.slug === slug || p.url.includes(slug)) || {
-          title: slug.replace(/-/g, ' ').replace(/^\d{4}-\d{2}-\d{2}-/, ''),
-          url: `{{ site.baseurl }}/${slug}/`,
-          category: progress.posts[slug].category || 'ai',
-          date: new Date(progress.posts[slug].completedAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-        };
+      if (completedEntries.length > 0) {
+        let postsHTML = '<ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">';
+        
+        completedEntries.forEach(storedKey => {
+          const normKey = normalizeSlug(storedKey);
+          const postData = progress.posts[storedKey];
 
-        postsHTML += `
-          <li style="padding: 1rem 1.25rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; box-shadow: 0 1px 4px rgba(0,0,0,0.02);">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-              <span style="font-size: 1.25rem; color: #059669;">✅</span>
-              <div>
-                <a href="${postMeta.url}" style="font-weight: 600; color: #111827; text-decoration: none; font-size: 1rem;">
-                  ${postMeta.title}
-                </a>
-                <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem;">
-                  Completed on ${postMeta.date}
+          const postMeta = allPostsData.find(p => {
+            const normP = normalizeSlug(p.slug) || normalizeSlug(p.url);
+            return normP === normKey;
+          }) || {
+            title: normKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+            url: `{{ site.baseurl }}/${normKey}/`,
+            category: postData.category || 'ai',
+            date: new Date(postData.completedAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+          };
+
+          postsHTML += `
+            <li style="padding: 1rem 1.25rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; box-shadow: 0 1px 4px rgba(0,0,0,0.02);">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <span style="font-size: 1.25rem; color: #059669;">✅</span>
+                <div>
+                  <a href="${postMeta.url}" style="font-weight: 600; color: #111827; text-decoration: none; font-size: 1rem;">
+                    ${postMeta.title}
+                  </a>
+                  <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem;">
+                    Completed on ${postMeta.date}
+                  </div>
                 </div>
               </div>
-            </div>
-            <span style="padding: 0.25rem 0.6rem; background: #f3f4f6; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600; color: #4b5563; text-transform: uppercase;">
-              ${postMeta.category || 'ai'}
-            </span>
-          </li>
-        `;
-      });
+              <span style="padding: 0.25rem 0.6rem; background: #f3f4f6; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600; color: #4b5563; text-transform: uppercase;">
+                ${postMeta.category || 'ai'}
+              </span>
+            </li>
+          `;
+        });
 
-      postsHTML += '</ul>';
-      completedList.innerHTML = postsHTML;
-    } else {
-      completedList.innerHTML = `
-        <div style="padding: 1.5rem; background: #f9fafb; border: 1px dashed #d1d5db; border-radius: 0.75rem; text-align: center; color: #6b7280;">
-          <p style="margin: 0; font-size: 0.95rem;">You haven't completed any articles yet.</p>
-          <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem;">Read blog posts and click <strong>"Mark as Complete"</strong> at the bottom of any article to track it here!</p>
-        </div>
-      `;
+        postsHTML += '</ul>';
+        completedList.innerHTML = postsHTML;
+      } else {
+        completedList.innerHTML = `
+          <div style="padding: 1.5rem; background: #f9fafb; border: 1px dashed #d1d5db; border-radius: 0.75rem; text-align: center; color: #6b7280;">
+            <p style="margin: 0; font-size: 0.95rem; font-weight: 600; color: #374151;">No articles completed yet!</p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem;">Read blog posts and click <strong>"Mark as Complete"</strong> at the bottom of any article to track your learning journey here.</p>
+          </div>
+        `;
+      }
     }
   }
 
   // Reset all progress
   function resetAllProgress() {
-    if (confirm('Are you sure you want to reset all your learning progress? This will clear your browser storage.')) {
+    if (confirm('Are you sure you want to reset all your learning progress? This will clear your saved browser data.')) {
       if (window.LearningProgress) {
         window.LearningProgress.reset();
       } else {

@@ -26,6 +26,8 @@ show_hero: true
 menu:
   - title: Home
     url: /
+  - title: Progress
+    url: /progress/
   - title: About
     url: /about
   - title: Contact

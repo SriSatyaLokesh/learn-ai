@@ -1,214 +1,185 @@
 // Learning Progress Tracker for Post Pages
-// Automatically marks posts as complete when reader reaches the end
-// Integrates with series navigation and progress page
+// Automatically tracks post completion via scroll & interactive completion callout
+// Integrates with learning progress module and dashboard
 
 (function() {
   'use strict';
 
-  // Check if we're on a post page
-  const isPostPage = document.body.classList.contains('post-template') || 
-                     document.querySelector('article.post-content');
-  
-  if (!isPostPage) return;
+  function normalizeSlug(str) {
+    if (!str) return '';
+    return String(str)
+      .toLowerCase()
+      .trim()
+      .replace(/^(https?:\/\/[^\/]+)?\/?(learn-ai\/)?/, '')
+      .replace(/\/$/, '')
+      .replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  }
 
-  // Get post metadata from page
+  // Check if we are on a blog post page
+  const isPostPage = () => {
+    return (window.pageData && window.pageData.slug) ||
+           document.body.classList.contains('post-template') || 
+           document.querySelector('article.post-content') !== null ||
+           document.querySelector('section.post') !== null;
+  };
+
+  // Extract post metadata
   const getPostMetadata = () => {
-    // Try to get from Jekyll/Liquid variables first (if available)
     const pageData = window.pageData || {};
+    let rawSlug = pageData.slug;
     
+    if (!rawSlug) {
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      rawSlug = pathParts.pop() || '';
+    }
+
     return {
-      slug: pageData.slug || window.location.pathname.split('/').filter(Boolean).pop(),
-      category: pageData.category || window.location.pathname.split('/').filter(Boolean)[0],
+      rawSlug: rawSlug,
+      normSlug: normalizeSlug(rawSlug),
+      category: pageData.category || 'ai',
       series: pageData.series || null,
       part: pageData.part || null,
-      readingTime: pageData.readingTime || 5 // Default 5 minutes
+      readingTime: pageData.readingTime || 5
     };
   };
 
-  // Track scroll completion
   let hasReached80Percent = false;
-  let hasReached100Percent = false;
 
+  // Track scroll depth
   const trackScrollCompletion = () => {
+    if (!isPostPage()) return;
+
     const article = document.querySelector('article.post-content') || document.querySelector('article');
     if (!article) return;
 
     const articleTop = article.offsetTop;
     const articleHeight = article.offsetHeight;
     const scrollPosition = window.scrollY + window.innerHeight;
-    const articleBottom = articleTop + articleHeight;
 
     const scrollPercentage = ((scrollPosition - articleTop) / articleHeight) * 100;
 
-    // Mark 80% completion (considered "read")
+    // Auto mark complete when reader reaches 80% scroll
     if (scrollPercentage >= 80 && !hasReached80Percent) {
       hasReached80Percent = true;
-      markPostAsComplete();
-    }
-
-    // Mark 100% completion (fully read)
-    if (scrollPercentage >= 100 && !hasReached100Percent) {
-      hasReached100Percent = true;
-      showCompletionBadge();
+      markPostAsComplete(false); // don't show noisy popups on scroll, just record
     }
   };
 
-  // Mark post as complete
-  const markPostAsComplete = () => {
-    const metadata = getPostMetadata();
-    
-    // LearningProgress should be available since learning-progress.js loads first
+  // Mark post as complete in localStorage
+  const markPostAsComplete = (showNotice = true) => {
+    const meta = getPostMetadata();
+    if (!meta.normSlug) return;
+
     if (window.LearningProgress) {
-      window.LearningProgress.completePost(metadata.slug, metadata.category, metadata.readingTime);
-      
-      // If part of series, mark series part as complete
-      if (metadata.series && metadata.part) {
-        window.LearningProgress.completeSeriesPart(metadata.series, metadata.part);
+      window.LearningProgress.completePost(meta.normSlug, meta.category, meta.readingTime);
+
+      if (meta.series && meta.part) {
+        window.LearningProgress.completeSeriesPart(meta.series, meta.part);
       }
       
-      console.log('✅ Post marked as complete:', metadata.slug);
-    } else {
-      console.warn('LearningProgress not available - this should not happen');
+      updateCompletionUI(true);
     }
   };
 
-  // Show completion badge
-  const showCompletionBadge = () => {
-    // Check if badge already exists
-    if (document.querySelector('.completion-badge')) return;
+  // Toggle post complete status
+  const togglePostComplete = () => {
+    const meta = getPostMetadata();
+    if (!meta.normSlug || !window.LearningProgress) return;
 
-    const badge = document.createElement('div');
-    badge.className = 'completion-badge';
-    badge.style.cssText = `
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      padding: 1rem 1.5rem;
-      background: #ffffff;
-      color: #dc2f02;
-      border: 2px solid #dc2f02;
-      border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(220, 47, 2, 0.15);
-      font-weight: 600;
-      z-index: 1000;
-      animation: slideInUp 0.5s ease-out;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    `;
-    badge.innerHTML = `
-      <span style="font-size: 1.5rem;">🎉</span>
-      <div>
-        <div style="font-size: 0.875rem; opacity: 0.9;">Post Complete!</div>
-        <div style="font-size: 0.75rem; opacity: 0.8;">Progress saved</div>
-      </div>
-    `;
-
-    document.body.appendChild(badge);
-
-    // Add animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideInUp {
-        from {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+    const isComplete = window.LearningProgress.isPostComplete(meta.normSlug);
+    if (isComplete) {
+      window.LearningProgress.togglePost(meta.normSlug, meta.category, meta.readingTime);
+      updateCompletionUI(false);
+    } else {
+      window.LearningProgress.completePost(meta.normSlug, meta.category, meta.readingTime);
+      if (meta.series && meta.part) {
+        window.LearningProgress.completeSeriesPart(meta.series, meta.part);
       }
-    `;
-    document.head.appendChild(style);
-
-    // Remove badge after 5 seconds
-    setTimeout(() => {
-      badge.style.animation = 'slideInUp 0.5s ease-out reverse';
-      setTimeout(() => badge.remove(), 500);
-    }, 5000);
+      updateCompletionUI(true);
+    }
   };
 
-  // Add completion button at end of post
-  const addCompletionButton = () => {
-    const article = document.querySelector('article.post-content') || document.querySelector('article');
-    if (!article) return;
-
-    const metadata = getPostMetadata();
-    const isComplete = window.LearningProgress && window.LearningProgress.isPostComplete(metadata.slug);
-
-    const buttonContainer = document.createElement('div');
-    buttonContainer.style.cssText = `
-      margin: 3rem 0;
-      padding: 2rem;
-      background: ${isComplete ? '#ffffff' : '#ffffff'};
-      border: 2px solid #dc2f02;
-      border-radius: 1rem;
-      color: #000000;
-      text-align: center;
-    `;
+  // Update Callout Box UI
+  const updateCompletionUI = (isComplete) => {
+    const container = document.getElementById('post-completion-callout');
+    if (!container) return;
 
     if (isComplete) {
-      buttonContainer.innerHTML = `
-        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">You've completed this post!</h3>
-        <p style="margin: 0; color: #374151;">Check your <a href="/learn-ai/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
+      container.style.borderColor = '#059669';
+      container.style.background = '#f0fdf4';
+      container.innerHTML = `
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎉</div>
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem; color: #065f46; font-weight: 700;">You've completed this post!</h3>
+        <p style="margin: 0 0 1rem 0; color: #047857; font-size: 0.875rem;">Your reading progress has been saved locally.</p>
+        <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+          <a href="{{ site.baseurl }}/progress/" style="padding: 0.5rem 1.25rem; background: #059669; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem;">
+            View Learning Dashboard
+          </a>
+          <button onclick="window.togglePostComplete()" style="padding: 0.5rem 1rem; background: transparent; color: #047857; border: 1px solid #059669; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem; cursor: pointer;">
+            Mark as Unread
+          </button>
+        </div>
       `;
     } else {
-      buttonContainer.innerHTML = `
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">Did you find this helpful?</h3>
-        <p style="margin: 0 0 1rem 0; color: #374151;">Mark as complete to track your progress</p>
-        <button onclick="window.markPostComplete()" style="padding: 0.75rem 2rem; background: #dc2f02; color: white; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s;">
+      container.style.borderColor = '#dc2f02';
+      container.style.background = '#ffffff';
+      container.innerHTML = `
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem; color: #111827; font-weight: 700;">Completed reading this article?</h3>
+        <p style="margin: 0 0 1rem 0; color: #4b5563; font-size: 0.875rem;">Mark it as complete to track your progress on your dashboard.</p>
+        <button onclick="window.togglePostComplete()" style="padding: 0.65rem 1.75rem; background: #dc2f02; color: white; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: transform 0.15s ease;">
           Mark as Complete
         </button>
       `;
     }
-
-    article.appendChild(buttonContainer);
   };
 
-  // Make function globally available
-  window.markPostComplete = () => {
-    markPostAsComplete();
-    hasReached100Percent = true;
-    
-    // The LearningProgress.completePost() already shows notification and updates UI
-    // But let's also show the completion badge for good UX
-    showCompletionBadge();
-    
-    // Replace button with completion message after a short delay to show the success feedback
-    setTimeout(() => {
-      const button = document.querySelector('button[onclick="window.markPostComplete()"]');
-      if (button) {
-        const container = button.closest('div');
-        container.style.transition = 'all 0.3s ease';
-        container.innerHTML = `
-          <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-          <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #000000;">Marked as complete!</h3>
-          <p style="margin: 0; color: #374151;">Check your <a href="/learn-ai/progress/" style="color: #dc2f02; text-decoration: underline;">learning progress</a></p>
-        `;
-      }
-    }, 100);
+  // Add completion callout box to bottom of article
+  const injectCompletionCallout = () => {
+    if (!isPostPage()) return;
+    if (document.getElementById('post-completion-callout')) return;
+
+    const article = document.querySelector('article.post-content') || document.querySelector('article');
+    if (!article) return;
+
+    const meta = getPostMetadata();
+    const isComplete = window.LearningProgress ? window.LearningProgress.isPostComplete(meta.normSlug) : false;
+
+    const callout = document.createElement('div');
+    callout.id = 'post-completion-callout';
+    callout.style.cssText = `
+      margin: 3rem 0;
+      padding: 1.75rem;
+      border: 2px solid ${isComplete ? '#059669' : '#dc2f02'};
+      border-radius: 1rem;
+      background: ${isComplete ? '#f0fdf4' : '#ffffff'};
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+    `;
+
+    article.appendChild(callout);
+    updateCompletionUI(isComplete);
   };
 
-  // Initialize
+  // Expose global methods
+  window.markPostComplete = () => markPostAsComplete(true);
+  window.togglePostComplete = togglePostComplete;
+
+  // Initialize event listeners
   const init = () => {
-    // Add scroll tracking
+    if (!isPostPage()) return;
+
     let scrollTimeout;
     window.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(trackScrollCompletion, 100);
+      scrollTimeout = setTimeout(trackScrollCompletion, 150);
     });
 
-    // Add completion button
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', addCompletionButton);
+      document.addEventListener('DOMContentLoaded', injectCompletionCallout);
     } else {
-      addCompletionButton();
+      injectCompletionCallout();
     }
-
-    // Initial check
-    trackScrollCompletion();
   };
 
   init();

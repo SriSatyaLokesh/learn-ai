@@ -5,83 +5,153 @@
 (function() {
   'use strict';
 
+  function normalizeSlug(str) {
+    if (!str) return '';
+    return String(str)
+      .toLowerCase()
+      .trim()
+      .replace(/^(https?:\/\/[^\/]+)?\/?(learn-ai\/)?/, '')
+      .replace(/\/$/, '')
+      .replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  }
+
   const LearningProgress = {
     STORAGE_KEY: 'learn-with-satya-progress',
 
-    // Get all progress data
+    normalizeSlug: normalizeSlug,
+
+    // Get all progress data safely
     getAll() {
-      const data = localStorage.getItem(this.STORAGE_KEY);
-      return data ? JSON.parse(data) : { posts: {}, series: {} };
+      try {
+        const data = localStorage.getItem(this.STORAGE_KEY);
+        const parsed = data ? JSON.parse(data) : { posts: {}, series: {} };
+        if (!parsed.posts) parsed.posts = {};
+        if (!parsed.series) parsed.series = {};
+        return parsed;
+      } catch (e) {
+        console.error('Error reading learning progress localStorage:', e);
+        return { posts: {}, series: {} };
+      }
+    },
+
+    // Save progress object
+    save(progress) {
+      try {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
+      } catch (e) {
+        console.error('Error saving learning progress localStorage:', e);
+      }
     },
 
     // Mark post as complete
-    completePost(postSlug, categorySlug, readingTimeMinutes = 5) {
+    completePost(postSlug, categorySlug = 'ai', readingTimeMinutes = 5) {
+      const normSlug = normalizeSlug(postSlug);
+      if (!normSlug) return;
+
       const progress = this.getAll();
-      progress.posts[postSlug] = {
+      progress.posts[normSlug] = {
         completed: true,
         completedAt: new Date().toISOString(),
-        readingTime: readingTimeMinutes,
-        category: categorySlug
+        readingTime: parseInt(readingTimeMinutes) || 5,
+        category: categorySlug || 'ai',
+        rawSlug: postSlug
       };
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
-      console.log('✅ Progress saved:', postSlug);
-      
+
+      this.save(progress);
+      console.log('✅ Progress saved for post:', normSlug);
+
       // Trigger real-time UI updates
       this.updateProgressBarsRealtime();
       this.showCompletionNotification('Post marked as complete!');
-      
+
       return progress;
+    },
+
+    // Toggle post completion
+    togglePost(postSlug, categorySlug = 'ai', readingTimeMinutes = 5) {
+      const normSlug = normalizeSlug(postSlug);
+      if (!normSlug) return false;
+
+      const progress = this.getAll();
+      if (progress.posts[normSlug] && progress.posts[normSlug].completed) {
+        delete progress.posts[normSlug];
+        this.save(progress);
+        this.updateProgressBarsRealtime();
+        this.showCompletionNotification('Post marked as incomplete.');
+        return false;
+      } else {
+        this.completePost(postSlug, categorySlug, readingTimeMinutes);
+        return true;
+      }
     },
 
     // Check if post is complete
     isPostComplete(postSlug) {
+      const normSlug = normalizeSlug(postSlug);
+      if (!normSlug) return false;
+
       const progress = this.getAll();
-      return progress.posts[postSlug]?.completed || false;
+      // Check normalized key or raw key
+      if (progress.posts[normSlug] && progress.posts[normSlug].completed) {
+        return true;
+      }
+      return Object.keys(progress.posts).some(key => {
+        return normalizeSlug(key) === normSlug && progress.posts[key].completed;
+      });
     },
 
     // Get series completion percentage
     getSeriesProgress(seriesId, totalParts) {
       const progress = this.getAll();
       const seriesData = progress.series[seriesId] || { completed: [] };
-      const completedCount = seriesData.completed.length;
+      const completedCount = seriesData.completed ? seriesData.completed.length : 0;
+      if (!totalParts || totalParts <= 0) return 0;
       return Math.round((completedCount / totalParts) * 100);
     },
 
     // Mark series part as complete
     completeSeriesPart(seriesId, partNumber) {
+      if (!seriesId || !partNumber) return;
+
       const progress = this.getAll();
       if (!progress.series[seriesId]) {
-        progress.series[seriesId] = { 
-          completed: [], 
-          lastAccessed: new Date().toISOString() 
+        progress.series[seriesId] = {
+          completed: [],
+          lastAccessed: new Date().toISOString()
         };
       }
-      if (!progress.series[seriesId].completed.includes(partNumber)) {
-        progress.series[seriesId].completed.push(partNumber);
+
+      const partNum = parseInt(partNumber);
+      if (!progress.series[seriesId].completed.includes(partNum)) {
+        progress.series[seriesId].completed.push(partNum);
         progress.series[seriesId].lastAccessed = new Date().toISOString();
       }
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
-      
-      // Trigger real-time UI updates
+
+      this.save(progress);
       this.updateProgressBarsRealtime();
-      
+
       return progress;
     },
 
     // Reset all progress
     reset() {
-      localStorage.removeItem(this.STORAGE_KEY);
-      console.log('🗑️ All progress cleared');
+      try {
+        localStorage.removeItem(this.STORAGE_KEY);
+        console.log('🗑️ All progress cleared');
+        this.updateProgressBarsRealtime();
+      } catch (e) {
+        console.error('Error clearing progress:', e);
+      }
     },
 
-    // Get stats
+    // Get overall progress stats
     getStats() {
       const progress = this.getAll();
-      const completedPosts = Object.values(progress.posts || {}).filter(p => p.completed);
+      const completedPosts = Object.values(progress.posts || {}).filter(p => p && p.completed);
       const totalPosts = completedPosts.length;
       const totalTimeMinutes = completedPosts.reduce((sum, post) => sum + (parseInt(post.readingTime) || 5), 0);
-      const seriesCompleted = Object.values(progress.series || {}).filter(s => s.completed && s.completed.length > 0).length;
-      
+      const seriesCompleted = Object.values(progress.series || {}).filter(s => s && s.completed && s.completed.length > 0).length;
+
       let totalTimeFormatted = `${totalTimeMinutes}m`;
       if (totalTimeMinutes >= 60) {
         const hours = (totalTimeMinutes / 60).toFixed(1);
@@ -99,13 +169,9 @@
 
     // Real-time DOM update methods
     updateProgressBarsRealtime() {
-      // Update progress page stats if present
       this.updateProgressPageStats();
-      
-      // Update series progress bars
       this.updateSeriesProgressBars();
-      
-      // Fire custom event for other components
+
       window.dispatchEvent(new CustomEvent('learningProgressUpdated', {
         detail: { stats: this.getStats() }
       }));
@@ -116,7 +182,7 @@
       const totalElement = document.getElementById('total-completed');
       const seriesElement = document.getElementById('series-completed');
       const timeElement = document.getElementById('total-time');
-      
+
       if (totalElement) {
         this.animateCountUp(totalElement, parseInt(totalElement.textContent) || 0, stats.totalPosts);
       }
@@ -129,23 +195,20 @@
     },
 
     updateSeriesProgressBars() {
-      // Get all progress bars on the current page
       const progressBars = document.querySelectorAll('[data-progress-bar]');
-      
       progressBars.forEach(bar => {
         const seriesId = bar.getAttribute('data-series-id');
         const totalParts = parseInt(bar.getAttribute('data-total-parts'));
-        
+
         if (seriesId && totalParts) {
           const percentage = this.getSeriesProgress(seriesId, totalParts);
           this.animateProgressBar(bar, percentage);
-          
-          // Update accompanying text
-          const textElement = bar.parentElement.querySelector('.progress-text');
+
+          const textElement = bar.parentElement ? bar.parentElement.querySelector('.progress-text') : null;
           if (textElement) {
             const progress = this.getAll();
             const seriesData = progress.series[seriesId] || { completed: [] };
-            const completedCount = seriesData.completed.length;
+            const completedCount = seriesData.completed ? seriesData.completed.length : 0;
             textElement.textContent = `${completedCount} / ${totalParts} parts (${percentage}%)`;
           }
         }
@@ -153,109 +216,78 @@
     },
 
     animateCountUp(element, from, to) {
-      if (from === to) return;
-      
-      const duration = 800;
-      const steps = 30;
+      if (from === to) {
+        element.textContent = to;
+        return;
+      }
+
+      const duration = 600;
+      const steps = 20;
       const increment = (to - from) / steps;
       let current = from;
       let step = 0;
-      
+
       const timer = setInterval(() => {
         step++;
         current += increment;
-        
+
         if (step >= steps) {
           current = to;
           clearInterval(timer);
         }
-        
+
         element.textContent = Math.round(current);
       }, duration / steps);
     },
 
     animateProgressBar(progressBar, targetPercentage) {
-      const currentWidth = parseFloat(progressBar.style.width) || 0;
-      
-      if (Math.abs(currentWidth - targetPercentage) < 1) return;
-      
-      // Add transition if not already present
-      if (!progressBar.style.transition) {
-        progressBar.style.transition = 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-      }
-      
-      // Animate to new width
+      if (!progressBar) return;
+      progressBar.style.transition = 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
       progressBar.style.width = `${targetPercentage}%`;
-      
-      // Add a subtle scale effect for completion
-      if (targetPercentage === 100 && currentWidth < 100) {
-        progressBar.style.transform = 'scaleY(1.2)';
-        setTimeout(() => {
-          progressBar.style.transform = 'scaleY(1)';
-        }, 200);
-      }
     },
 
     showCompletionNotification(message = 'Progress updated!') {
-      // Create success notification
+      const existing = document.querySelector('.progress-notification');
+      if (existing) existing.remove();
+
       const notification = document.createElement('div');
       notification.className = 'progress-notification';
       notification.style.cssText = `
         position: fixed;
-        top: 2rem;
-        right: 2rem;
-        padding: 1rem 1.5rem;
-        background: #ffffff;
-        color: #047857;
-        border: 2px solid #059669;
+        bottom: 2rem;
+        left: 2rem;
+        padding: 0.875rem 1.25rem;
+        background: #111827;
+        color: #ffffff;
+        border: 1px solid #374151;
         border-radius: 0.75rem;
-        box-shadow: 0 10px 25px rgba(5, 150, 105, 0.15);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         font-weight: 600;
-        z-index: 1000;
-        animation: slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 0.875rem;
+        z-index: 9999;
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.6rem;
         max-width: 320px;
+        transition: all 0.3s ease;
       `;
-      
+
       notification.innerHTML = `
-        <span style="font-size: 1.25rem;">✅</span>
+        <span style="font-size: 1.1rem;">✅</span>
         <span>${message}</span>
       `;
-      
+
       document.body.appendChild(notification);
-      
-      // Add slide animation
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideInDown {
-          from {
-            transform: translateY(-100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-      
-      // Remove after 3 seconds
+
       setTimeout(() => {
-        notification.style.animation = 'slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) reverse';
-        setTimeout(() => {
-          if (notification.parentElement) {
-            notification.remove();
-          }
-        }, 400);
-      }, 3000);
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(10px)';
+        setTimeout(() => notification.remove(), 300);
+      }, 2500);
     }
   };
 
   // Make available globally
   window.LearningProgress = LearningProgress;
-
-  console.log('📊 LearningProgress module loaded with real-time updates');
+  console.log('📊 LearningProgress module loaded');
 })();
