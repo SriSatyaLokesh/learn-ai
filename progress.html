@@ -1,34 +1,39 @@
 ---
 layout: page
 title: Learning Progress
-description: Track your learning journey across all series
+description: Track your learning journey across all series and articles
 ---
 
 <div id="learning-progress-dashboard">
   <h1>Your Learning Progress</h1>
-  <p>Track your progress across all learning series. Progress is saved in your browser.</p>
+  <p>Track your progress across all learning series and articles. Progress is saved locally in your browser.</p>
 
   <div id="progress-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
-    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000;">
-      <div style="font-size: 2rem; font-weight: 700;" id="total-completed">0</div>
-      <div style="font-size: 0.875rem; color: #6b7280;">Posts Completed</div>
+    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <div style="font-size: 2.25rem; font-weight: 700; color: #dc2f02;" id="total-completed">0</div>
+      <div style="font-size: 0.875rem; color: #4b5563; font-weight: 600;">Posts Completed</div>
     </div>
-    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000;">
-      <div style="font-size: 2rem; font-weight: 700;" id="series-completed">0</div>
-      <div style="font-size: 0.875rem; color: #6b7280;">Series Completed</div>
+    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <div style="font-size: 2.25rem; font-weight: 700; color: #dc2f02;" id="series-completed">0</div>
+      <div style="font-size: 0.875rem; color: #4b5563; font-weight: 600;">Series Started / Done</div>
     </div>
-    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000;">
-      <div style="font-size: 2rem; font-weight: 700;" id="total-time">0h</div>
-      <div style="font-size: 0.875rem; color: #6b7280;">Estimated Time</div>
+    <div style="padding: 1.5rem; background: #ffffff; border: 2px solid #dc2f02; border-radius: 1rem; color: #000000; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <div style="font-size: 2.25rem; font-weight: 700; color: #dc2f02;" id="total-time">0m</div>
+      <div style="font-size: 0.875rem; color: #4b5563; font-weight: 600;">Time Invested</div>
     </div>
   </div>
 
   <div id="series-progress-list"></div>
 
+  <div id="completed-posts-section" style="margin-top: 3rem;">
+    <h2>Completed Articles</h2>
+    <div id="completed-posts-list" style="margin-top: 1rem;"></div>
+  </div>
+
   <div style="margin-top: 3rem; padding: 1.5rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 1rem;">
-    <h2 style="margin-top: 0;">Reset Progress</h2>
-    <p>Clear all your progress data. This cannot be undone.</p>
-    <button onclick="resetAllProgress()" style="padding: 0.5rem 1rem; background: #dc2f02; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+    <h2 style="margin-top: 0; font-size: 1.25rem;">Reset Progress</h2>
+    <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 1rem;">Clear all your saved learning data from this browser. This cannot be undone.</p>
+    <button onclick="resetAllProgress()" style="padding: 0.6rem 1.2rem; background: #dc2f02; color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: background 0.2s;">
       Reset All Progress
     </button>
   </div>
@@ -38,120 +43,182 @@ description: Track your learning journey across all series
 <script src="{{ '/assets/js/learning-progress.js' | prepend: site.baseurl }}"></script>
 
 <script>
-  // Learning progress dashboard functions
-  // Note: LearningProgress object is loaded from learning-progress.js
-      
-      return {
-        totalPosts,
-        totalTime: Math.round(totalTime / 60), // Convert to hours
-        seriesCompleted
-      };
-    }
-  };
+  // Jekyll Site Data
+  {% assign all_series = site.data.series %}
+  const seriesData = {{ all_series | jsonify }};
 
-  // Load and display progress on page load
+  {% assign all_posts = site.posts %}
+  const allPostsData = [
+    {% for post in all_posts %}
+      {
+        title: {{ post.title | jsonify }},
+        url: {{ post.url | prepend: site.baseurl | jsonify }},
+        slug: {{ post.slug | jsonify }},
+        category: {{ post.category | jsonify }},
+        date: {{ post.date | date: "%b %d, %Y" | jsonify }},
+        readingTime: {{ post.read_time_minutes | default: 5 | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  // Load and display progress dashboard
   function loadProgressDashboard() {
-    const progress = LearningProgress.getAll();
-    const stats = LearningProgress.getStats();
+    if (!window.LearningProgress) return;
 
-    // Update stats
+    const progress = window.LearningProgress.getAll();
+    const stats = window.LearningProgress.getStats();
+
+    // Update Top Stat Numbers
     document.getElementById('total-completed').textContent = stats.totalPosts;
     document.getElementById('series-completed').textContent = stats.seriesCompleted;
-    document.getElementById('total-time').textContent = stats.totalTime + 'h';
+    document.getElementById('total-time').textContent = stats.totalTimeFormatted || (stats.totalTime + 'h');
 
-    // Load series data from Jekyll
-    {% assign all_series = site.data.series %}
-    const seriesData = {{ all_series | jsonify }};
-
-    // Display series progress
+    // Display Series Progress
     const seriesList = document.getElementById('series-progress-list');
-    seriesList.innerHTML = '<h2>Series Progress</h2>';
+    seriesList.innerHTML = '<h2 style="font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem 0;">Series Progress</h2>';
 
-    seriesData.forEach(series => {
-      const seriesProgress = progress.series[series.id] || { completed: [] };
-      const completedCount = seriesProgress.completed.length;
-      const totalParts = series.total_parts || 0;
-      const percentage = totalParts > 0 ? Math.round((completedCount / totalParts) * 100) : 0;
+    if (seriesData && seriesData.length > 0) {
+      seriesData.forEach(series => {
+        const seriesProgress = progress.series[series.id] || { completed: [] };
+        const completedCount = seriesProgress.completed ? seriesProgress.completed.length : 0;
+        const totalParts = series.total_parts || (series.posts ? series.posts.length : 0);
+        const percentage = totalParts > 0 ? Math.round((completedCount / totalParts) * 100) : 0;
 
-      const seriesCard = `
-        <div style="margin: 1.5rem 0; padding: 1.5rem; border: 1px solid #e5e7eb; border-radius: 1rem; background: white;">
-          <h3 style="margin-top: 0;">${series.title}</h3>
-          <p style="color: #6b7280; font-size: 0.875rem;">${series.description}</p>
-          <div style="margin: 1rem 0;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.875rem; font-weight: 600;">Progress</span>
-              <span style="font-size: 0.875rem;" class="progress-text">${completedCount} / ${totalParts} parts (${percentage}%)</span>
+        const firstPostUrl = series.posts && series.posts.length > 0
+          ? `{{ site.baseurl }}/${series.posts[0].slug}/`
+          : '#';
+
+        const seriesCard = `
+          <div style="margin: 1.25rem 0; padding: 1.5rem; border: 1px solid #e5e7eb; border-radius: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <h3 style="margin-top: 0; font-size: 1.25rem; font-weight: 600;">${series.title}</h3>
+            <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 1rem;">${series.description || ''}</p>
+            
+            <div style="margin: 1rem 0;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span style="font-size: 0.875rem; font-weight: 600; color: #374151;">Completion</span>
+                <span style="font-size: 0.875rem; font-weight: 600; color: #dc2f02;" class="progress-text">${completedCount} / ${totalParts} parts (${percentage}%)</span>
+              </div>
+              <div style="height: 0.6rem; background: #f3f4f6; border-radius: 9999px; overflow: hidden;">
+                <div 
+                  data-progress-bar 
+                  data-series-id="${series.id}" 
+                  data-total-parts="${totalParts}"
+                  style="height: 100%; background: #dc2f02; border-radius: 9999px; width: ${percentage}%; transition: width 0.5s ease;"
+                ></div>
+              </div>
             </div>
-            <div style="height: 0.5rem; background: #e5e7eb; border-radius: 9999px; overflow: hidden;">
-              <div 
-                data-progress-bar 
-                data-series-id="${series.id}" 
-                data-total-parts="${totalParts}"
-                style="height: 100%; background: #dc2f02; border-radius: 9999px; width: ${percentage}%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease;"
-              ></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;">
+              <div style="display: flex; gap: 0.5rem;">
+                <span style="padding: 0.25rem 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #374151;">
+                  ${series.category || 'General'}
+                </span>
+                <span style="padding: 0.25rem 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #374151;">
+                  ${series.difficulty || 'All Levels'}
+                </span>
+              </div>
+              ${totalParts > 0 ? `
+                <a href="${firstPostUrl}" style="padding: 0.5rem 1rem; background: #dc2f02; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem;">
+                  ${completedCount > 0 ? (percentage === 100 ? 'Review Series' : 'Continue Series') : 'Start Series'}
+                </a>
+              ` : '<span style="color: #9ca3af; font-size: 0.875rem; font-style: italic;">Coming soon</span>'}
             </div>
           </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
-            <span style="padding: 0.25rem 0.75rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #023047;">
-              ${series.category}
+        `;
+        seriesList.innerHTML += seriesCard;
+      });
+    } else {
+      seriesList.innerHTML += '<p style="color: #6b7280;">No series available yet.</p>';
+    }
+
+    // Display Completed Articles List
+    const completedList = document.getElementById('completed-posts-list');
+    const completedSlugs = Object.keys(progress.posts || {}).filter(slug => progress.posts[slug].completed);
+
+    if (completedSlugs.length > 0) {
+      let postsHTML = '<ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">';
+      
+      completedSlugs.forEach(slug => {
+        const postMeta = allPostsData.find(p => p.slug === slug || p.url.includes(slug)) || {
+          title: slug.replace(/-/g, ' ').replace(/^\d{4}-\d{2}-\d{2}-/, ''),
+          url: `{{ site.baseurl }}/${slug}/`,
+          category: progress.posts[slug].category || 'ai',
+          date: new Date(progress.posts[slug].completedAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        };
+
+        postsHTML += `
+          <li style="padding: 1rem 1.25rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; box-shadow: 0 1px 4px rgba(0,0,0,0.02);">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span style="font-size: 1.25rem; color: #059669;">✅</span>
+              <div>
+                <a href="${postMeta.url}" style="font-weight: 600; color: #111827; text-decoration: none; font-size: 1rem;">
+                  ${postMeta.title}
+                </a>
+                <div style="font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem;">
+                  Completed on ${postMeta.date}
+                </div>
+              </div>
+            </div>
+            <span style="padding: 0.25rem 0.6rem; background: #f3f4f6; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600; color: #4b5563; text-transform: uppercase;">
+              ${postMeta.category || 'ai'}
             </span>
-            <span style="padding: 0.25rem 0.75rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #023047;">
-              ${series.difficulty}
-            </span>
-          </div>
-          ${totalParts > 0 ? `<a href="{{ site.baseurl }}/${series.posts[0]?.slug}/" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background: #dc2f02; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600;">
-            ${completedCount > 0 ? 'Continue Series' : 'Start Series'}
-          </a>` : '<span style="color: #374151; font-size: 0.875rem; font-style: italic; opacity: 0.6;">No posts yet</span>'}
+          </li>
+        `;
+      });
+
+      postsHTML += '</ul>';
+      completedList.innerHTML = postsHTML;
+    } else {
+      completedList.innerHTML = `
+        <div style="padding: 1.5rem; background: #f9fafb; border: 1px dashed #d1d5db; border-radius: 0.75rem; text-align: center; color: #6b7280;">
+          <p style="margin: 0; font-size: 0.95rem;">You haven't completed any articles yet.</p>
+          <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem;">Read blog posts and click <strong>"Mark as Complete"</strong> at the bottom of any article to track it here!</p>
         </div>
       `;
-      seriesList.innerHTML += seriesCard;
-    });
-
-    if (seriesData.length === 0) {
-      seriesList.innerHTML += '<p style="color: #374151; opacity: 0.6;">No series available yet. Check back soon!</p>';
     }
   }
 
   // Reset all progress
   function resetAllProgress() {
-    if (confirm('Are you sure you want to reset all your progress? This cannot be undone.')) {
-      LearningProgress.reset();
+    if (confirm('Are you sure you want to reset all your learning progress? This will clear your browser storage.')) {
+      if (window.LearningProgress) {
+        window.LearningProgress.reset();
+      } else {
+        localStorage.removeItem('learn-with-satya-progress');
+      }
       location.reload();
     }
   }
 
-  // Load dashboard on page load
+  // Run dashboard load on ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadProgressDashboard);
   } else {
     loadProgressDashboard();
   }
 
-  // Make LearningProgress available globally for post pages
-  window.LearningProgress = LearningProgress;
+  // Listen for real-time updates from other tabs / windows
+  window.addEventListener('learningProgressUpdated', loadProgressDashboard);
 </script>
 
 <style>
   #learning-progress-dashboard {
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 2rem 1rem;
   }
 
   #learning-progress-dashboard h1 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.25rem;
+    font-weight: 800;
     margin-bottom: 0.5rem;
+    color: #111827;
   }
 
   #learning-progress-dashboard h2 {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 2rem 0 1rem 0;
-  }
-
-  #learning-progress-dashboard h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    color: #111827;
   }
 </style>

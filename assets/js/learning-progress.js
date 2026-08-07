@@ -77,13 +77,22 @@
     // Get stats
     getStats() {
       const progress = this.getAll();
-      const totalPosts = Object.keys(progress.posts).length;
-      const totalTime = Object.values(progress.posts).reduce((sum, post) => sum + (post.readingTime || 5), 0);
-      const seriesCompleted = Object.values(progress.series).filter(s => s.completed.length > 0).length;
+      const completedPosts = Object.values(progress.posts || {}).filter(p => p.completed);
+      const totalPosts = completedPosts.length;
+      const totalTimeMinutes = completedPosts.reduce((sum, post) => sum + (parseInt(post.readingTime) || 5), 0);
+      const seriesCompleted = Object.values(progress.series || {}).filter(s => s.completed && s.completed.length > 0).length;
       
+      let totalTimeFormatted = `${totalTimeMinutes}m`;
+      if (totalTimeMinutes >= 60) {
+        const hours = (totalTimeMinutes / 60).toFixed(1);
+        totalTimeFormatted = `${hours}h`;
+      }
+
       return {
         totalPosts,
-        totalTime: Math.round(totalTime / 60), // Convert to hours
+        totalTimeMinutes,
+        totalTimeFormatted,
+        totalTime: totalTimeMinutes >= 60 ? Math.round(totalTimeMinutes / 60) : totalTimeMinutes,
         seriesCompleted
       };
     },
@@ -112,11 +121,10 @@
         this.animateCountUp(totalElement, parseInt(totalElement.textContent) || 0, stats.totalPosts);
       }
       if (seriesElement) {
-        // Series completed logic needs refinement - for now just update
         seriesElement.textContent = stats.seriesCompleted;
       }
       if (timeElement) {
-        timeElement.textContent = stats.totalTime + 'h';
+        timeElement.textContent = stats.totalTimeFormatted;
       }
     },
 
