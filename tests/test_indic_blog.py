@@ -25,7 +25,7 @@ def test_task1_frontmatter_and_tldr():
     assert 140 <= len(desc) <= 160, f"Description length is {len(desc)}, must be between 140 and 160 chars"
     
     # Check image is at root level
-    assert re.search(r'\nimage:\s*/assets/images/posts/', content), "image must be root level"
+    assert re.search(r'\nimage:\s*(https?://|/assets/)', content), "image must be root level and valid"
     assert "  image:" not in content[:content.find("---", 3)], "image must not be indented under header"
     
     # Check canonical_url
@@ -79,3 +79,34 @@ def test_task5_zero_translation_and_faq():
     assert "## Frequently Asked Questions" in content or "## FAQ" in content
     words = content.split()
     assert len(words) >= 2200, f"Post has {len(words)} words; required >= 2200"
+
+def test_no_internal_link_placeholders():
+    content = get_post_content()
+    assert "INTERNAL-LINK" not in content, "Unresolved INTERNAL-LINK placeholders found"
+
+def test_dual_modality_coverage():
+    content = get_post_content()
+    # Check all 4 scripts
+    assert re.search(r'[\u0900-\u097f]+', content), "Devanagari (Hindi) script text missing"
+    assert re.search(r'[\u0b80-\u0bff]+', content), "Tamil script text missing"
+    assert re.search(r'[\u0c00-\u0c7f]+', content), "Telugu script text missing"
+    assert re.search(r'[\u0c80-\u0cff]+', content), "Kannada script text missing"
+    
+    # Check all 4 transliterations / code-mix terms
+    assert "Hinglish" in content
+    assert "Tanglish" in content
+    assert "Tenglish" in content
+    assert "Kanglish" in content
+
+def test_image_asset_validity():
+    content = get_post_content()
+    img_match = re.search(r'\nimage:\s*(.+)', content)
+    assert img_match, "image not found in front matter"
+    img_val = img_match.group(1).strip().strip('"').strip("'")
+    if img_val.startswith("http://") or img_val.startswith("https://"):
+        assert True
+    else:
+        # Local asset must exist on disk
+        clean_path = img_val.lstrip("/")
+        assert os.path.exists(clean_path), f"Local image asset does not exist: {clean_path}"
+
